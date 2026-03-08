@@ -103,6 +103,41 @@ export const GET_EVENT = gql`
   }
 `;
 
+// Donations
+export const GET_DONATIONS = gql`
+  query GetDonations($first: Int) {
+    nodeDonations(first: $first) {
+      nodes {
+        id
+        title
+        donationAmount
+        donationDate { time timestamp }
+        donorName
+        donationType
+        donationPlatform
+        donationNotes { value processed }
+        created { time }
+      }
+    }
+  }
+`;
+
+export const GET_DONATION = gql`
+  query GetDonation($id: ID!) {
+    nodeDonation(id: $id) {
+      id
+      title
+      donationAmount
+      donationDate { time timestamp }
+      donorName
+      donationType
+      donationPlatform
+      donationNotes { value processed }
+      created { time }
+    }
+  }
+`;
+
 // Pages
 export const GET_PAGE = gql`
   query GetPage($id: ID!) {

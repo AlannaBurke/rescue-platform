@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Heart, Users, Home, Calendar, ArrowRight } from "lucide-react";
+import { Heart, Users, Home, Calendar, ArrowRight, DollarSign } from "lucide-react";
 import { getClient } from "@/lib/apollo-client";
 import { GET_ANIMALS_LIST } from "@/lib/graphql/animals";
-import { GET_BLOG_POSTS } from "@/lib/graphql/content";
+import { GET_BLOG_POSTS, GET_EVENTS } from "@/lib/graphql/content";
 import AnimalCard from "@/components/animals/AnimalCard";
 import BlogPostCard from "@/components/blog/BlogPostCard";
+import EventCard from "@/components/events/EventCard";
 import type { Animal, BlogPost } from "@/types/drupal";
 import type { GetAnimalsListQuery, GetBlogPostsQuery } from "@/types/graphql";
 
@@ -41,6 +42,22 @@ export default async function HomePage() {
   const latestPosts: BlogPost[] = (blogData?.nodeBlogPosts?.nodes || [])
     .filter((p: BlogPost) => p.status)
     .slice(0, 3);
+
+  // Fetch upcoming events
+  let upcomingEvents: any[] = [];
+  try {
+    const { data: eventsData } = await getClient().query({
+      query: GET_EVENTS,
+      variables: { first: 20 },
+    });
+    const now = new Date();
+    upcomingEvents = ((eventsData as any)?.nodeEvents?.nodes ?? [])
+      .filter((e: any) => e.eventDate && new Date(e.eventDate.time) >= now)
+      .sort((a: any, b: any) => new Date(a.eventDate.time).getTime() - new Date(b.eventDate.time).getTime())
+      .slice(0, 3);
+  } catch (e) {
+    // Events are optional on homepage
+  }
 
   return (
     <div className="min-h-screen">
@@ -229,6 +246,51 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* Upcoming Events preview */}
+      {upcomingEvents.length > 0 && (
+        <section className="py-14 border-t border-gray-100 bg-amber-50/40">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900">Upcoming Events</h2>
+                <p className="text-gray-500 mt-1">Come meet our animals and support our mission.</p>
+              </div>
+              <Link
+                href="/events"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 hover:text-amber-700"
+              >
+                See all events
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {upcomingEvents.map((event: any) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Donate CTA strip */}
+      <section className="bg-green-600 py-10">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="text-white text-center sm:text-left">
+              <h3 className="text-2xl font-bold mb-1">Support Our Mission</h3>
+              <p className="text-green-100">100% of donations go directly to animal care. We are a registered 501(c)(3) nonprofit.</p>
+            </div>
+            <Link
+              href="/donate"
+              className="flex-shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-bold text-green-700 hover:bg-green-50 transition-colors shadow-lg"
+            >
+              <DollarSign className="h-5 w-5" />
+              Donate Today
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA */}
       <section className="bg-gradient-to-br from-rose-500 to-rose-600 py-16">

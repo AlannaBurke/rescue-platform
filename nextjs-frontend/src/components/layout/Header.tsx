@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, Heart } from "lucide-react";
+import { Menu, X, Heart, DollarSign } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -11,8 +11,7 @@ const navigation = [
   { name: "Volunteer", href: "/volunteer" },
   { name: "Events", href: "/events" },
   { name: "Blog", href: "/blog" },
-  { name: "Donate", href: "/donate" },
-  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -46,8 +45,15 @@ export default function Header() {
               </Link>
             ))}
             <Link
+              href="/donate"
+              className="ml-2 inline-flex items-center gap-1.5 rounded-full border-2 border-green-500 px-4 py-1.5 text-sm font-semibold text-green-600 hover:bg-green-50 transition-colors"
+            >
+              <DollarSign className="h-4 w-4" />
+              Donate
+            </Link>
+            <Link
               href="/adopt"
-              className="ml-3 inline-flex items-center gap-1.5 rounded-full bg-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-600 transition-colors"
+              className="ml-2 inline-flex items-center gap-1.5 rounded-full bg-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-600 transition-colors"
             >
               <Heart className="h-4 w-4 fill-white" />
               Adopt Now
@@ -78,7 +84,7 @@ export default function Header() {
         <div
           className={cn(
             "md:hidden transition-all duration-200 ease-in-out overflow-hidden",
-            mobileMenuOpen ? "max-h-96 pb-4" : "max-h-0"
+            mobileMenuOpen ? "max-h-[32rem] pb-4" : "max-h-0"
           )}
         >
           <div className="space-y-1 pt-2">
@@ -92,7 +98,15 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
+              <Link
+                href="/donate"
+                className="flex w-full items-center justify-center gap-1.5 rounded-full border-2 border-green-500 px-4 py-2.5 text-sm font-semibold text-green-600 hover:bg-green-50"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <DollarSign className="h-4 w-4" />
+                Donate
+              </Link>
               <Link
                 href="/adopt"
                 className="flex w-full items-center justify-center gap-1.5 rounded-full bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-600"
