@@ -1,8 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useState } from "react";
-import { Menu, X, Heart, DollarSign } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -14,109 +15,165 @@ const navigation = [
   { name: "Events", href: "/events" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
-  { name: "Surrender", href: "/surrender" },
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled
+          ? "bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(32,153,161,0.15)]"
+          : "bg-white shadow-[0_2px_15px_-3px_rgba(32,153,161,0.12)]"
+      )}
+    >
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
         <div className="flex h-16 items-center justify-between">
+
           {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-rose-500 group-hover:bg-rose-600 transition-colors">
-                <Heart className="h-5 w-5 text-white fill-white" />
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 group no-underline"
+            aria-label="Rescue Platform — Home"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#2099a1] to-[#105f66] shadow-[0_2px_15px_-3px_rgba(32,153,161,0.4)] group-hover:scale-105 transition-transform duration-200">
+              <Heart className="h-5 w-5 text-white fill-white" />
+            </div>
+            <div className="hidden sm:block">
+              <div
+                className="text-xl leading-none text-[#105f66]"
+                style={{ fontFamily: "'Fredoka One', ui-rounded, system-ui, sans-serif" }}
+              >
+                Rescue Platform
               </div>
-              <span className="text-xl font-bold text-gray-900 tracking-tight">
-                Rescue<span className="text-rose-500">Platform</span>
-              </span>
-            </Link>
-          </div>
+              <div className="text-xs text-[#8c8c7c] font-medium leading-none mt-0.5">
+                Every little life matters
+              </div>
+            </div>
+          </Link>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex md:items-center md:gap-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+          <div className="hidden lg:flex lg:items-center lg:gap-0.5">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-200 no-underline",
+                    isActive
+                      ? "text-[#1a7f87] bg-[#e8f8f9]"
+                      : "text-[#484838] hover:text-[#1a7f87] hover:bg-[#e8f8f9]"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Desktop CTAs */}
+          <div className="hidden lg:flex lg:items-center lg:gap-2">
             <Link
-              href="/donate"
-              className="ml-2 inline-flex items-center gap-1.5 rounded-full border-2 border-green-500 px-4 py-1.5 text-sm font-semibold text-green-600 hover:bg-green-50 transition-colors"
+              href="/surrender"
+              className="text-sm font-semibold text-[#8c8c7c] hover:text-[#1a7f87] transition-colors no-underline px-3 py-2"
             >
-              <DollarSign className="h-4 w-4" />
-              Donate
+              Surrender
             </Link>
             <Link
-              href="/adopt"
-              className="ml-2 inline-flex items-center gap-1.5 rounded-full bg-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-600 transition-colors"
+              href="/adopt/apply"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#2099a1] px-4 py-2 text-sm font-bold text-white hover:bg-[#1a7f87] transition-all duration-200 shadow-[0_2px_15px_-3px_rgba(32,153,161,0.4)] hover:shadow-[0_8px_32px_-4px_rgba(32,153,161,0.35)] no-underline"
             >
-              <Heart className="h-4 w-4 fill-white" />
+              <Heart className="h-3.5 w-3.5 fill-white" />
               Adopt Now
+            </Link>
+            <Link
+              href="/donate"
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-[#e8a87c] px-4 py-2 text-sm font-bold text-[#b86440] hover:bg-[#fdf5ef] transition-all duration-200 no-underline"
+            >
+              <Heart className="h-3.5 w-3.5 fill-[#e8a87c] text-[#e8a87c]" />
+              Donate
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-expanded={mobileMenuOpen}
-            >
-              <span className="sr-only">
-                {mobileMenuOpen ? "Close menu" : "Open menu"}
-              </span>
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
+          <button
+            type="button"
+            className="lg:hidden p-2 rounded-xl text-[#484838] hover:text-[#1a7f87] hover:bg-[#e8f8f9] transition-all duration-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            )}
+          </button>
         </div>
 
         {/* Mobile menu */}
         <div
           className={cn(
-            "md:hidden transition-all duration-200 ease-in-out overflow-hidden",
-            mobileMenuOpen ? "max-h-[32rem] pb-4" : "max-h-0"
+            "lg:hidden transition-all duration-300 ease-in-out overflow-hidden",
+            mobileMenuOpen ? "max-h-[36rem] pb-4" : "max-h-0"
           )}
         >
-          <div className="space-y-1 pt-2">
-            {navigation.map((item) => (
+          <div className="space-y-0.5 pt-2">
+            {[...navigation, { name: "Surrender", href: "/surrender" }].map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center rounded-2xl px-4 py-3 text-base font-semibold transition-all duration-200 no-underline",
+                    isActive
+                      ? "text-[#1a7f87] bg-[#e8f8f9]"
+                      : "text-[#484838] hover:text-[#1a7f87] hover:bg-[#e8f8f9]"
+                  )}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+            <div className="pt-3 space-y-2 border-t border-[#e8e8e0] mt-2">
               <Link
-                key={item.name}
-                href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-rose-50 hover:text-rose-600"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-2 space-y-2">
-              <Link
-                href="/donate"
-                className="flex w-full items-center justify-center gap-1.5 rounded-full border-2 border-green-500 px-4 py-2.5 text-sm font-semibold text-green-600 hover:bg-green-50"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <DollarSign className="h-4 w-4" />
-                Donate
-              </Link>
-              <Link
-                href="/adopt"
-                className="flex w-full items-center justify-center gap-1.5 rounded-full bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-600"
+                href="/adopt/apply"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#2099a1] px-6 py-3.5 text-base font-bold text-white hover:bg-[#1a7f87] transition-all no-underline shadow-[0_2px_15px_-3px_rgba(32,153,161,0.4)]"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Heart className="h-4 w-4 fill-white" />
-                Adopt Now
+                Start Adoption Application
+              </Link>
+              <Link
+                href="/donate"
+                className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-[#e8a87c] px-6 py-3.5 text-base font-bold text-[#b86440] hover:bg-[#fdf5ef] transition-all no-underline"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Heart className="h-4 w-4 fill-[#e8a87c] text-[#e8a87c]" />
+                Make a Donation
               </Link>
             </div>
           </div>
