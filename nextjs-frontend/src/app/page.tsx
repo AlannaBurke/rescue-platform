@@ -64,8 +64,12 @@ export default async function HomePage() {
     .filter(
       (a) =>
         a.status &&
-        (a.animalStatus?.name === "Available" || a.animalStatus?.name === "In Foster")
+        !a.excludePublic &&
+        (a.isFeatured ||
+          a.lifecycleStatus?.name === "Available" ||
+          a.animalStatus?.name === "Available")
     )
+    .sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0))
     .slice(0, 3);
 
   const { data: blogData } = await getClient().query<GetBlogPostsQuery>({

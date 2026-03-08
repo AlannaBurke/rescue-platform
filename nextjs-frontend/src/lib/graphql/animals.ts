@@ -7,7 +7,6 @@ export const ANIMAL_CARD_FRAGMENT = gql`
     title
     path
     status
-    animalId
     animalBreed
     animalSex
     animalSize
@@ -52,7 +51,9 @@ export const ANIMAL_DETAIL_FRAGMENT = gql`
   fragment AnimalDetail on NodeAnimal {
     ...AnimalCard
     microchip
-    animalSource
+    animalSource {
+      value
+    }
     adoptionDate {
       time
     }

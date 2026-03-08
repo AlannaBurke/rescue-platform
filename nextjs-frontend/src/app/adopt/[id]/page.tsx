@@ -209,7 +209,7 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
                 <DetailRow icon={Ruler}    label="Size"    value={animal.animalSize ? capitalize(animal.animalSize) : undefined} />
                 <DetailRow icon={Heart}    label="Sex"     value={animal.animalSex ? capitalize(animal.animalSex) : undefined} />
                 <DetailRow icon={Tag}      label="Color"   value={animal.animalColor} />
-                <DetailRow icon={MapPin}   label="Source"  value={(animal as any).animalSource} />
+                <DetailRow icon={MapPin}   label="Source"  value={(animal as any).animalSource?.value} />
                 {animal.intakeDate?.time && (
                   <DetailRow icon={Calendar} label="In Our Care Since" value={formatDate(animal.intakeDate.time)} />
                 )}
