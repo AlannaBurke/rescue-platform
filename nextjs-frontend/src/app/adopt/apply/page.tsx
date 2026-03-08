@@ -135,13 +135,69 @@ export default function AdoptionApplicationPage() {
   const set = (field: keyof FormData, value: string | string[]) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // In production, POST to a Drupal webform endpoint or email API
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitted(true);
-    setSubmitting(false);
+    setSubmitError(null);
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          webform_id: 'adoption_application',
+          applicant_name: form.fullName,
+          applicant_email: form.email,
+          applicant_phone: form.daytimePhone,
+          housing_type: form.residenceType,
+          own_or_rent: form.isHomeowner === 'yes' ? 'own' : 'rent',
+          other_pets: form.currentPreviousPets,
+          experience: form.ownedThisTypeBefore,
+          why_adopt: form.reasonForPet,
+          veterinarian: form.veterinarian,
+          reference_name: form.references,
+          agree_terms: true,
+          // Extended fields stored as JSON in additional_info
+          additional_info: JSON.stringify({
+            dateOfBirth: form.dateOfBirth,
+            address: `${form.addressLine1}${form.addressLine2 ? ', ' + form.addressLine2 : ''}, ${form.city}, ${form.state} ${form.zipCode}`,
+            eveningPhone: form.eveningPhone,
+            residenceTypeOther: form.residenceTypeOther,
+            fosterOrAdopt: form.fosterOrAdopt,
+            animalTypes: form.animalTypes,
+            sexPreference: form.sexPreference,
+            agePreferences: form.agePreferences,
+            otherPetsConsidered: form.otherPetsConsidered,
+            hoursAttention: form.hoursAttention,
+            petLocationHome: form.petLocationHome,
+            petLocationAway: form.petLocationAway,
+            householdMembers: form.householdMembers,
+            everSurrendered: form.everSurrendered,
+            surrenderExplanation: form.surrenderExplanation,
+            allergies: form.allergies,
+            wantVetRecommendation: form.wantVetRecommendation,
+            vetCareFrequency: form.vetCareFrequency,
+            annualBudget: form.annualBudget,
+            plannedDiet: form.plannedDiet,
+            cageDescription: form.cageDescription,
+            cageBedding: form.cageBedding,
+            awareBrushingNails: form.awareBrushingNails,
+            nailClipper: form.nailClipper,
+          }),
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -704,6 +760,12 @@ export default function AdoptionApplicationPage() {
                 <strong>info@helpingalllittlethings.org</strong> to your contacts and check your
                 spam folder so you don&apos;t miss our response.
               </InfoBox>
+
+              {submitError && (
+                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  <strong>Error:</strong> {submitError}
+                </div>
+              )}
 
               <div className="flex justify-between mt-6">
                 <button type="button" onClick={() => setStep(4)} className="text-gray-600 hover:text-gray-900 font-medium px-4 py-2">← Back</button>
