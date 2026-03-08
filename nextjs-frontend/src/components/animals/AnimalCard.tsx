@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Heart, Dog, Cat, MapPin } from "lucide-react";
-import { cn, formatAge, capitalize } from "@/lib/utils";
+import Image from "next/image";
+import { Heart, Dog, Cat } from "lucide-react";
+import { cn, formatAge, capitalize, drupalImageUrl } from "@/lib/utils";
 import type { Animal } from "@/types/drupal";
 
 interface AnimalCardProps {
@@ -96,7 +97,17 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
     >
       {/* Image area */}
       <div className="relative h-52 overflow-hidden bg-gray-100">
-        <AnimalPlaceholderImage species={speciesName} />
+        {animal.animalPhotos && animal.animalPhotos.length > 0 ? (
+          <Image
+            src={drupalImageUrl(animal.animalPhotos[0].url)}
+            alt={animal.animalPhotos[0].alt || animal.title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <AnimalPlaceholderImage species={speciesName} />
+        )}
         {/* Status badge overlay */}
         <div className="absolute top-3 left-3">
           <StatusBadge status={statusName} />

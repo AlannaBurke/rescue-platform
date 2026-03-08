@@ -150,6 +150,7 @@ export interface Animal {
   placementHistory?: ParagraphPlacement[];
   // Media
   image?: DrupalImage;
+  animalPhotos?: DrupalImage[];
 }
 
 // ============================================================
