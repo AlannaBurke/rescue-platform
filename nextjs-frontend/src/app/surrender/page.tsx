@@ -115,12 +115,49 @@ export default function SurrenderPage() {
     });
   };
 
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitted(true);
-    setSubmitting(false);
+    setSubmitError(null);
+    try {
+      const firstPet = form.pets[0] || {};
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          webform_id: 'surrender_intake',
+          owner_name: `${form.firstName} ${form.lastName}`.trim(),
+          owner_email: form.email,
+          owner_phone: '',
+          animal_name: (firstPet as PetData).name || 'Unknown',
+          animal_species: (firstPet as PetData).species || 'other',
+          animal_age: (firstPet as PetData).age || 'Unknown',
+          animal_sex: (firstPet as PetData).sex || 'unknown',
+          spayed_neutered: 'unknown',
+          health_issues: (firstPet as PetData).medicalIssues || '',
+          reason_for_surrender: (firstPet as PetData).surrenderReason || '',
+          timeline: 'flexible',
+          additional_info: JSON.stringify({
+            address: `${form.street}, ${form.city}, ${form.state} ${form.zipCode}`,
+            previouslyAdoptedFromHalt: form.previouslyAdoptedFromHalt,
+            numberOfPets: form.numberOfPets,
+            allPets: form.pets,
+          }),
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -459,6 +496,12 @@ export default function SurrenderPage() {
               <strong>info@helpingalllittlethings.org</strong> to your contacts and check your spam
               folder so you don&apos;t miss our response.
             </InfoBox>
+
+            {submitError && (
+              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                <strong>Error:</strong> {submitError}
+              </div>
+            )}
 
             <div className="flex justify-end">
               <button

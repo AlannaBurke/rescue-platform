@@ -1,9 +1,7 @@
-import { Mail, Phone, MapPin, Clock, ArrowRight, MessageSquare } from 'lucide-react';
+'use client';
 
-export const metadata = {
-  title: 'Contact Us | Rescue Platform',
-  description: 'Get in touch with our rescue team. We\'re here to answer your questions about adoption, fostering, volunteering, and more.',
-};
+import { useState } from 'react';
+import { Mail, Phone, Clock, ArrowRight, MessageSquare } from 'lucide-react';
 
 const contactReasons = [
   { value: 'adoption', label: 'Adoption Inquiry' },
@@ -41,6 +39,46 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [reason, setReason] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          webform_id: 'contact',
+          name: `${firstName} ${lastName}`.trim(),
+          email,
+          subject: `[${reason}] ${subject}`,
+          message: `Phone: ${phone || 'Not provided'}\n\n${message}`,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
@@ -59,76 +97,47 @@ export default function ContactPage() {
 
       <div className="max-w-5xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
           {/* Contact info sidebar */}
-          <div className="space-y-5">
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h2 className="font-bold text-gray-900 mb-5 text-lg">Contact Information</h2>
-              <div className="space-y-5">
-                {contactInfo.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={item.label} className="flex items-start gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${item.color}`}>
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">{item.label}</p>
-                        {item.href ? (
-                          <a href={item.href} className="text-gray-900 font-semibold hover:text-indigo-600 transition-colors">
-                            {item.value}
-                          </a>
-                        ) : (
-                          <p className="text-gray-900 font-semibold">{item.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+          <div className="space-y-4">
+            {contactInfo.map((item) => (
+              <div key={item.label} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-start gap-4">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${item.color}`}>
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-0.5">{item.label}</p>
+                  {item.href ? (
+                    <a href={item.href} className="text-gray-900 font-medium hover:text-indigo-600 transition-colors text-sm">{item.value}</a>
+                  ) : (
+                    <p className="text-gray-900 font-medium text-sm">{item.value}</p>
+                  )}
+                </div>
               </div>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h2 className="font-bold text-gray-900 mb-4 text-lg">Quick Links</h2>
-              <div className="space-y-2">
-                {[
-                  { label: 'View Adoptable Animals', href: '/adopt' },
-                  { label: 'Become a Foster', href: '/foster' },
-                  { label: 'Volunteer With Us', href: '/volunteer' },
-                  { label: 'Make a Donation', href: '/donate' },
-                  { label: 'Upcoming Events', href: '/events' },
-                ].map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="flex items-center justify-between py-2 text-sm text-gray-700 hover:text-indigo-600 transition-colors group"
-                  >
-                    <span>{link.label}</span>
-                    <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-indigo-400 transition-colors" />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-indigo-50 rounded-2xl border border-indigo-100 p-6">
-              <h3 className="font-bold text-indigo-900 mb-2">Emergency?</h3>
-              <p className="text-sm text-indigo-700 leading-relaxed">
-                If you&apos;ve found an injured or stray animal, please contact your local animal control
-                or emergency vet immediately. For urgent rescue situations, call us directly.
-              </p>
-            </div>
+            ))}
           </div>
 
           {/* Contact form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
               <h2 className="text-xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+
+              {submitted ? (
+                <div className="text-center py-10">
+                  <div className="text-5xl mb-4">✉️</div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                  <p className="text-gray-600">Thank you for reaching out. We&apos;ll get back to you within 24–48 hours.</p>
+                </div>
+              ) : (
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1.5">First Name *</label>
                     <input
                       type="text"
                       required
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-shadow"
                     />
                   </div>
@@ -137,6 +146,8 @@ export default function ContactPage() {
                     <input
                       type="text"
                       required
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-shadow"
                     />
                   </div>
@@ -147,6 +158,8 @@ export default function ContactPage() {
                   <input
                     type="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-shadow"
                   />
                 </div>
@@ -155,6 +168,8 @@ export default function ContactPage() {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone Number</label>
                   <input
                     type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-shadow"
                   />
                 </div>
@@ -163,6 +178,8 @@ export default function ContactPage() {
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Reason for Contact *</label>
                   <select
                     required
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 bg-white transition-shadow"
                   >
                     <option value="">Select a reason</option>
@@ -177,6 +194,8 @@ export default function ContactPage() {
                   <input
                     type="text"
                     required
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-shadow"
                     placeholder="Brief description of your inquiry"
                   />
@@ -187,6 +206,8 @@ export default function ContactPage() {
                   <textarea
                     rows={5}
                     required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-300 resize-none transition-shadow"
                     placeholder="Please provide as much detail as possible so we can help you quickly..."
                   />
@@ -199,14 +220,21 @@ export default function ContactPage() {
                   </label>
                 </div>
 
+                {submitError && (
+                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                    <strong>Error:</strong> {submitError}
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-200"
+                  disabled={submitting}
+                  className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-indigo-200 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message
-                  <ArrowRight className="w-5 h-5" />
+                  {submitting ? 'Sending...' : (<>Send Message <ArrowRight className="w-5 h-5" /></>)}
                 </button>
               </form>
+              )}
             </div>
           </div>
         </div>

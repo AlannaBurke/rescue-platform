@@ -1,11 +1,9 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { Users, ArrowRight, CheckCircle, Star, Camera, Truck, Heart, Laptop, Calendar, Megaphone } from 'lucide-react';
 
-export const metadata = {
-  title: 'Volunteer | Rescue Platform',
-  description:
-    'Join our volunteer team and help animals find their forever homes. Every hour you give makes a difference.',
-};
 
 const opportunities = [
   {
@@ -60,6 +58,55 @@ const steps = [
 ];
 
 export default function VolunteerPage() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [availability, setAvailability] = useState('');
+  const [bio, setBio] = useState('');
+  const [interests, setInterests] = useState<string[]>([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const toggleInterest = (skill: string) => {
+    setInterests((prev) =>
+      prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]
+    );
+  };
+
+  const handleVolunteerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          webform_id: 'volunteer_application',
+          volunteer_name: `${firstName} ${lastName}`.trim(),
+          volunteer_email: email,
+          volunteer_phone: phone,
+          volunteer_areas: Object.fromEntries(interests.map((k) => [k, k])),
+          volunteer_availability: availability,
+          volunteer_skills: bio,
+          volunteer_why: 'Submitted via volunteer page quick form',
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
@@ -175,59 +222,81 @@ export default function VolunteerPage() {
           </p>
           <div className="bg-white rounded-2xl p-8 text-left shadow-xl">
             <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Volunteer Application</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            {submitted ? (
+              <div className="text-center py-8">
+                <div className="text-5xl mb-4">🐾</div>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Application Submitted!</h4>
+                <p className="text-gray-600 text-sm">Thank you! We&apos;ll be in touch within 48 hours.</p>
+              </div>
+            ) : (
+            <form className="space-y-4" onSubmit={handleVolunteerSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">First Name *</label>
-                  <input type="text" required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+                  <input type="text" required value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Last Name *</label>
-                  <input type="text" required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+                  <input type="text" required value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
-                <input type="email" required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
-                <input type="tel" className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Areas of Interest * (select all that apply)</label>
                 <div className="grid grid-cols-2 gap-2">
-                  {['Animal Transport', 'Photography', 'Social Media', 'Event Volunteer', 'Admin & Tech', 'Fundraising', 'Foster Care', 'Other'].map((skill) => (
-                    <label key={skill} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                      <input type="checkbox" className="rounded" />
-                      {skill}
+                  {[
+                    { key: 'transport', label: 'Animal Transport' },
+                    { key: 'photography', label: 'Photography' },
+                    { key: 'social_media', label: 'Social Media' },
+                    { key: 'events', label: 'Event Volunteer' },
+                    { key: 'admin', label: 'Admin & Tech' },
+                    { key: 'fundraising', label: 'Fundraising' },
+                    { key: 'foster_support', label: 'Foster Support' },
+                    { key: 'other', label: 'Other' },
+                  ].map(({ key, label }) => (
+                    <label key={key} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                      <input type="checkbox" className="rounded" checked={interests.includes(key)} onChange={() => toggleInterest(key)} />
+                      {label}
                     </label>
                   ))}
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Availability *</label>
-                <select required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300 bg-white">
+                <select required value={availability} onChange={(e) => setAvailability(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300 bg-white">
                   <option value="">Select your availability</option>
-                  <option>Weekdays only</option>
-                  <option>Weekends only</option>
-                  <option>Weekdays and weekends</option>
-                  <option>Evenings only</option>
-                  <option>Flexible / As needed</option>
+                  <option value="weekdays">Weekdays only</option>
+                  <option value="weekends">Weekends only</option>
+                  <option value="both">Weekdays and weekends</option>
+                  <option value="evenings">Evenings only</option>
+                  <option value="flexible">Flexible / As needed</option>
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Tell us about yourself</label>
-                <textarea rows={3} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300 resize-none" placeholder="Any relevant experience, skills, or reasons you want to volunteer..." />
+                <textarea rows={3} value={bio} onChange={(e) => setBio(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-teal-300 resize-none" placeholder="Any relevant experience, skills, or reasons you want to volunteer..." />
               </div>
+              {submitError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  <strong>Error:</strong> {submitError}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full bg-teal-600 text-white font-bold py-3 rounded-xl hover:bg-teal-700 transition-colors flex items-center justify-center gap-2"
+                disabled={submitting}
+                className="w-full bg-teal-600 text-white font-bold py-3 rounded-xl hover:bg-teal-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Submit Application
-                <ArrowRight className="w-5 h-5" />
+                {submitting ? 'Submitting...' : (<>Submit Application <ArrowRight className="w-5 h-5" /></>)}
               </button>
             </form>
+            )}
           </div>
         </div>
       </section>

@@ -43,6 +43,12 @@ export const ANIMAL_CARD_FRAGMENT = gql`
       summary
       value
     }
+    animalPhotos {
+      url
+      width
+      height
+      alt
+    }
   }
 `;
 

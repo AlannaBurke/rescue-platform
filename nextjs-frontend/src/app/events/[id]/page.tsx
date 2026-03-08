@@ -1,8 +1,9 @@
 import { getClient } from '@/lib/apollo-client';
 import { GET_EVENT } from '@/lib/graphql/content';
 import Link from 'next/link';
-import { Calendar, MapPin, Clock, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, MapPin, Clock, ArrowLeft } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import ShareButton from '@/components/ShareButton';
 
 export const revalidate = 300;
 
@@ -163,13 +164,7 @@ export default async function EventDetailPage({
                   >
                     Contact Us
                   </Link>
-                  <button
-                    onClick={() => navigator.share?.({ title: event.title, url: window.location.href })}
-                    className="flex items-center gap-2 border border-amber-200 text-amber-700 font-semibold px-4 py-2.5 rounded-full hover:bg-amber-100 transition-colors text-sm"
-                  >
-                    <Share2 className="w-4 h-4" />
-                    Share
-                  </button>
+                  <ShareButton title={event.title} />
                 </div>
               </div>
             </div>

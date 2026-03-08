@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   Heart,
@@ -19,7 +20,7 @@ import {
 } from "lucide-react";
 import { getClient } from "@/lib/apollo-client";
 import { GET_ANIMAL } from "@/lib/graphql/animals";
-import { formatAge, capitalize, formatDate } from "@/lib/utils";
+import { formatAge, capitalize, formatDate, drupalImageUrl } from "@/lib/utils";
 import type { Animal } from "@/types/drupal";
 import type { GetAnimalQuery } from "@/types/graphql";
 
@@ -192,9 +193,36 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
           {/* ── Left column ── */}
           <div className="lg:col-span-1 space-y-4">
             {/* Photo */}
-            <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-sm border border-gray-100">
-              <AnimalPlaceholder species={speciesName} />
+            <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-sm border border-gray-100 relative">
+              {animal.animalPhotos && animal.animalPhotos.length > 0 ? (
+                <Image
+                  src={drupalImageUrl(animal.animalPhotos[0].url)}
+                  alt={animal.animalPhotos[0].alt || animal.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  priority
+                />
+              ) : (
+                <AnimalPlaceholder species={speciesName} />
+              )}
             </div>
+            {/* Photo gallery (additional photos) */}
+            {animal.animalPhotos && animal.animalPhotos.length > 1 && (
+              <div className="grid grid-cols-3 gap-2">
+                {animal.animalPhotos.slice(1, 4).map((photo, i) => (
+                  <div key={i} className="aspect-square rounded-xl overflow-hidden relative bg-gray-100">
+                    <Image
+                      src={drupalImageUrl(photo.url)}
+                      alt={photo.alt || `${animal.title} photo ${i + 2}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 33vw, 11vw"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Quick details */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
