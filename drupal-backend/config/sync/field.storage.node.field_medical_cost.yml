@@ -1,0 +1,20 @@
+uuid: 6618a385-8f7c-483e-9792-5ed0fc6b4606
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_medical_cost
+field_name: field_medical_cost
+entity_type: node
+type: decimal
+settings:
+  precision: 10
+  scale: 2
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

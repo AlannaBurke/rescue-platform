@@ -1,0 +1,24 @@
+uuid: b6e8e1a8-1fd6-475c-aeb3-d7e074864c27
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.medical_record
+  module:
+    - text
+id: node.medical_record.body
+field_name: body
+entity_type: node
+bundle: medical_record
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

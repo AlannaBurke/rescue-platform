@@ -1,0 +1,64 @@
+uuid: e1bd5fdd-3fa4-45a1-b4bc-90b7ae2b8293
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.animal.body
+    - field.field.node.animal.field_adoption_date
+    - field.field.node.animal.field_animal_age_months
+    - field.field.node.animal.field_animal_age_years
+    - field.field.node.animal.field_animal_breed
+    - field.field.node.animal.field_animal_color
+    - field.field.node.animal.field_animal_id
+    - field.field.node.animal.field_animal_notes
+    - field.field.node.animal.field_animal_sex
+    - field.field.node.animal.field_animal_size
+    - field.field.node.animal.field_animal_species
+    - field.field.node.animal.field_animal_status
+    - field.field.node.animal.field_current_foster
+    - field.field.node.animal.field_good_with_cats
+    - field.field.node.animal.field_good_with_dogs
+    - field.field.node.animal.field_good_with_kids
+    - field.field.node.animal.field_intake_date
+    - field.field.node.animal.field_microchip
+    - node.type.animal
+  module:
+    - text
+    - user
+id: node.animal.teaser
+targetEntityType: node
+bundle: animal
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_adoption_date: true
+  field_animal_age_months: true
+  field_animal_age_years: true
+  field_animal_breed: true
+  field_animal_color: true
+  field_animal_id: true
+  field_animal_notes: true
+  field_animal_sex: true
+  field_animal_size: true
+  field_animal_species: true
+  field_animal_status: true
+  field_current_foster: true
+  field_good_with_cats: true
+  field_good_with_dogs: true
+  field_good_with_kids: true
+  field_intake_date: true
+  field_microchip: true

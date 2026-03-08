@@ -1,0 +1,11 @@
+uuid: 571ff6c4-b9a7-4654-9ca9-72100f7adf5e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Medical Record'
+type: medical_record
+description: 'A medical event log entry for an animal.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

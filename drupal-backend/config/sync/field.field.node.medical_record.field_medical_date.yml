@@ -1,0 +1,21 @@
+uuid: 52cb7979-339e-4853-8a3f-c46e34dd4c40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medical_date
+    - node.type.medical_record
+  module:
+    - datetime
+id: node.medical_record.field_medical_date
+field_name: field_medical_date
+entity_type: node
+bundle: medical_record
+label: Date
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,21 @@
+uuid: 1725859e-7c91-4a11-8a61-5fd82b97bd21
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_animal_size
+    - node.type.animal
+  module:
+    - options
+id: node.animal.field_animal_size
+field_name: field_animal_size
+entity_type: node
+bundle: animal
+label: Size
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

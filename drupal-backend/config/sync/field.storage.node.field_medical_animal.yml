@@ -1,0 +1,19 @@
+uuid: 4d19595b-440a-45f5-be11-bef88bf61be6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_medical_animal
+field_name: field_medical_animal
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

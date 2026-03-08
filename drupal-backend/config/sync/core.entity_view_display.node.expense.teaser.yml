@@ -1,0 +1,38 @@
+uuid: 8ae568c8-57da-48b0-be0d-1aadef004a95
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.expense.body
+    - field.field.node.expense.field_expense_amount
+    - field.field.node.expense.field_expense_animal
+    - field.field.node.expense.field_expense_category
+    - field.field.node.expense.field_expense_date
+    - node.type.expense
+  module:
+    - text
+    - user
+id: node.expense.teaser
+targetEntityType: node
+bundle: expense
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_expense_amount: true
+  field_expense_animal: true
+  field_expense_category: true
+  field_expense_date: true

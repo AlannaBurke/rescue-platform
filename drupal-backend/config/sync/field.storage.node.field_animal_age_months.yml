@@ -1,0 +1,20 @@
+uuid: ec84dc14-9996-462c-97fc-84f121406dd7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_animal_age_months
+field_name: field_animal_age_months
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

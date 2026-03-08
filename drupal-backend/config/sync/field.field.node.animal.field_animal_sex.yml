@@ -1,0 +1,21 @@
+uuid: 69f1d759-1a11-4a5a-98aa-89e5f93c80ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_animal_sex
+    - node.type.animal
+  module:
+    - options
+id: node.animal.field_animal_sex
+field_name: field_animal_sex
+entity_type: node
+bundle: animal
+label: Sex
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

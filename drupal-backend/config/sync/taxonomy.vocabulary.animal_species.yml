@@ -1,0 +1,9 @@
+uuid: 11242310-fd10-4e74-9832-cee33b18fb45
+langcode: en
+status: true
+dependencies: {  }
+name: 'Animal Species'
+vid: animal_species
+description: null
+weight: 0
+new_revision: false

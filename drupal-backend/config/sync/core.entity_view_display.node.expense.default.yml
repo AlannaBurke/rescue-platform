@@ -1,0 +1,36 @@
+uuid: d76cc267-83c8-4275-9277-75e27a2d9022
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.expense.body
+    - field.field.node.expense.field_expense_amount
+    - field.field.node.expense.field_expense_animal
+    - field.field.node.expense.field_expense_category
+    - field.field.node.expense.field_expense_date
+    - node.type.expense
+  module:
+    - text
+    - user
+id: node.expense.default
+targetEntityType: node
+bundle: expense
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_expense_amount: true
+  field_expense_animal: true
+  field_expense_category: true
+  field_expense_date: true

@@ -1,0 +1,23 @@
+uuid: 3f78d4b5-45b3-4710-8539-9f414087fe88
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medical_cost
+    - node.type.medical_record
+id: node.medical_record.field_medical_cost
+field_name: field_medical_cost
+entity_type: node
+bundle: medical_record
+label: Cost
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

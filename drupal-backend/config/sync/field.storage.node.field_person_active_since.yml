@@ -1,0 +1,20 @@
+uuid: 478725bc-f693-4320-a439-a1b12c6faf73
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_person_active_since
+field_name: field_person_active_since
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

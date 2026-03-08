@@ -1,0 +1,23 @@
+uuid: 4a683348-363c-4d40-9799-67dd3ae891f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_animal_age_months
+    - node.type.animal
+id: node.animal.field_animal_age_months
+field_name: field_animal_age_months
+entity_type: node
+bundle: animal
+label: 'Age (Months)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,21 @@
+uuid: 6cd78b2f-61d5-4908-8da3-f5ef84af4fb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medical_next_due
+    - node.type.medical_record
+  module:
+    - datetime
+id: node.medical_record.field_medical_next_due
+field_name: field_medical_next_due
+entity_type: node
+bundle: medical_record
+label: 'Next Due Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

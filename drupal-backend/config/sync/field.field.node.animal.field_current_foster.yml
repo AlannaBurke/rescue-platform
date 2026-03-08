@@ -1,0 +1,23 @@
+uuid: 9cb7e7b7-3afb-4329-81d2-0ba7fe18cc40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_current_foster
+    - node.type.animal
+id: node.animal.field_current_foster
+field_name: field_current_foster
+entity_type: node
+bundle: animal
+label: 'Current Foster'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+field_type: entity_reference

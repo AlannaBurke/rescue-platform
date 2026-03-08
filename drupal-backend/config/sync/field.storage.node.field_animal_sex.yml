@@ -1,0 +1,30 @@
+uuid: 7f50234e-817e-488c-a376-02e17b471b90
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_animal_sex
+field_name: field_animal_sex
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: male
+      label: Male
+    -
+      value: female
+      label: Female
+    -
+      value: unknown
+      label: Unknown
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

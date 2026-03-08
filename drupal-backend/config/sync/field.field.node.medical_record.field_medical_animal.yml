@@ -1,0 +1,24 @@
+uuid: 83db5589-9a45-465b-a7b1-cd946df1bc3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medical_animal
+    - node.type.animal
+    - node.type.medical_record
+id: node.medical_record.field_medical_animal
+field_name: field_medical_animal
+entity_type: node
+bundle: medical_record
+label: Animal
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      animal: animal
+field_type: entity_reference

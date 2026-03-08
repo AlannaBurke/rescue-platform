@@ -1,0 +1,11 @@
+uuid: d78fede6-e55c-470a-bdd3-cc17fb6c241a
+langcode: en
+status: true
+dependencies: {  }
+name: Animal
+type: animal
+description: "An animal in the rescue's care."
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,9 @@
+uuid: 5806807a-370f-4549-93b4-d6a55afaea85
+langcode: en
+status: true
+dependencies: {  }
+name: 'Animal Status'
+vid: animal_status
+description: null
+weight: 0
+new_revision: false

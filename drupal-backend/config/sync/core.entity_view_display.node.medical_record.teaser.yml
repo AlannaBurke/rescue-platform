@@ -1,0 +1,42 @@
+uuid: 8fa8028e-90cf-4832-9d21-35027681aa89
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.medical_record.body
+    - field.field.node.medical_record.field_medical_animal
+    - field.field.node.medical_record.field_medical_cost
+    - field.field.node.medical_record.field_medical_date
+    - field.field.node.medical_record.field_medical_next_due
+    - field.field.node.medical_record.field_medical_provider
+    - field.field.node.medical_record.field_medical_type
+    - node.type.medical_record
+  module:
+    - text
+    - user
+id: node.medical_record.teaser
+targetEntityType: node
+bundle: medical_record
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_medical_animal: true
+  field_medical_cost: true
+  field_medical_date: true
+  field_medical_next_due: true
+  field_medical_provider: true
+  field_medical_type: true

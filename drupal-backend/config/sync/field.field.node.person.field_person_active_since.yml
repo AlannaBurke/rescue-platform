@@ -1,0 +1,21 @@
+uuid: 3644c963-9088-44a1-afa1-2038cf7ffae4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_active_since
+    - node.type.person
+  module:
+    - datetime
+id: node.person.field_person_active_since
+field_name: field_person_active_since
+entity_type: node
+bundle: person
+label: 'Active Since'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

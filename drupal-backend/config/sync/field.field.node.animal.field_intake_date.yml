@@ -1,0 +1,21 @@
+uuid: f4c16776-b24b-4ea7-9263-fa58d8abf667
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intake_date
+    - node.type.animal
+  module:
+    - datetime
+id: node.animal.field_intake_date
+field_name: field_intake_date
+entity_type: node
+bundle: animal
+label: 'Intake Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,11 @@
+uuid: 9908d33e-6272-4994-bc67-e36e7262b5c0
+langcode: en
+status: true
+dependencies: {  }
+name: Expense
+type: expense
+description: 'A financial expense incurred by the rescue.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

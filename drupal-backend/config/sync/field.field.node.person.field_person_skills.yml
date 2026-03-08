@@ -1,0 +1,19 @@
+uuid: 4e038ec4-bb30-4ec8-a304-1c7d31f1d506
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_skills
+    - node.type.person
+id: node.person.field_person_skills
+field_name: field_person_skills
+entity_type: node
+bundle: person
+label: Skills
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

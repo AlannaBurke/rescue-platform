@@ -1,0 +1,24 @@
+uuid: f8f2cbaa-34a1-4acf-afce-3a11daef463b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.expense
+  module:
+    - text
+id: node.expense.body
+field_name: body
+entity_type: node
+bundle: expense
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

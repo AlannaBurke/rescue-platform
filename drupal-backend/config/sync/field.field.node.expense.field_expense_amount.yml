@@ -1,0 +1,23 @@
+uuid: aafc30ad-d151-4dff-8f2f-7f9aa982759d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_expense_amount
+    - node.type.expense
+id: node.expense.field_expense_amount
+field_name: field_expense_amount
+entity_type: node
+bundle: expense
+label: Amount
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

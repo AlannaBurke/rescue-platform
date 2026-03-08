@@ -1,0 +1,26 @@
+uuid: 0f0feb00-6b10-41ec-b0bf-983f3364a04b
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+  module:
+    - comment
+    - contact
+    - filter
+    - graphql
+    - search
+    - system
+_core:
+  default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'execute rescue_platform arbitrary graphql requests'
+  - 'search content'
+  - 'use text format restricted_html'

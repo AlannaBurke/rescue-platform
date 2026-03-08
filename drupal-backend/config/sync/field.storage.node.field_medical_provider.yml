@@ -1,0 +1,21 @@
+uuid: 383b58bd-27c1-4fae-9537-122b7291d179
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_medical_provider
+field_name: field_medical_provider
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

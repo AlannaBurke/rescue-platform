@@ -1,0 +1,11 @@
+uuid: ee0145a8-1c0f-411f-b27a-e2be4563f6d6
+langcode: en
+status: true
+dependencies: {  }
+name: Event
+type: event
+description: 'A fundraiser, adoption event, or other rescue event.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

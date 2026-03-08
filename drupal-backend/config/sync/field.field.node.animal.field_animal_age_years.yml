@@ -1,0 +1,23 @@
+uuid: 9f3eefe7-5ed0-4721-8bb6-b3c1e67433c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_animal_age_years
+    - node.type.animal
+id: node.animal.field_animal_age_years
+field_name: field_animal_age_years
+entity_type: node
+bundle: animal
+label: 'Age (Years)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

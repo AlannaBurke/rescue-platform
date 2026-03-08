@@ -1,0 +1,24 @@
+uuid: 264396e1-7d90-4c70-880a-3b05e65b28ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_expense_animal
+    - node.type.animal
+    - node.type.expense
+id: node.expense.field_expense_animal
+field_name: field_expense_animal
+entity_type: node
+bundle: expense
+label: 'Associated Animal'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      animal: animal
+field_type: entity_reference

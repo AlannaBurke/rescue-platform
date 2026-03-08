@@ -1,0 +1,18 @@
+uuid: d27496e3-02da-4805-99f3-f9a4ea973ac3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_good_with_kids
+field_name: field_good_with_kids
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

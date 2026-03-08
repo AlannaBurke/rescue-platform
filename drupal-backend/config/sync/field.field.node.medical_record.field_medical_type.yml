@@ -1,0 +1,24 @@
+uuid: efd1cb67-6ee0-414d-8d1e-963391aa9103
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medical_type
+    - node.type.medical_record
+    - taxonomy.vocabulary.medical_type
+id: node.medical_record.field_medical_type
+field_name: field_medical_type
+entity_type: node
+bundle: medical_record
+label: Type
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      medical_type: medical_type
+field_type: entity_reference

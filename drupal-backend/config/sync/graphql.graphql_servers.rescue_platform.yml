@@ -1,0 +1,15 @@
+status: true
+name: rescue_platform
+label: 'Rescue Platform'
+endpoint: /graphql
+debug_flag: 0
+schema: graphql_compose
+caching: false
+query_depth: 10
+query_complexity: 100
+schema_configuration:
+  graphql_compose:
+    extensions:
+      graphql_compose_route: graphql_compose_route
+      graphql_compose_menus: graphql_compose_menus
+id: rescue_platform

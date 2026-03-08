@@ -1,0 +1,21 @@
+uuid: bf625cf6-2e85-4fa7-a0be-afabf1828599
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_good_with_dogs
+    - node.type.animal
+id: node.animal.field_good_with_dogs
+field_name: field_good_with_dogs
+entity_type: node
+bundle: animal
+label: 'Good With Dogs'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

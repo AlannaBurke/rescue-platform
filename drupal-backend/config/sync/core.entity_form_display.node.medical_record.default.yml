@@ -1,0 +1,89 @@
+uuid: 733ee1b8-7897-49c1-814d-de5f8eca75e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.medical_record.body
+    - field.field.node.medical_record.field_medical_animal
+    - field.field.node.medical_record.field_medical_cost
+    - field.field.node.medical_record.field_medical_date
+    - field.field.node.medical_record.field_medical_next_due
+    - field.field.node.medical_record.field_medical_provider
+    - field.field.node.medical_record.field_medical_type
+    - node.type.medical_record
+  module:
+    - path
+    - text
+id: node.medical_record.default
+targetEntityType: node
+bundle: medical_record
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 121
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 16
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_medical_animal: true
+  field_medical_cost: true
+  field_medical_date: true
+  field_medical_next_due: true
+  field_medical_provider: true
+  field_medical_type: true

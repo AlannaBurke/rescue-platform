@@ -1,0 +1,19 @@
+uuid: fe306376-30ac-415d-ad75-a698a506352e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_microchip
+    - node.type.animal
+id: node.animal.field_microchip
+field_name: field_microchip
+entity_type: node
+bundle: animal
+label: 'Microchip Number'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

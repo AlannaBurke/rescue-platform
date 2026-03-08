@@ -1,0 +1,11 @@
+uuid: 5d65cfa9-c0a1-4f97-98f0-ae2e9faf963d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Blog Post'
+type: blog_post
+description: 'A news or blog post for the rescue website.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

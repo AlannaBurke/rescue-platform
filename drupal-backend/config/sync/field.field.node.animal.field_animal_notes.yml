@@ -1,0 +1,22 @@
+uuid: 0022bde0-6226-4088-960f-4cedf8e23703
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_animal_notes
+    - node.type.animal
+  module:
+    - text
+id: node.animal.field_animal_notes
+field_name: field_animal_notes
+entity_type: node
+bundle: animal
+label: 'Internal Notes'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

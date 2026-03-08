@@ -1,0 +1,9 @@
+uuid: f1d4af3d-4c62-4f04-b051-abb5e16087d0
+langcode: en
+status: true
+dependencies: {  }
+name: 'Medical Type'
+vid: medical_type
+description: null
+weight: 0
+new_revision: false
