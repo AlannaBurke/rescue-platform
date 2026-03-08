@@ -1,11 +1,9 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { Heart, Home, CheckCircle, AlertCircle, ArrowRight, Clock, Star } from 'lucide-react';
 
-export const metadata = {
-  title: 'Become a Foster | Rescue Platform',
-  description:
-    'Open your home to an animal in need. Learn how to become a foster parent and make a life-saving difference.',
-};
 
 const whatToExpect = [
   {
@@ -94,6 +92,48 @@ const faq = [
 ];
 
 export default function FosterPage() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [animalType, setAnimalType] = useState('');
+  const [household, setHousehold] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleFosterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          webform_id: 'foster_application',
+          applicant_name: `${firstName} ${lastName}`.trim(),
+          applicant_email: email,
+          applicant_phone: phone,
+          animals_can_foster: animalType ? [animalType] : [],
+          foster_experience: household,
+          availability: 'To be discussed',
+          why_foster: 'Submitted via foster page quick form',
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
@@ -242,39 +282,47 @@ export default function FosterPage() {
           </p>
           <div className="bg-white rounded-2xl p-8 text-left shadow-xl">
             <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Foster Application</h3>
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            {submitted ? (
+              <div className="text-center py-8">
+                <div className="text-5xl mb-4">🐾</div>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Application Submitted!</h4>
+                <p className="text-gray-600 text-sm">Thank you! We&apos;ll be in touch within 48 hours.</p>
+              </div>
+            ) : (
+            <form className="space-y-4" onSubmit={handleFosterSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">First Name *</label>
-                  <input type="text" required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
+                  <input type="text" required value={firstName} onChange={(e) => setFirstName(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Last Name *</label>
-                  <input type="text" required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
+                  <input type="text" required value={lastName} onChange={(e) => setLastName(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address *</label>
-                <input type="email" required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
+                <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
-                <input type="tel" className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">What type of animal would you like to foster? *</label>
-                <select required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300 bg-white">
+                <select required value={animalType} onChange={(e) => setAnimalType(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300 bg-white">
                   <option value="">Select an option</option>
-                  <option>Dogs</option>
-                  <option>Cats</option>
-                  <option>Kittens / Bottle Babies</option>
-                  <option>Puppies</option>
-                  <option>Any / No Preference</option>
+                  <option value="rabbits">Rabbits</option>
+                  <option value="guinea_pigs">Guinea Pigs</option>
+                  <option value="rats">Rats/Mice</option>
+                  <option value="other_small">Other Small Animals</option>
+                  <option value="medical">Medical/Special Needs</option>
+                  <option value="bottle_babies">Bottle Babies/Neonates</option>
                 </select>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1">Tell us about your home and household *</label>
-                <textarea rows={3} required className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none" placeholder="Do you have other pets? Children? Do you rent or own? Any relevant details..." />
+                <textarea rows={3} required value={household} onChange={(e) => setHousehold(e.target.value)} className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none" placeholder="Do you have other pets? Children? Do you rent or own? Any relevant details..." />
               </div>
               <div className="flex items-start gap-3">
                 <input type="checkbox" id="agree" required className="mt-1" />
@@ -282,14 +330,20 @@ export default function FosterPage() {
                   I understand that fostering requires a commitment to the animal&apos;s care and that I will work with the rescue coordinator throughout the placement.
                 </label>
               </div>
+              {submitError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                  <strong>Error:</strong> {submitError}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full bg-rose-500 text-white font-bold py-3 rounded-xl hover:bg-rose-600 transition-colors flex items-center justify-center gap-2"
+                disabled={submitting}
+                className="w-full bg-rose-500 text-white font-bold py-3 rounded-xl hover:bg-rose-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Submit Application
-                <ArrowRight className="w-5 h-5" />
+                {submitting ? 'Submitting...' : (<>Submit Application <ArrowRight className="w-5 h-5" /></>)}
               </button>
             </form>
+            )}
           </div>
         </div>
       </section>
