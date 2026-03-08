@@ -19,6 +19,8 @@ This project was born from the idea that every rescue, regardless of size or tec
 | **Expense & Donation Tracking** | Log expenses with receipt uploads and track incoming donations for financial transparency. | ✅ Complete |
 | **Content Moderation** | Robust, permission-based workflows for publishing content, from blog posts to animal profiles. | ✅ Complete |
 | **Decoupled Frontend** | A lightning-fast, SEO-friendly, and mobile-responsive public website built with Next.js. | ✅ Complete |
+| **Online Forms** | Adoption, foster, surrender, and volunteer applications that submit directly to Drupal. | ✅ Complete |
+| **Image Management** | Upload and display photos for animals, blog posts, and events. | ✅ Complete |
 | **GraphQL API** | A comprehensive and flexible API to connect the backend to the frontend and any future applications. | ✅ Complete |
 | **One-Click Deployment** | Deploy the entire Drupal backend to Pantheon with a single click. | ✅ Complete |
 | **Local Development** | A fully containerized local development environment powered by Docker Compose. | ✅ Complete |
