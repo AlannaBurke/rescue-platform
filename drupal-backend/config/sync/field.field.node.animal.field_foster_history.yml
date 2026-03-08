@@ -1,0 +1,31 @@
+uuid: 1882578a-b427-41aa-9375-7fb4451921b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_foster_history
+    - node.type.animal
+    - paragraphs.paragraphs_type.foster_placement
+  module:
+    - entity_reference_revisions
+id: node.animal.field_foster_history
+field_name: field_foster_history
+entity_type: node
+bundle: animal
+label: 'Foster History'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      foster_placement: foster_placement
+    negate: 0
+    target_bundles_drag_drop:
+      foster_placement:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

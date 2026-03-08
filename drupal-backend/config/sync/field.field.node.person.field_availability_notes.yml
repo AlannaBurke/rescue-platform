@@ -1,0 +1,22 @@
+uuid: 40c173e3-541f-45e8-a7e6-a845c933a92c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_availability_notes
+    - node.type.person
+  module:
+    - text
+id: node.person.field_availability_notes
+field_name: field_availability_notes
+entity_type: node
+bundle: person
+label: 'Availability Notes'
+description: 'Describe availability for fostering or volunteering (e.g., weekends only, no dogs over 30 lbs, etc.)'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

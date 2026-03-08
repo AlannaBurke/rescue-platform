@@ -1,0 +1,21 @@
+uuid: 374dbdf9-e611-4672-bc29-8eef2d733715
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_donation_platform
+    - node.type.donation
+  module:
+    - options
+id: node.donation.field_donation_platform
+field_name: field_donation_platform
+entity_type: node
+bundle: donation
+label: 'Platform / Source'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

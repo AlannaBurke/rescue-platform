@@ -1,0 +1,14 @@
+uuid: 5f221ba7-64d4-4065-909c-9f4f3fb4e8f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.rescue_staff
+  module:
+    - user
+id: user_remove_role_action.rescue_staff
+label: 'Remove the Rescue Staff role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: rescue_staff

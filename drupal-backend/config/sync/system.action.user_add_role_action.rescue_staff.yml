@@ -1,0 +1,14 @@
+uuid: e5bad2dd-0b07-47c0-8052-d2f186b540c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.rescue_staff
+  module:
+    - user
+id: user_add_role_action.rescue_staff
+label: 'Add the Rescue Staff role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: rescue_staff

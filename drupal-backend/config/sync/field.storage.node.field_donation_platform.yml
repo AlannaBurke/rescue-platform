@@ -1,0 +1,51 @@
+uuid: 89d902b5-41d5-4d49-80ba-5b735419ed59
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_donation_platform
+field_name: field_donation_platform
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: paypal
+      label: PayPal
+    -
+      value: venmo
+      label: Venmo
+    -
+      value: check
+      label: Check
+    -
+      value: cash
+      label: Cash
+    -
+      value: facebook
+      label: 'Facebook Fundraiser'
+    -
+      value: givebutter
+      label: GiveButter
+    -
+      value: donorbox
+      label: DonorBox
+    -
+      value: amazon_wishlist
+      label: 'Amazon Wishlist'
+    -
+      value: chewy
+      label: 'Chewy Wishlist'
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

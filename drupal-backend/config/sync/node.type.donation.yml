@@ -1,0 +1,11 @@
+uuid: 5dad7355-648a-4c1d-b5e8-585e4a77e7d7
+langcode: en
+status: true
+dependencies: {  }
+name: Donation
+type: donation
+description: 'Tracks incoming donations to the rescue.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

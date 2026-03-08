@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.animal.field_animal_species
     - field.field.node.animal.field_animal_status
     - field.field.node.animal.field_current_foster
+    - field.field.node.animal.field_foster_history
     - field.field.node.animal.field_good_with_cats
     - field.field.node.animal.field_good_with_dogs
     - field.field.node.animal.field_good_with_kids
@@ -37,6 +38,11 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
@@ -55,6 +61,7 @@ hidden:
   field_animal_species: true
   field_animal_status: true
   field_current_foster: true
+  field_foster_history: true
   field_good_with_cats: true
   field_good_with_dogs: true
   field_good_with_kids: true

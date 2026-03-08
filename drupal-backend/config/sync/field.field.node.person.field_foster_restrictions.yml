@@ -1,0 +1,22 @@
+uuid: 40ebf192-b215-41e8-9938-01ff509ae574
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_foster_restrictions
+    - node.type.person
+  module:
+    - text
+id: node.person.field_foster_restrictions
+field_name: field_foster_restrictions
+entity_type: node
+bundle: person
+label: 'Foster Restrictions'
+description: 'Any restrictions on what animals this foster can take (e.g., no cats, dogs only, kittens only).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

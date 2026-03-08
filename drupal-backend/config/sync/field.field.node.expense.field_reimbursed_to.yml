@@ -1,0 +1,28 @@
+uuid: b10acb9a-9646-4f07-ae30-12bab736f0bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reimbursed_to
+    - node.type.expense
+    - node.type.person
+id: node.expense.field_reimbursed_to
+field_name: field_reimbursed_to
+entity_type: node
+bundle: expense
+label: 'Reimbursed To (Person)'
+description: 'The foster or volunteer who paid out of pocket and needs reimbursement.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

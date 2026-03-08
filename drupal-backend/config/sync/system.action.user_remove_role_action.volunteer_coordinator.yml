@@ -1,0 +1,14 @@
+uuid: 7ecf9362-dd50-4ed0-ad1b-addcb53c9aad
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.volunteer_coordinator
+  module:
+    - user
+id: user_remove_role_action.volunteer_coordinator
+label: 'Remove the Volunteer Coordinator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: volunteer_coordinator

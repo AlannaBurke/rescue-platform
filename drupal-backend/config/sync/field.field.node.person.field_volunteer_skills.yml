@@ -1,0 +1,25 @@
+uuid: b1c9aa87-b137-436c-b8ec-585a9b0cd410
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volunteer_skills
+    - node.type.person
+    - taxonomy.vocabulary.volunteer_skills
+id: node.person.field_volunteer_skills
+field_name: field_volunteer_skills
+entity_type: node
+bundle: person
+label: 'Volunteer Skills'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      volunteer_skills: volunteer_skills
+    auto_create: false
+field_type: entity_reference

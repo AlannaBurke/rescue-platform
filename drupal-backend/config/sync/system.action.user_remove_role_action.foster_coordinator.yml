@@ -1,0 +1,14 @@
+uuid: 792d6a92-f018-4da0-894a-23945daacb10
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.foster_coordinator
+  module:
+    - user
+id: user_remove_role_action.foster_coordinator
+label: 'Remove the Foster Coordinator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: foster_coordinator

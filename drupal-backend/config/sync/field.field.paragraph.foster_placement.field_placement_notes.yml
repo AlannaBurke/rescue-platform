@@ -1,0 +1,22 @@
+uuid: 659e5873-b782-494f-9a3f-6a32d0e32e78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_notes
+    - paragraphs.paragraphs_type.foster_placement
+  module:
+    - text
+id: paragraph.foster_placement.field_placement_notes
+field_name: field_placement_notes
+entity_type: paragraph
+bundle: foster_placement
+label: 'Placement Notes'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

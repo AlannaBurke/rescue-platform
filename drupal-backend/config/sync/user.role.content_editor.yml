@@ -3,13 +3,20 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.basic_html
+    - filter.format.full_html
     - node.type.article
+    - node.type.blog_post
+    - node.type.event
     - node.type.page
     - taxonomy.vocabulary.tags
+    - workflows.workflow.editorial
   module:
     - comment
+    - content_moderation
     - contextual
     - file
+    - filter
     - node
     - path
     - system
@@ -29,19 +36,36 @@ permissions:
   - 'access toolbar'
   - 'administer url aliases'
   - 'create article content'
+  - 'create blog_post content'
+  - 'create event content'
   - 'create page content'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete article revisions'
   - 'delete own article content'
+  - 'delete own blog_post content'
+  - 'delete own event content'
   - 'delete own files'
   - 'delete own page content'
   - 'delete page revisions'
+  - 'edit any blog_post content'
+  - 'edit any event content'
+  - 'edit any page content'
   - 'edit own article content'
+  - 'edit own blog_post content'
   - 'edit own comments'
+  - 'edit own event content'
   - 'edit own page content'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'use editorial transition create_new_draft'
+  - 'use text format basic_html'
+  - 'use text format full_html'
   - 'view all revisions'
+  - 'view any unpublished content'
+  - 'view blog_post revisions'
+  - 'view event revisions'
+  - 'view latest version'
   - 'view own unpublished content'
+  - 'view page revisions'
   - 'view the administration theme'

@@ -1,0 +1,31 @@
+uuid: f43dddf1-c3eb-41cb-bcb5-58f40299ef3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_volunteer_shifts
+    - node.type.person
+    - paragraphs.paragraphs_type.volunteer_shift
+  module:
+    - entity_reference_revisions
+id: node.person.field_volunteer_shifts
+field_name: field_volunteer_shifts
+entity_type: node
+bundle: person
+label: 'Volunteer Shifts'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      volunteer_shift: volunteer_shift
+    negate: 0
+    target_bundles_drag_drop:
+      volunteer_shift:
+        weight: 0
+        enabled: true
+field_type: entity_reference_revisions

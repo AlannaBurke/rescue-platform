@@ -1,0 +1,21 @@
+uuid: 933fa40b-488e-4b32-8332-123aa8bd4797
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_start_date
+    - paragraphs.paragraphs_type.foster_placement
+  module:
+    - datetime
+id: paragraph.foster_placement.field_placement_start_date
+field_name: field_placement_start_date
+entity_type: paragraph
+bundle: foster_placement
+label: 'Placement Start Date'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

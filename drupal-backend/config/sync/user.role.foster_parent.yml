@@ -1,0 +1,12 @@
+uuid: 6ea064dd-8933-4ff7-bde2-3c93814dc0ba
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: foster_parent
+label: 'Foster Parent'
+weight: 6
+is_admin: null
+permissions:
+  - 'access content'

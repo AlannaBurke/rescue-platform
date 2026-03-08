@@ -1,0 +1,10 @@
+uuid: 221cef6d-9452-4e6a-bb6c-8e1880605ca3
+langcode: en
+status: true
+dependencies: {  }
+id: foster_placement
+label: 'Foster Placement'
+icon_uuid: null
+icon_default: null
+description: 'Records a foster placement: which person is fostering this animal and for what period.'
+behavior_plugins: {  }

@@ -1,0 +1,9 @@
+uuid: 0f080526-005c-4974-8848-4da99d9b18ad
+langcode: en
+status: true
+dependencies: {  }
+name: 'Volunteer Skills'
+vid: volunteer_skills
+description: 'Skills and areas of expertise that volunteers can offer.'
+weight: 0
+new_revision: false

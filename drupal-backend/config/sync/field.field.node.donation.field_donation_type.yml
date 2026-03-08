@@ -1,0 +1,23 @@
+uuid: 193e1add-8fd2-4a8c-8f75-bca68baba193
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_donation_type
+    - node.type.donation
+  module:
+    - options
+id: node.donation.field_donation_type
+field_name: field_donation_type
+entity_type: node
+bundle: donation
+label: 'Donation Type'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: monetary
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,28 @@
+uuid: d2099de5-c00b-43dd-bf3e-02e161afbb63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_currently_fostering
+    - node.type.animal
+    - node.type.person
+id: node.person.field_currently_fostering
+field_name: field_currently_fostering
+entity_type: node
+bundle: person
+label: 'Currently Fostering'
+description: 'Animals this person is currently fostering.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      animal: animal
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

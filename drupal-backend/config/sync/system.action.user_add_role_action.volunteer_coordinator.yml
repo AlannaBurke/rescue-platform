@@ -1,0 +1,14 @@
+uuid: 54a1a9fe-7350-4245-8f39-899a79068692
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.volunteer_coordinator
+  module:
+    - user
+id: user_add_role_action.volunteer_coordinator
+label: 'Add the Volunteer Coordinator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: volunteer_coordinator

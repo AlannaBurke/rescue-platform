@@ -1,0 +1,141 @@
+uuid: 9b8ea46a-82e6-44b5-97cb-3d44863a6afa
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.animal
+  module:
+    - content_moderation
+id: animal_intake
+label: 'Animal Intake Workflow'
+type: content_moderation
+type_settings:
+  states:
+    adopted:
+      label: Adopted
+      weight: 4
+      published: false
+      default_revision: true
+    adoption_pending:
+      label: 'Adoption Pending'
+      weight: 3
+      published: true
+      default_revision: true
+    available:
+      label: Available
+      weight: 2
+      published: true
+      default_revision: true
+    deceased:
+      label: Deceased
+      weight: 6
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: -1
+      published: false
+      default_revision: false
+    in_foster:
+      label: 'In Foster'
+      weight: 1
+      published: true
+      default_revision: true
+    intake:
+      label: 'Intake / Evaluation'
+      weight: 0
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: -1
+      published: true
+      default_revision: true
+    returned:
+      label: Returned
+      weight: 5
+      published: false
+      default_revision: false
+    transferred:
+      label: 'Transferred Out'
+      weight: 7
+      published: false
+      default_revision: true
+  transitions:
+    adopt:
+      label: 'Mark as Adopted'
+      from:
+        - adoption_pending
+        - available
+        - in_foster
+      to: adopted
+      weight: 3
+    back_to_intake:
+      label: 'Return to Intake'
+      from:
+        - returned
+      to: intake
+      weight: 7
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+      to: draft
+      weight: -2
+    mark_available:
+      label: 'Mark as Available'
+      from:
+        - intake
+        - in_foster
+        - returned
+      to: available
+      weight: 1
+    mark_deceased:
+      label: 'Mark as Deceased'
+      from:
+        - intake
+        - in_foster
+        - available
+        - adoption_pending
+      to: deceased
+      weight: 5
+    pending_adoption:
+      label: 'Mark Adoption Pending'
+      from:
+        - available
+        - in_foster
+      to: adoption_pending
+      weight: 2
+    place_in_foster:
+      label: 'Place in Foster'
+      from:
+        - intake
+        - returned
+      to: in_foster
+      weight: 0
+    publish_direct:
+      label: Publish
+      from:
+        - draft
+      to: published
+      weight: -1
+    return_animal:
+      label: 'Return to Rescue'
+      from:
+        - adopted
+        - in_foster
+        - available
+        - adoption_pending
+      to: returned
+      weight: 4
+    transfer_out:
+      label: 'Transfer to Another Rescue'
+      from:
+        - intake
+        - in_foster
+        - available
+      to: transferred
+      weight: 6
+  entity_types:
+    node:
+      - animal

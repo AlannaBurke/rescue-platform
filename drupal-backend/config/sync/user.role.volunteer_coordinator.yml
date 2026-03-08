@@ -1,0 +1,28 @@
+uuid: 55f2f458-6283-461d-852a-f635c182869a
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - node.type.event
+    - node.type.person
+  module:
+    - filter
+    - node
+    - system
+id: volunteer_coordinator
+label: 'Volunteer Coordinator'
+weight: 4
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'create event content'
+  - 'create person content'
+  - 'delete own event content'
+  - 'delete own person content'
+  - 'edit any event content'
+  - 'edit any person content'
+  - 'edit own event content'
+  - 'edit own person content'
+  - 'use text format basic_html'

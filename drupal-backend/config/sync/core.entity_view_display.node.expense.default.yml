@@ -8,6 +8,12 @@ dependencies:
     - field.field.node.expense.field_expense_animal
     - field.field.node.expense.field_expense_category
     - field.field.node.expense.field_expense_date
+    - field.field.node.expense.field_expense_receipt
+    - field.field.node.expense.field_fiscal_year
+    - field.field.node.expense.field_payment_method
+    - field.field.node.expense.field_reimbursed_to
+    - field.field.node.expense.field_reimbursement_status
+    - field.field.node.expense.field_vendor
     - node.type.expense
   module:
     - text
@@ -34,3 +40,9 @@ hidden:
   field_expense_animal: true
   field_expense_category: true
   field_expense_date: true
+  field_expense_receipt: true
+  field_fiscal_year: true
+  field_payment_method: true
+  field_reimbursed_to: true
+  field_reimbursement_status: true
+  field_vendor: true

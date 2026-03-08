@@ -5,12 +5,18 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.person.body
+    - field.field.node.person.field_availability_notes
+    - field.field.node.person.field_currently_fostering
+    - field.field.node.person.field_foster_restrictions
+    - field.field.node.person.field_max_foster_capacity
     - field.field.node.person.field_person_active_since
     - field.field.node.person.field_person_availability
     - field.field.node.person.field_person_email
     - field.field.node.person.field_person_phone
     - field.field.node.person.field_person_roles
     - field.field.node.person.field_person_skills
+    - field.field.node.person.field_volunteer_shifts
+    - field.field.node.person.field_volunteer_skills
     - node.type.person
   module:
     - text
@@ -34,9 +40,15 @@ content:
     weight: 100
     region: content
 hidden:
+  field_availability_notes: true
+  field_currently_fostering: true
+  field_foster_restrictions: true
+  field_max_foster_capacity: true
   field_person_active_since: true
   field_person_availability: true
   field_person_email: true
   field_person_phone: true
   field_person_roles: true
   field_person_skills: true
+  field_volunteer_shifts: true
+  field_volunteer_skills: true

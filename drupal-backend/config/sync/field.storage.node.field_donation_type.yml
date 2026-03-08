@@ -1,0 +1,42 @@
+uuid: 31c869fc-4009-442c-a276-1196c1b1163a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_donation_type
+field_name: field_donation_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: monetary
+      label: Monetary
+    -
+      value: in_kind
+      label: 'In-Kind (Supplies/Food)'
+    -
+      value: medical
+      label: 'Medical Services (Donated)'
+    -
+      value: transport
+      label: 'Transport Services'
+    -
+      value: event_sponsorship
+      label: 'Event Sponsorship'
+    -
+      value: grant
+      label: Grant
+    -
+      value: bequest
+      label: 'Bequest / Estate'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

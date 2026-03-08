@@ -1,0 +1,28 @@
+uuid: 72707c55-09d8-49ef-9b8f-7efe7cc43e99
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_donation_for_animal
+    - node.type.animal
+    - node.type.donation
+id: node.donation.field_donation_for_animal
+field_name: field_donation_for_animal
+entity_type: node
+bundle: donation
+label: 'Designated For Animal'
+description: 'If this donation is designated for a specific animal (e.g., memorial donation).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      animal: animal
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

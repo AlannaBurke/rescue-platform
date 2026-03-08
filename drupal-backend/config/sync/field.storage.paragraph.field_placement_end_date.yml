@@ -1,0 +1,20 @@
+uuid: 65c7dc41-2124-4a92-82e8-c1b1e3e02c79
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+id: paragraph.field_placement_end_date
+field_name: field_placement_end_date
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

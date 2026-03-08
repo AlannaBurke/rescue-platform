@@ -1,0 +1,21 @@
+uuid: 11225297-b090-420d-a7a3-fdfc01031d74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_end_date
+    - paragraphs.paragraphs_type.foster_placement
+  module:
+    - datetime
+id: paragraph.foster_placement.field_placement_end_date
+field_name: field_placement_end_date
+entity_type: paragraph
+bundle: foster_placement
+label: 'Placement End Date'
+description: 'Leave blank if placement is ongoing.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

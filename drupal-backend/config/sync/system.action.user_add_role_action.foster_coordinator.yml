@@ -1,0 +1,14 @@
+uuid: 01ba133a-7fc7-4d02-adb2-b640167f2470
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.foster_coordinator
+  module:
+    - user
+id: user_add_role_action.foster_coordinator
+label: 'Add the Foster Coordinator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: foster_coordinator

@@ -1,0 +1,14 @@
+uuid: e0f40780-eb8b-43b5-9ca8-7de146c41db2
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.rescue_admin
+  module:
+    - user
+id: user_remove_role_action.rescue_admin
+label: 'Remove the Rescue Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: rescue_admin

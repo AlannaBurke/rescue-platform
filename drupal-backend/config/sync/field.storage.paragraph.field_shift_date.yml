@@ -1,0 +1,20 @@
+uuid: 6bd5d637-031a-4ea3-a6fd-b6d82f626030
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+id: paragraph.field_shift_date
+field_name: field_shift_date
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

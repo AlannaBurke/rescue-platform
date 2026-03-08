@@ -1,0 +1,10 @@
+uuid: adaad7a0-0c64-4334-9286-e9665f001bf5
+langcode: en
+status: true
+dependencies: {  }
+id: volunteer_shift
+label: 'Volunteer Shift'
+icon_uuid: null
+icon_default: null
+description: 'Records a volunteer shift: date, hours worked, and activity description.'
+behavior_plugins: {  }

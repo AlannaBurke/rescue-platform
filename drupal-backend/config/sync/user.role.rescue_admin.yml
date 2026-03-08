@@ -1,0 +1,106 @@
+uuid: 65748c5d-bf8d-4c62-99fe-f754500b6213
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.full_html
+    - node.type.animal
+    - node.type.blog_post
+    - node.type.donation
+    - node.type.event
+    - node.type.expense
+    - node.type.medical_record
+    - node.type.page
+    - node.type.person
+    - workflows.workflow.animal_intake
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_ui
+    - filter
+    - node
+    - system
+    - taxonomy
+    - workflows
+id: rescue_admin
+label: 'Rescue Admin'
+weight: 1
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'administer content types'
+  - 'administer node fields'
+  - 'administer permissions'
+  - 'administer site configuration'
+  - 'administer taxonomy'
+  - 'administer users'
+  - 'administer workflows'
+  - 'create animal content'
+  - 'create blog_post content'
+  - 'create donation content'
+  - 'create event content'
+  - 'create expense content'
+  - 'create medical_record content'
+  - 'create page content'
+  - 'create person content'
+  - 'delete all revisions'
+  - 'delete any animal content'
+  - 'delete any blog_post content'
+  - 'delete any donation content'
+  - 'delete any event content'
+  - 'delete any expense content'
+  - 'delete any medical_record content'
+  - 'delete any page content'
+  - 'delete any person content'
+  - 'delete own animal content'
+  - 'delete own blog_post content'
+  - 'delete own donation content'
+  - 'delete own event content'
+  - 'delete own expense content'
+  - 'delete own medical_record content'
+  - 'delete own page content'
+  - 'delete own person content'
+  - 'edit any animal content'
+  - 'edit any blog_post content'
+  - 'edit any donation content'
+  - 'edit any event content'
+  - 'edit any expense content'
+  - 'edit any medical_record content'
+  - 'edit any page content'
+  - 'edit any person content'
+  - 'edit own animal content'
+  - 'edit own blog_post content'
+  - 'edit own donation content'
+  - 'edit own event content'
+  - 'edit own expense content'
+  - 'edit own medical_record content'
+  - 'edit own page content'
+  - 'edit own person content'
+  - 'revert all revisions'
+  - 'use animal_intake transition adopt'
+  - 'use animal_intake transition back_to_intake'
+  - 'use animal_intake transition mark_available'
+  - 'use animal_intake transition mark_deceased'
+  - 'use animal_intake transition pending_adoption'
+  - 'use animal_intake transition place_in_foster'
+  - 'use animal_intake transition return_animal'
+  - 'use animal_intake transition transfer_out'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition publish'
+  - 'use text format basic_html'
+  - 'use text format full_html'
+  - 'view all revisions'
+  - 'view animal revisions'
+  - 'view any unpublished content'
+  - 'view blog_post revisions'
+  - 'view event revisions'
+  - 'view expense revisions'
+  - 'view latest version'
+  - 'view medical_record revisions'
+  - 'view page revisions'
+  - 'view person revisions'

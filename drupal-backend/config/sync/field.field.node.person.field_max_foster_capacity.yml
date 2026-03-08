@@ -1,0 +1,23 @@
+uuid: 3daec5ea-2e0d-4c1e-a6d8-90a824d90aa6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_max_foster_capacity
+    - node.type.person
+id: node.person.field_max_foster_capacity
+field_name: field_max_foster_capacity
+entity_type: node
+bundle: person
+label: 'Max Foster Capacity'
+description: 'Maximum number of animals this foster can house at one time.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

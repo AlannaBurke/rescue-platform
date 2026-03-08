@@ -5,40 +5,52 @@ entity_config:
     animal:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     person:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     medical_record:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     expense:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     blog_post:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     event:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     page:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
   taxonomy_term:
     animal_status:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     animal_species:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     person_role:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     medical_type:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
     expense_category:
       enabled: true
       query_load_enabled: true
+      edges_enabled: true
 field_config:
   node:
     animal:

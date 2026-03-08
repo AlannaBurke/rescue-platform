@@ -1,0 +1,23 @@
+uuid: 19c6c265-cef1-4df5-8bb7-2a9780a0428a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_shift_hours
+    - paragraphs.paragraphs_type.volunteer_shift
+id: paragraph.volunteer_shift.field_shift_hours
+field_name: field_shift_hours
+entity_type: paragraph
+bundle: volunteer_shift
+label: Hours
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

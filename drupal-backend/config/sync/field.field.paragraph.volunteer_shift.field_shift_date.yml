@@ -1,0 +1,21 @@
+uuid: 48633cce-ffe3-49b1-94fd-80abe606b968
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_shift_date
+    - paragraphs.paragraphs_type.volunteer_shift
+  module:
+    - datetime
+id: paragraph.volunteer_shift.field_shift_date
+field_name: field_shift_date
+entity_type: paragraph
+bundle: volunteer_shift
+label: 'Shift Date'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

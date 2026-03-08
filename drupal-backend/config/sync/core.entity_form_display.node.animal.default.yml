@@ -16,13 +16,16 @@ dependencies:
     - field.field.node.animal.field_animal_species
     - field.field.node.animal.field_animal_status
     - field.field.node.animal.field_current_foster
+    - field.field.node.animal.field_foster_history
     - field.field.node.animal.field_good_with_cats
     - field.field.node.animal.field_good_with_dogs
     - field.field.node.animal.field_good_with_kids
     - field.field.node.animal.field_intake_date
     - field.field.node.animal.field_microchip
     - node.type.animal
+    - workflows.workflow.animal_intake
   module:
+    - content_moderation
     - path
     - text
 id: node.animal.default
@@ -43,6 +46,12 @@ content:
   created:
     type: datetime_timestamp
     weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -104,6 +113,7 @@ hidden:
   field_animal_species: true
   field_animal_status: true
   field_current_foster: true
+  field_foster_history: true
   field_good_with_cats: true
   field_good_with_dogs: true
   field_good_with_kids: true

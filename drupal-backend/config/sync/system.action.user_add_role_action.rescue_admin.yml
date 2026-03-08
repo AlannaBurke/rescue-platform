@@ -1,0 +1,14 @@
+uuid: 82ec1c1d-5635-4a35-a908-37b4c77800f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.rescue_admin
+  module:
+    - user
+id: user_add_role_action.rescue_admin
+label: 'Add the Rescue Admin role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: rescue_admin

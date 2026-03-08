@@ -1,0 +1,25 @@
+uuid: 484659cd-046b-468a-9be8-90b864266f1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fiscal_year
+    - node.type.expense
+id: node.expense.field_fiscal_year
+field_name: field_fiscal_year
+entity_type: node
+bundle: expense
+label: 'Fiscal Year'
+description: 'The fiscal year this expense belongs to (e.g., 2025). Auto-populated from expense date.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 2026
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

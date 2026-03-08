@@ -1,0 +1,21 @@
+uuid: 42a60129-f636-4ba2-8ef4-9a86d0bd2e24
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_donation_date
+    - node.type.donation
+  module:
+    - datetime
+id: node.donation.field_donation_date
+field_name: field_donation_date
+entity_type: node
+bundle: donation
+label: 'Donation Date'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

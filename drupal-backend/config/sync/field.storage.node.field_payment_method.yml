@@ -1,0 +1,48 @@
+uuid: 4c5b94e4-f59b-4a62-8e42-3b0643f26dcd
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_payment_method
+field_name: field_payment_method
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: rescue_card
+      label: 'Rescue Debit/Credit Card'
+    -
+      value: rescue_check
+      label: 'Rescue Check'
+    -
+      value: paypal
+      label: PayPal
+    -
+      value: venmo
+      label: Venmo
+    -
+      value: zelle
+      label: Zelle
+    -
+      value: cash
+      label: Cash
+    -
+      value: personal_card
+      label: 'Personal Card (Reimbursable)'
+    -
+      value: donation_in_kind
+      label: 'Donation In Kind'
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

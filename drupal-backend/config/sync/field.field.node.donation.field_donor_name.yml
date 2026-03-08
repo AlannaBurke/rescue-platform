@@ -1,0 +1,19 @@
+uuid: 78f9abbf-75da-480f-bdf8-c1c33f1f3223
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_donor_name
+    - node.type.donation
+id: node.donation.field_donor_name
+field_name: field_donor_name
+entity_type: node
+bundle: donation
+label: 'Donor Name'
+description: 'Leave blank for anonymous donations.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,20 @@
+uuid: 0aa1d049-3418-4100-908b-480d7a361063
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_fiscal_year
+field_name: field_fiscal_year
+entity_type: node
+type: integer
+settings:
+  unsigned: true
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
