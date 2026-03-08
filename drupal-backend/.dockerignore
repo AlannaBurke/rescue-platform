@@ -1,0 +1,34 @@
+# Git
+.git
+.gitignore
+
+# Drupal generated files (managed via volumes)
+web/sites/default/files/
+web/sites/default/private/
+
+# Drupal settings (injected via environment variables)
+web/sites/default/settings.local.php
+
+# Development tools
+.ddev/
+.lando.yml
+.lando.local.yml
+
+# Node (not needed in PHP container)
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Tests
+web/core/tests/

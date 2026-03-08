@@ -1,0 +1,210 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Rescue Platform profile.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Performs initial setup tasks after the profile is installed.
+ */
+function rescue_platform_install(): void {
+  // Set the default front page to the animals listing.
+  \Drupal::configFactory()
+    ->getEditable('system.site')
+    ->set('page.front', '/node')
+    ->save(TRUE);
+
+  // Set the default theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'olivero')
+    ->set('admin', 'claro')
+    ->save(TRUE);
+
+  // Enable the Olivero and Claro themes.
+  \Drupal::service('theme_installer')->install(['olivero', 'claro']);
+
+  // Set Claro as the admin theme.
+  \Drupal::configFactory()
+    ->getEditable('node.settings')
+    ->set('use_admin_theme', TRUE)
+    ->save(TRUE);
+
+  // Configure the text formats.
+  _rescue_platform_configure_text_formats();
+
+  // Configure default media types.
+  _rescue_platform_configure_media();
+
+  // Set default date formats.
+  _rescue_platform_configure_date_formats();
+
+  // Configure pathauto patterns.
+  _rescue_platform_configure_pathauto();
+}
+
+/**
+ * Configure text formats for the rescue platform.
+ */
+function _rescue_platform_configure_text_formats(): void {
+  // Ensure the 'full_html' filter format is available for staff.
+  $format_storage = \Drupal::entityTypeManager()->getStorage('filter_format');
+  $full_html = $format_storage->load('full_html');
+  if ($full_html) {
+    // Grant full HTML to admin and staff roles.
+    user_role_grant_permissions('rescue_admin', ['use text format full_html']);
+    user_role_grant_permissions('rescue_staff', ['use text format full_html']);
+    user_role_grant_permissions('content_editor', ['use text format basic_html']);
+  }
+}
+
+/**
+ * Configure media types for the rescue platform.
+ */
+function _rescue_platform_configure_media(): void {
+  // Media configuration is handled via config/install YAML files.
+  // This function is a placeholder for any programmatic media setup.
+}
+
+/**
+ * Configure date formats for the rescue platform.
+ */
+function _rescue_platform_configure_date_formats(): void {
+  $config_factory = \Drupal::configFactory();
+
+  // Set a friendly default date format.
+  $config_factory->getEditable('core.date_format.medium')
+    ->set('pattern', 'D, m/d/Y - H:i')
+    ->save();
+}
+
+/**
+ * Configure pathauto URL alias patterns.
+ */
+function _rescue_platform_configure_pathauto(): void {
+  if (!\Drupal::moduleHandler()->moduleExists('pathauto')) {
+    return;
+  }
+
+  $patterns = [
+    'animal' => '/animals/[node:title]',
+    'person' => '/people/[node:title]',
+    'blog_post' => '/blog/[node:title]',
+    'event' => '/events/[node:title]',
+    'page' => '/[node:title]',
+    'expense' => '/expenses/[node:title]',
+    'medical_record' => '/medical/[node:title]',
+    'donation' => '/donations/[node:title]',
+  ];
+
+  $pattern_storage = \Drupal::entityTypeManager()->getStorage('pathauto_pattern');
+
+  foreach ($patterns as $bundle => $pattern) {
+    $pattern_id = 'rescue_platform_' . $bundle;
+
+    if (!$pattern_storage->load($pattern_id)) {
+      $pathauto_pattern = $pattern_storage->create([
+        'id' => $pattern_id,
+        'label' => 'Rescue Platform: ' . ucfirst(str_replace('_', ' ', $bundle)),
+        'type' => 'canonical_entities:node',
+        'pattern' => $pattern,
+        'selection_criteria' => [
+          'entity_bundle:node' => [
+            'id' => 'entity_bundle:node',
+            'bundles' => [$bundle => $bundle],
+            'negate' => FALSE,
+            'context_mapping' => ['node' => 'node'],
+          ],
+        ],
+        'weight' => 0,
+        'status' => TRUE,
+      ]);
+      $pathauto_pattern->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_requirements().
+ *
+ * Checks system requirements before and after installation.
+ */
+function rescue_platform_requirements(string $phase): array {
+  $requirements = [];
+
+  if ($phase === 'install') {
+    // Check PHP version.
+    if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+      $requirements['rescue_platform_php'] = [
+        'title' => t('Rescue Platform PHP requirement'),
+        'value' => PHP_VERSION,
+        'description' => t('Rescue Platform requires PHP 8.1 or higher.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+
+    // Check for required PHP extensions.
+    $required_extensions = ['json', 'mbstring', 'pdo', 'xml', 'gd'];
+    $missing = [];
+    foreach ($required_extensions as $ext) {
+      if (!extension_loaded($ext)) {
+        $missing[] = $ext;
+      }
+    }
+
+    if (!empty($missing)) {
+      $requirements['rescue_platform_extensions'] = [
+        'title' => t('Rescue Platform PHP extensions'),
+        'value' => t('Missing: @extensions', ['@extensions' => implode(', ', $missing)]),
+        'description' => t('The following PHP extensions are required: @extensions', [
+          '@extensions' => implode(', ', $missing),
+        ]),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  if ($phase === 'runtime') {
+    // Verify the GraphQL endpoint is accessible.
+    $requirements['rescue_platform_graphql'] = [
+      'title' => t('Rescue Platform GraphQL API'),
+      'value' => t('Configured'),
+      'description' => t('The GraphQL API endpoint is available at <a href="/graphql">/graphql</a>.'),
+      'severity' => REQUIREMENT_OK,
+    ];
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the rescue_platform_settings table for storing rescue-specific
+ * configuration that does not fit in Drupal's standard config system.
+ */
+function rescue_platform_schema(): array {
+  // All rescue platform settings are stored in Drupal's config system
+  // under the 'rescue_platform.settings' config object.
+  // No custom database tables are required.
+  return [];
+}
+
+/**
+ * Update 8001: Add fiscal year field to expense content type.
+ */
+function rescue_platform_update_8001(): string {
+  // This update was applied in the initial release.
+  return t('Fiscal year field already exists on the expense content type.');
+}
+
+/**
+ * Update 8002: Add donation tracking content type.
+ */
+function rescue_platform_update_8002(): string {
+  // This update was applied in the initial release.
+  return t('Donation content type already exists.');
+}

@@ -1,0 +1,75 @@
+name: 'Rescue Platform'
+type: profile
+description: 'A comprehensive, open-source content management and website platform for small animal rescues. Includes animal tracking, foster management, volunteer coordination, expense tracking, and a decoupled Next.js public website.'
+version: '1.0.0'
+core_version_requirement: '^10 || ^11'
+distribution:
+  name: 'Rescue Platform'
+  install:
+    theme: claro
+
+# Core modules required by the profile
+install:
+  # Core
+  - node
+  - taxonomy
+  - field
+  - field_ui
+  - text
+  - options
+  - datetime
+  - datetime_range
+  - link
+  - file
+  - image
+  - telephone
+  - views
+  - views_ui
+  - block
+  - block_content
+  - menu_link_content
+  - menu_ui
+  - path
+  - path_alias
+  - pathauto
+  - token
+  - user
+  - filter
+  - editor
+  - ckeditor5
+  - media
+  - media_library
+  - content_moderation
+  - workflows
+  - paragraphs
+  - entity_reference_revisions
+  # Admin UI
+  - admin_toolbar
+  - admin_toolbar_tools
+  # API
+  - serialization
+  - jsonapi
+  - jsonapi_extras
+  - graphql
+  - graphql_compose
+  - graphql_compose_edges
+  - graphql_compose_views
+  # SEO & Performance
+  - metatag
+  - redirect
+  - simple_sitemap
+  # Developer
+  - config
+  - config_split
+  - devel
+
+# Themes
+themes:
+  - claro
+  - olivero
+
+# Default theme for the admin interface
+admin_theme: claro
+
+# Exclude from search
+hidden: false

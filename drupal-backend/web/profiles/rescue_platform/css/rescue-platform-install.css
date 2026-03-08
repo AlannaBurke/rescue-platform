@@ -1,0 +1,39 @@
+/**
+ * @file
+ * Rescue Platform installer styles.
+ *
+ * Applies rescue branding to the Drupal installation wizard.
+ */
+
+.install-page #page-wrapper {
+  background: linear-gradient(135deg, #fff1f2 0%, #fff7ed 100%);
+}
+
+.install-page .task-list__item--active {
+  color: #e11d48;
+}
+
+.install-page .task-list__item--active::before {
+  background-color: #e11d48;
+}
+
+/* Rescue Platform installer header */
+.install-page #header {
+  background-color: #9f1239;
+  padding: 1rem 2rem;
+}
+
+.install-page #header::after {
+  content: '🐾 Rescue Platform Installer';
+  display: block;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+/* Progress bar */
+.install-page .progress__bar {
+  background-color: #e11d48;
+}

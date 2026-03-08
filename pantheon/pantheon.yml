@@ -1,0 +1,59 @@
+# =============================================================================
+# Rescue Platform — Pantheon Platform Configuration
+# =============================================================================
+# This file configures the Pantheon hosting environment for the Drupal backend.
+# Copy this file to the root of your Pantheon repository as pantheon.yml.
+# Documentation: https://docs.pantheon.io/pantheon-yml
+# =============================================================================
+
+api_version: 1
+
+# PHP version
+php_version: 8.2
+
+# Drupal version
+drupal_major_version: 10
+
+# Database version
+database:
+  version: 10.6
+
+# Solr version (optional — enable if you add search)
+# search:
+#   version: 8
+
+# Enforce HTTPS on all environments
+enforce_https: transitional
+
+# Protected web paths — prevent direct access to sensitive files
+protected_web_dirs:
+  - private
+  - config/sync
+
+# Quicksilver platform hooks — run scripts on Pantheon events
+workflows:
+  deploy:
+    after:
+      - type: webphp
+        description: "Run Drush deploy after code push"
+        script: private/scripts/pantheon/deploy.php
+
+  clear_cache:
+    after:
+      - type: webphp
+        description: "Clear Drupal caches"
+        script: private/scripts/pantheon/clear_cache.php
+
+  sync_code:
+    after:
+      - type: webphp
+        description: "Run database updates after code sync"
+        script: private/scripts/pantheon/post_sync.php
+
+# Autopilot — enable automated updates (optional)
+# autopilot:
+#   frequency: weekly
+#   day: monday
+
+# Build tools (for Integrated Composer on Pantheon)
+build_step: true

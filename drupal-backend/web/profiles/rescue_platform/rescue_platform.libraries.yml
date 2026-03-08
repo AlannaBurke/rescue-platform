@@ -1,0 +1,13 @@
+rescue-platform-admin:
+  version: '1.0.0'
+  css:
+    theme:
+      css/rescue-platform-admin.css: {}
+  dependencies:
+    - core/drupal
+
+rescue-platform-install:
+  version: '1.0.0'
+  css:
+    theme:
+      css/rescue-platform-install.css: {}

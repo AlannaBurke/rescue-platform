@@ -1,0 +1,115 @@
+{
+    "name": "rescue-platform/project-template",
+    "description": "Composer project template for the Rescue Platform — an open-source CMS for small animal rescues.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://github.com/AlannaBurke/rescue-platform",
+    "support": {
+        "issues": "https://github.com/AlannaBurke/rescue-platform/issues",
+        "docs": "https://github.com/AlannaBurke/rescue-platform/tree/main/docs"
+    },
+    "require": {
+        "php": ">=8.1",
+        "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/admin_toolbar": "^3.4",
+        "drupal/config_split": "^2.0",
+        "drupal/core-composer-scaffold": "^10",
+        "drupal/core-project-message": "^10",
+        "drupal/core-recommended": "^10",
+        "drupal/devel": "^5.0",
+        "drupal/entity_reference_revisions": "^1.10",
+        "drupal/graphql": "^4.8",
+        "drupal/graphql_compose": "^2.1",
+        "drupal/graphql_compose_edges": "^1.0",
+        "drupal/graphql_compose_views": "^1.0",
+        "drupal/jsonapi_extras": "^3.23",
+        "drupal/metatag": "^2.0",
+        "drupal/paragraphs": "^1.17",
+        "drupal/pathauto": "^1.12",
+        "drupal/redirect": "^1.9",
+        "drupal/simple_sitemap": "^4.1",
+        "drupal/token": "^1.13",
+        "drush/drush": "^12.0"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^10",
+        "phpunit/phpunit": "^10.0",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            },
+            "file-mapping": {
+                "[web-root]/sites/default/default.settings.php": {
+                    "append": "web/profiles/rescue_platform/rescue_platform.settings.php"
+                }
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "drupal-core-project-message": {
+            "include-keys": ["homepage", "support"],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Welcome to the Rescue Platform!                        </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Next steps:                                            </>",
+                "<bg=blue;fg=white>  1. cd into your project directory                      </>",
+                "<bg=blue;fg=white>  2. Copy .env.example to .env and fill in your values   </>",
+                "<bg=blue;fg=white>  3. Run: docker compose up -d                           </>",
+                "<bg=blue;fg=white>  4. Run: ./scripts/install.sh                           </>",
+                "<bg=blue;fg=white>  5. Visit http://localhost:8080 to complete setup        </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Documentation: https://github.com/AlannaBurke/rescue-platform/tree/main/docs </>",
+                "<bg=blue;fg=white>                                                         </>"
+            ]
+        },
+        "patches": {}
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php -r \"copy('.env.example', '.env');\"",
+            "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
+        ],
+        "post-install-cmd": [
+            "@composer drupal:scaffold"
+        ],
+        "post-update-cmd": [
+            "@composer drupal:scaffold"
+        ],
+        "install-rescue-platform": [
+            "./scripts/install.sh"
+        ],
+        "cs": "phpcs --standard=Drupal,DrupalPractice web/profiles/rescue_platform",
+        "cs-fix": "phpcbf --standard=Drupal,DrupalPractice web/profiles/rescue_platform",
+        "test": "phpunit -c web/core web/profiles/rescue_platform/tests"
+    }
+}

@@ -1,0 +1,162 @@
+---
+# =============================================================================
+# Rescue Platform — Docker Compose Local Development Environment
+# =============================================================================
+# Usage:
+#   docker compose up -d          Start all services
+#   docker compose down           Stop all services
+#   docker compose logs -f        Tail logs
+#   docker compose exec drupal bash   Shell into the Drupal container
+#
+# Services:
+#   drupal   - Drupal 10 backend (PHP 8.2 + Apache) on port 8080
+#   db       - MySQL 8.0 database on port 3306
+#   frontend - Next.js 15 frontend on port 3000
+#   mailpit  - Local email catcher on port 8025 (web UI)
+# =============================================================================
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # Drupal Backend
+  # ---------------------------------------------------------------------------
+  drupal:
+    build:
+      context: ./drupal-backend
+      dockerfile: Dockerfile
+    container_name: rescue_drupal
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-rescue_platform}
+      DB_USER: ${DB_USER:-rescue_platform}
+      DB_PASSWORD: ${DB_PASSWORD:-rescue_platform_dev}
+      DRUPAL_HASH_SALT: ${DRUPAL_HASH_SALT:-dev_hash_salt_change_in_production}
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+    volumes:
+      - ./drupal-backend:/var/www/html
+      - drupal_files:/var/www/html/web/sites/default/files
+      - drupal_private:/var/www/html/private
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - rescue_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ---------------------------------------------------------------------------
+  # MySQL Database
+  # ---------------------------------------------------------------------------
+  db:
+    image: mysql:8.0
+    container_name: rescue_db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rescue_root_dev}
+      MYSQL_DATABASE: ${DB_NAME:-rescue_platform}
+      MYSQL_USER: ${DB_USER:-rescue_platform}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-rescue_platform_dev}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - rescue_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-rescue_root_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --innodb-buffer-pool-size=256M
+      --max-allowed-packet=64M
+
+  # ---------------------------------------------------------------------------
+  # Next.js Frontend
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./nextjs-frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: rescue_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_DRUPAL_BASE_URL: http://localhost:8080
+      DRUPAL_GRAPHQL_ENDPOINT: http://drupal/graphql
+      NODE_ENV: development
+    volumes:
+      - ./nextjs-frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      drupal:
+        condition: service_healthy
+    networks:
+      - rescue_network
+
+  # ---------------------------------------------------------------------------
+  # Mailpit — Local Email Catcher (dev only)
+  # ---------------------------------------------------------------------------
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: rescue_mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"   # Web UI
+      - "1025:1025"   # SMTP
+    networks:
+      - rescue_network
+
+  # ---------------------------------------------------------------------------
+  # phpMyAdmin — Database GUI (dev only, optional)
+  # ---------------------------------------------------------------------------
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: rescue_phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USER:-rescue_platform}
+      PMA_PASSWORD: ${DB_PASSWORD:-rescue_platform_dev}
+    depends_on:
+      - db
+    networks:
+      - rescue_network
+    profiles:
+      - tools
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  db_data:
+    driver: local
+  drupal_files:
+    driver: local
+  drupal_private:
+    driver: local
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  rescue_network:
+    driver: bridge
