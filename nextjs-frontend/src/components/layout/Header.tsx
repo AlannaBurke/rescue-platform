@@ -12,6 +12,7 @@ const navigation = [
   { name: "Events", href: "/events" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
+  { name: "Surrender", href: "/surrender" },
 ];
 
 export default function Header() {

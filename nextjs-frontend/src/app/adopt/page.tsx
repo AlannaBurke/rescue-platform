@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Heart, Search } from "lucide-react";
+import Link from "next/link";
+import { Heart, Search, FileText } from "lucide-react";
 import { getClient } from "@/lib/apollo-client";
 import { GET_ANIMALS_LIST } from "@/lib/graphql/animals";
 import AnimalCard from "@/components/animals/AnimalCard";
@@ -98,11 +99,18 @@ export default async function AdoptPage({
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-4">
             Find Your Forever Friend
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
             Every animal in our care is looking for a loving home. Browse our
             available animals and take the first step toward changing a life —
             yours and theirs.
           </p>
+          <Link
+            href="/adopt/apply"
+            className="inline-flex items-center gap-2 bg-rose-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-rose-600 transition-colors shadow-sm"
+          >
+            <FileText className="h-5 w-5" />
+            Start Your Application
+          </Link>
         </div>
       </div>
 
