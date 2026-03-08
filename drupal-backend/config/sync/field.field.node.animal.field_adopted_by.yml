@@ -1,0 +1,24 @@
+uuid: 1cf3d214-c97b-4679-8c62-b299a7f40d6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_adopted_by
+    - node.type.animal
+    - node.type.person
+id: node.animal.field_adopted_by
+field_name: field_adopted_by
+entity_type: node
+bundle: animal
+label: 'Adopted By'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+field_type: entity_reference

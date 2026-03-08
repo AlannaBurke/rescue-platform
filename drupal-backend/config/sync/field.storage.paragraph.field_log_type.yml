@@ -1,0 +1,36 @@
+uuid: cc872d1c-70cf-4253-aad5-c3b80c273543
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_log_type
+field_name: field_log_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: general
+      label: General
+    -
+      value: medical
+      label: Medical
+    -
+      value: behavioral
+      label: Behavioral
+    -
+      value: intake
+      label: Intake
+    -
+      value: placement
+      label: Placement
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

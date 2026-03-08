@@ -1,0 +1,10 @@
+uuid: 9206989e-c412-499f-bd6d-2dc00413d1f2
+langcode: en
+status: true
+dependencies: {  }
+id: log_entry
+label: 'Log Entry'
+icon_uuid: null
+icon_default: null
+description: 'A dated log entry for general, medical, or behavioral notes.'
+behavior_plugins: {  }

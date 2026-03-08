@@ -1,0 +1,21 @@
+uuid: ba9ec9d0-8897-4a80-9c53-3ed01de86476
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_med_start_date
+    - paragraphs.paragraphs_type.medication_log
+  module:
+    - datetime
+id: paragraph.medication_log.field_med_start_date
+field_name: field_med_start_date
+entity_type: paragraph
+bundle: medication_log
+label: 'Start Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

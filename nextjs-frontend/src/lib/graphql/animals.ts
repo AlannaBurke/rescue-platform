@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// ── Core animal card fragment (used on listing pages) ──
 export const ANIMAL_CARD_FRAGMENT = gql`
   fragment AnimalCard on NodeAnimal {
     id
@@ -16,8 +17,19 @@ export const ANIMAL_CARD_FRAGMENT = gql`
     goodWithDogs
     goodWithCats
     goodWithKids
+    isFeatured
+    excludePublic
+    intakeDate {
+      time
+    }
     animalStatus {
       ... on TermAnimalStatus {
+        id
+        name
+      }
+    }
+    lifecycleStatus {
+      ... on TermAnimalLifecycleStatus {
         id
         name
       }
@@ -35,35 +47,98 @@ export const ANIMAL_CARD_FRAGMENT = gql`
   }
 `;
 
-// Query: single animal by ID
-export const GET_ANIMAL = gql`
-  ${ANIMAL_CARD_FRAGMENT}
-  query GetAnimal($id: ID!) {
-    nodeAnimal(id: $id) {
-      ...AnimalCard
-      microchip
-      intakeDate {
-        time
-        timestamp
+// ── Full animal detail fragment (used on the animal profile page) ──
+export const ANIMAL_DETAIL_FRAGMENT = gql`
+  fragment AnimalDetail on NodeAnimal {
+    ...AnimalCard
+    microchip
+    animalSource
+    adoptionDate {
+      time
+    }
+    dateOfPassing {
+      time
+    }
+    animalNotes {
+      value
+    }
+    currentFoster {
+      ... on NodePerson {
+        id
+        title
       }
-      adoptionDate {
-        time
-        timestamp
+    }
+    adoptedBy {
+      ... on NodePerson {
+        id
+        title
       }
-      animalNotes {
-        value
+    }
+    historyLog {
+      ... on ParagraphLogEntry {
+        id
+        logDate {
+          time
+        }
+        logType
+        logDetails {
+          value
+        }
       }
-      currentFoster {
-        ... on NodePerson {
-          id
-          title
+    }
+    medicationLog {
+      ... on ParagraphMedicationLog {
+        id
+        medName
+        medDosage
+        medFrequency
+        medStartDate {
+          time
+        }
+        medEndDate {
+          time
+        }
+        medNotes {
+          value
+        }
+      }
+    }
+    placementHistory {
+      ... on ParagraphPlacement {
+        id
+        placementType
+        placementStartDate {
+          time
+        }
+        placementEndDate {
+          time
+        }
+        placementNotes {
+          value
+        }
+        placementPerson {
+          ... on NodePerson {
+            id
+            title
+          }
         }
       }
     }
   }
 `;
 
-// Query: paginated list of all animals
+// ── Query: single animal by ID (full detail) ──
+export const GET_ANIMAL = gql`
+  ${ANIMAL_CARD_FRAGMENT}
+  ${ANIMAL_DETAIL_FRAGMENT}
+  query GetAnimal($id: ID!) {
+    nodeAnimal(id: $id) {
+      ...AnimalDetail
+    }
+  }
+`;
+
+// ── Query: paginated list of all animals ──
 export const GET_ANIMALS_LIST = gql`
   ${ANIMAL_CARD_FRAGMENT}
   query GetAnimalsList($first: Int, $after: Cursor) {

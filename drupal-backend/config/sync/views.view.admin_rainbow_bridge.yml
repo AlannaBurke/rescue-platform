@@ -1,0 +1,155 @@
+uuid: ad9f3004-9a1c-466f-9ea0-8db7d9b8906f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.animal
+    - system.menu.main
+  module:
+    - datetime
+    - node
+    - user
+id: admin_rainbow_bridge
+label: 'Rainbow Bridge'
+module: views
+description: 'All animals that have crossed the Rainbow Bridge.'
+tag: ''
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Rainbow Bridge'
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          plugin_id: node
+          label: Name
+          alter:
+            make_link: true
+            path: '/node/{{ nid }}/edit'
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          plugin_id: node
+          label: ID
+      pager:
+        type: full
+        options:
+          offset: 0
+          pagination_heading_level: h4
+          items_per_page: 50
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Reset
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          plugin_id: standard
+          order: ASC
+        field_date_of_passing_value:
+          id: field_date_of_passing_value
+          table: node__field_date_of_passing
+          field: field_date_of_passing_value
+          plugin_id: date
+          order: DESC
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          plugin_id: bundle
+          value:
+            animal: animal
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            title: title
+            nid: nid
+          default: '-1'
+          info: {  }
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+      row:
+        type: fields
+        options: {  }
+      query:
+        type: views_query
+        options:
+          distinct: false
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_admin:
+    id: page_admin
+    display_title: 'Admin Page'
+    display_plugin: page
+    position: 1
+    display_options:
+      access:
+        type: perm
+        options:
+          perm: 'administer nodes'
+      display_extenders: {  }
+      path: /admin/rescue/rainbow-bridge
+      menu:
+        type: normal
+        title: 'Rainbow Bridge'
+        description: 'All animals that have crossed the Rainbow Bridge.'
+        weight: 0
+        name: admin
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }

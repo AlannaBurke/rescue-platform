@@ -26,10 +26,20 @@ entity_config:
       enabled: true
       query_load_enabled: true
       edges_enabled: true
+      simple_queries: false
+      base_fields: true
     page:
       enabled: true
       query_load_enabled: true
       edges_enabled: true
+      simple_queries: false
+      base_fields: true
+    donation:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+      simple_queries: false
+      base_fields: true
   taxonomy_term:
     animal_status:
       enabled: true
@@ -48,6 +58,23 @@ entity_config:
       query_load_enabled: true
       edges_enabled: true
     expense_category:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+    animal_lifecycle_status:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+  paragraph:
+    log_entry:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+    medication_log:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+    placement:
       enabled: true
       query_load_enabled: true
       edges_enabled: true
@@ -129,6 +156,24 @@ field_config:
       field_intake_date:
         enabled: true
       field_microchip:
+        enabled: true
+      field_animal_source:
+        enabled: true
+      field_lifecycle_status:
+        enabled: true
+      field_is_featured:
+        enabled: true
+      field_exclude_public:
+        enabled: true
+      field_date_of_passing:
+        enabled: true
+      field_adopted_by:
+        enabled: true
+      field_history_log:
+        enabled: true
+      field_medication_log:
+        enabled: true
+      field_placement_history:
         enabled: true
     person:
       nid:
@@ -426,6 +471,21 @@ field_config:
         enabled: true
       body:
         enabled: true
+    donation:
+      field_donation_amount:
+        enabled: true
+      field_donation_date:
+        enabled: true
+      field_donation_for_animal:
+        enabled: true
+      field_donation_notes:
+        enabled: true
+      field_donation_platform:
+        enabled: true
+      field_donation_type:
+        enabled: true
+      field_donor_name:
+        enabled: true
   taxonomy_term:
     animal_status:
       tid:
@@ -611,6 +671,38 @@ field_config:
       revision_translation_affected:
         enabled: true
       path:
+        enabled: true
+  paragraph:
+    log_entry:
+      field_log_date:
+        enabled: true
+      field_log_type:
+        enabled: true
+      field_log_details:
+        enabled: true
+    medication_log:
+      field_med_name:
+        enabled: true
+      field_med_dosage:
+        enabled: true
+      field_med_frequency:
+        enabled: true
+      field_med_start_date:
+        enabled: true
+      field_med_end_date:
+        enabled: true
+      field_med_notes:
+        enabled: true
+    placement:
+      field_placement_type:
+        enabled: true
+      field_placement_person:
+        enabled: true
+      field_placement_start_date:
+        enabled: true
+      field_placement_end_date:
+        enabled: true
+      field_placement_notes:
         enabled: true
 settings:
   exclude_unpublished: true

@@ -1,0 +1,33 @@
+uuid: c9e28bba-39a6-43c0-8f65-9a205b5e5649
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_placement_type
+field_name: field_placement_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: foster
+      label: Foster
+    -
+      value: adoption
+      label: Adoption
+    -
+      value: transfer
+      label: 'Transfer to Another Rescue'
+    -
+      value: return
+      label: 'Return from Foster'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,9 @@
+uuid: 2531273a-ee18-4248-a217-6b250beab571
+langcode: en
+status: true
+dependencies: {  }
+name: 'Animal Lifecycle Status'
+vid: animal_lifecycle_status
+description: 'Comprehensive lifecycle status for animals in the rescue.'
+weight: 0
+new_revision: false

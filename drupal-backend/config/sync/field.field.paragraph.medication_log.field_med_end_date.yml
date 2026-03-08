@@ -1,0 +1,21 @@
+uuid: 4e5fce00-0824-4666-b39a-c710f2a488da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_med_end_date
+    - paragraphs.paragraphs_type.medication_log
+  module:
+    - datetime
+id: paragraph.medication_log.field_med_end_date
+field_name: field_med_end_date
+entity_type: paragraph
+bundle: medication_log
+label: 'End Date (leave blank if ongoing)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

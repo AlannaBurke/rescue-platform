@@ -1,0 +1,19 @@
+uuid: a8cd488f-1293-4e2c-8d02-f53f6b3da76b
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_med_notes
+field_name: field_med_notes
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

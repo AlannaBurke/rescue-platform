@@ -1,0 +1,19 @@
+uuid: 90153b83-a48f-4956-aaa2-4033f18bf137
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_med_frequency
+    - paragraphs.paragraphs_type.medication_log
+id: paragraph.medication_log.field_med_frequency
+field_name: field_med_frequency
+entity_type: paragraph
+bundle: medication_log
+label: 'Frequency / Schedule'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

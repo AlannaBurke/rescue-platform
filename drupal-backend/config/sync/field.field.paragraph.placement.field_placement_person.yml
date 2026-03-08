@@ -1,0 +1,24 @@
+uuid: a628bccd-e080-40d9-b6fb-e29e9004d340
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_person
+    - node.type.person
+    - paragraphs.paragraphs_type.placement
+id: paragraph.placement.field_placement_person
+field_name: field_placement_person
+entity_type: paragraph
+bundle: placement
+label: Person
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      person: person
+field_type: entity_reference

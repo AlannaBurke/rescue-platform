@@ -30,6 +30,12 @@ export interface DrupalDateTime {
 // Taxonomy terms
 // ============================================================
 
+export interface TermAnimalLifecycleStatus {
+  __typename: "TermAnimalLifecycleStatus";
+  id: string;
+  name: string;
+}
+
 export interface TermAnimalStatus {
   __typename: "TermAnimalStatus";
   id: string;
@@ -61,6 +67,39 @@ export interface TermExpenseCategory {
 }
 
 // ============================================================
+// Paragraph types
+// ============================================================
+
+export interface ParagraphLogEntry {
+  __typename: "ParagraphLogEntry";
+  id: string;
+  logDate?: DrupalDateTime;
+  logType?: string;
+  logDetails?: DrupalText;
+}
+
+export interface ParagraphMedicationLog {
+  __typename: "ParagraphMedicationLog";
+  id: string;
+  medName?: string;
+  medDosage?: string;
+  medFrequency?: string;
+  medStartDate?: DrupalDateTime;
+  medEndDate?: DrupalDateTime;
+  medNotes?: DrupalText;
+}
+
+export interface ParagraphPlacement {
+  __typename: "ParagraphPlacement";
+  id: string;
+  placementType?: string;
+  placementPerson?: Person;
+  placementStartDate?: DrupalDateTime;
+  placementEndDate?: DrupalDateTime;
+  placementNotes?: DrupalText;
+}
+
+// ============================================================
 // Animal
 // ============================================================
 
@@ -77,6 +116,7 @@ export interface Animal {
   // Identification
   animalId?: string;
   microchip?: string;
+  animalSource?: string;
   // Physical
   animalSpecies?: TermAnimalSpecy;
   animalBreed?: string;
@@ -85,11 +125,18 @@ export interface Animal {
   animalColor?: string;
   animalAgeYears?: number;
   animalAgeMonths?: number;
-  // Status & placement
+  // Lifecycle & display flags
   animalStatus?: TermAnimalStatus;
-  currentFoster?: Person;
+  lifecycleStatus?: TermAnimalLifecycleStatus;
+  isFeatured?: boolean;
+  excludePublic?: boolean;
+  // Dates
   intakeDate?: DrupalDateTime;
   adoptionDate?: DrupalDateTime;
+  dateOfPassing?: DrupalDateTime;
+  // People
+  currentFoster?: Person;
+  adoptedBy?: Person;
   // Compatibility
   goodWithDogs?: boolean;
   goodWithCats?: boolean;
@@ -97,6 +144,10 @@ export interface Animal {
   // Content
   body?: DrupalTextSummary;
   animalNotes?: DrupalText;
+  // Paragraphs
+  historyLog?: ParagraphLogEntry[];
+  medicationLog?: ParagraphMedicationLog[];
+  placementHistory?: ParagraphPlacement[];
   // Media
   image?: DrupalImage;
 }

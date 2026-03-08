@@ -1,0 +1,10 @@
+uuid: 1c123fdf-1275-494a-befc-2cc394474a62
+langcode: en
+status: true
+dependencies: {  }
+id: medication_log
+label: 'Medication Log'
+icon_uuid: null
+icon_default: null
+description: 'Tracks medications administered to an animal.'
+behavior_plugins: {  }

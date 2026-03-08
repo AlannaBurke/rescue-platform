@@ -1,0 +1,20 @@
+uuid: c92f483b-edae-4553-a4b8-d495216b7b4b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs
+id: paragraph.field_placement_person
+field_name: field_placement_person
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

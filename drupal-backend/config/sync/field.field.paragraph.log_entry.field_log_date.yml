@@ -1,0 +1,21 @@
+uuid: 87a62591-ed2b-418f-9c4a-7ddb485692cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_log_date
+    - paragraphs.paragraphs_type.log_entry
+  module:
+    - datetime
+id: paragraph.log_entry.field_log_date
+field_name: field_log_date
+entity_type: paragraph
+bundle: log_entry
+label: 'Log Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,10 @@
+uuid: 56a71c49-04af-47c7-9b1e-933efd6dd7ee
+langcode: en
+status: true
+dependencies: {  }
+id: placement
+label: Placement
+icon_uuid: null
+icon_default: null
+description: 'Records a foster or adoption placement.'
+behavior_plugins: {  }

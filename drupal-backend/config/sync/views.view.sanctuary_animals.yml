@@ -1,0 +1,113 @@
+uuid: 7721455e-4201-4bc9-ab17-3113078caab0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.animal
+  module:
+    - datetime
+    - node
+    - user
+id: sanctuary_animals
+label: 'Sanctuary Animals'
+module: views
+description: 'Animals with lifecycle status: Sanctuary'
+tag: ''
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Default
+    display_plugin: default
+    position: 0
+    display_options:
+      title: 'Sanctuary Animals'
+      fields: {  }
+      pager:
+        type: full
+        options:
+          pagination_heading_level: h4
+          items_per_page: 50
+      exposed_form:
+        type: basic
+        options: {  }
+      access:
+        type: perm
+        options:
+          perm: 'access content'
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        field_is_featured_value:
+          id: field_is_featured_value
+          table: node__field_is_featured
+          field: field_is_featured_value
+          plugin_id: standard
+          order: DESC
+        field_intake_date_value:
+          id: field_intake_date_value
+          table: node__field_intake_date
+          field: field_intake_date_value
+          plugin_id: date
+          order: ASC
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          plugin_id: bundle
+          value:
+            animal: animal
+      style:
+        type: default
+        options: {  }
+      row:
+        type: 'entity:node'
+        options:
+          view_mode: teaser
+      query:
+        type: views_query
+        options:
+          distinct: false
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page_1:
+    id: page_1
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: /sanctuary-list
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }

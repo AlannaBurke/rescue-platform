@@ -1,0 +1,26 @@
+uuid: 30448bb5-2a39-44a3-8bb2-24474b632fc8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medication_log
+    - node.type.animal
+    - paragraphs.paragraphs_type.medication_log
+  module:
+    - entity_reference_revisions
+id: node.animal.field_medication_log
+field_name: field_medication_log
+entity_type: node
+bundle: animal
+label: 'Medication Log'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      medication_log: medication_log
+field_type: entity_reference_revisions

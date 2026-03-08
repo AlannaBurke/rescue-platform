@@ -1,0 +1,21 @@
+uuid: f87d34ab-ebd7-411b-a00c-f4560b0af80f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_end_date
+    - paragraphs.paragraphs_type.placement
+  module:
+    - datetime
+id: paragraph.placement.field_placement_end_date
+field_name: field_placement_end_date
+entity_type: paragraph
+bundle: placement
+label: 'End Date (leave blank if current)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

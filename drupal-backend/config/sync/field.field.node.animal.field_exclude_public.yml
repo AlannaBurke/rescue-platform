@@ -1,0 +1,21 @@
+uuid: e2e2d971-e591-49f3-a81e-5764442dc936
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_exclude_public
+    - node.type.animal
+id: node.animal.field_exclude_public
+field_name: field_exclude_public
+entity_type: node
+bundle: animal
+label: 'Exclude from Public View?'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

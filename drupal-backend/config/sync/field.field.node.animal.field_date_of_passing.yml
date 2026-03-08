@@ -1,0 +1,21 @@
+uuid: 25766ece-88ef-43d0-8717-149f0e8ae16f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_of_passing
+    - node.type.animal
+  module:
+    - datetime
+id: node.animal.field_date_of_passing
+field_name: field_date_of_passing
+entity_type: node
+bundle: animal
+label: 'Date of Passing'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

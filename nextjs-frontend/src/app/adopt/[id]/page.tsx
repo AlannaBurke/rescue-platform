@@ -12,12 +12,16 @@ import {
   CheckCircle,
   XCircle,
   FileText,
+  MapPin,
+  Pill,
+  Clock,
+  Home,
 } from "lucide-react";
 import { getClient } from "@/lib/apollo-client";
 import { GET_ANIMAL } from "@/lib/graphql/animals";
 import { formatAge, capitalize, formatDate } from "@/lib/utils";
 import type { Animal } from "@/types/drupal";
-import type { GetAnimalQuery } from "@/types/graphql"
+import type { GetAnimalQuery } from "@/types/graphql";
 
 interface AnimalPageProps {
   params: Promise<{ id: string }>;
@@ -39,7 +43,7 @@ export async function generateMetadata({
     title: animal.title,
     description:
       animal.body?.summary ||
-      `Meet ${animal.title}, a ${animal.animalSpecies?.name ?? "animal"} available for adoption.`,
+      `Meet ${animal.title}, a ${animal.animalSpecies?.name ?? "animal"} in our care.`,
   };
 }
 
@@ -111,6 +115,20 @@ function CompatibilityRow({
   );
 }
 
+function lifecycleColor(status?: string) {
+  switch (status) {
+    case "Available for Adoption": return "bg-green-100 text-green-800";
+    case "Adoption Pending":       return "bg-yellow-100 text-yellow-800";
+    case "In Foster":              return "bg-blue-100 text-blue-800";
+    case "Adopted":                return "bg-purple-100 text-purple-800";
+    case "Sanctuary":              return "bg-emerald-100 text-emerald-800";
+    case "Hospice":                return "bg-orange-100 text-orange-800";
+    case "Pregnancy Watch":        return "bg-pink-100 text-pink-800";
+    case "Deceased (Rainbow Bridge)": return "bg-violet-100 text-violet-800";
+    default:                       return "bg-gray-100 text-gray-800";
+  }
+}
+
 export default async function AnimalPage({ params }: AnimalPageProps) {
   const { id } = await params;
 
@@ -124,10 +142,35 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
 
   const age = formatAge(animal.animalAgeYears, animal.animalAgeMonths);
   const speciesName = animal.animalSpecies?.name;
-  const statusName = animal.animalStatus?.name;
+  const lifecycleName = (animal as any).lifecycleStatus?.name as string | undefined;
 
   const isAvailable =
-    statusName === "Available" || statusName === "In Foster";
+    lifecycleName === "Available for Adoption" ||
+    lifecycleName === "In Foster";
+  const isSanctuary  = lifecycleName === "Sanctuary";
+  const isHospice    = lifecycleName === "Hospice";
+  const isRainbow    = lifecycleName === "Deceased (Rainbow Bridge)";
+  const isAdopted    = lifecycleName === "Adopted";
+
+  // History log sorted newest first
+  const historyLog: any[] = ((animal as any).historyLog ?? []).slice().sort(
+    (a: any, b: any) =>
+      new Date(b.logDate?.time ?? 0).getTime() -
+      new Date(a.logDate?.time ?? 0).getTime()
+  );
+
+  // Active medications (no end date or end date in the future)
+  const now = Date.now();
+  const activeMeds: any[] = ((animal as any).medicationLog ?? []).filter(
+    (m: any) => !m.medEndDate?.time || new Date(m.medEndDate.time).getTime() > now
+  );
+
+  // Placement history sorted newest first
+  const placements: any[] = ((animal as any).placementHistory ?? []).slice().sort(
+    (a: any, b: any) =>
+      new Date(b.placementStartDate?.time ?? 0).getTime() -
+      new Date(a.placementStartDate?.time ?? 0).getTime()
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -146,65 +189,40 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left column: image + quick details */}
+          {/* ── Left column ── */}
           <div className="lg:col-span-1 space-y-4">
             {/* Photo */}
             <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-sm border border-gray-100">
               <AnimalPlaceholder species={speciesName} />
             </div>
 
-            {/* Quick details card */}
+            {/* Quick details */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
               <h3 className="text-sm font-semibold text-gray-900 mb-1">
                 About {animal.title}
               </h3>
               <div className="divide-y divide-gray-50">
-                <DetailRow
-                  icon={Tag}
-                  label="ID"
-                  value={animal.animalId}
-                />
-                <DetailRow
-                  icon={speciesName === "Dog" ? Dog : Cat}
-                  label="Species"
-                  value={speciesName}
-                />
-                <DetailRow
-                  icon={FileText}
-                  label="Breed"
-                  value={animal.animalBreed}
-                />
-                <DetailRow
-                  icon={Calendar}
-                  label="Age"
-                  value={age !== "Age unknown" ? age : undefined}
-                />
-                <DetailRow
-                  icon={Ruler}
-                  label="Size"
-                  value={animal.animalSize ? capitalize(animal.animalSize) : undefined}
-                />
-                <DetailRow
-                  icon={Heart}
-                  label="Sex"
-                  value={animal.animalSex ? capitalize(animal.animalSex) : undefined}
-                />
-                <DetailRow
-                  icon={Tag}
-                  label="Color"
-                  value={animal.animalColor}
-                />
+                <DetailRow icon={Tag}      label="ID"      value={animal.animalId} />
+                <DetailRow icon={speciesName === "Dog" ? Dog : Cat} label="Species" value={speciesName} />
+                <DetailRow icon={FileText} label="Breed"   value={animal.animalBreed} />
+                <DetailRow icon={Calendar} label="Age"     value={age !== "Age unknown" ? age : undefined} />
+                <DetailRow icon={Ruler}    label="Size"    value={animal.animalSize ? capitalize(animal.animalSize) : undefined} />
+                <DetailRow icon={Heart}    label="Sex"     value={animal.animalSex ? capitalize(animal.animalSex) : undefined} />
+                <DetailRow icon={Tag}      label="Color"   value={animal.animalColor} />
+                <DetailRow icon={MapPin}   label="Source"  value={(animal as any).animalSource} />
                 {animal.intakeDate?.time && (
-                  <DetailRow
-                    icon={Calendar}
-                    label="In Our Care Since"
-                    value={formatDate(animal.intakeDate.time)}
-                  />
+                  <DetailRow icon={Calendar} label="In Our Care Since" value={formatDate(animal.intakeDate.time)} />
+                )}
+                {isAdopted && (animal as any).adoptionDate?.time && (
+                  <DetailRow icon={Heart} label="Adopted" value={formatDate((animal as any).adoptionDate.time)} />
+                )}
+                {isRainbow && (animal as any).dateOfPassing?.time && (
+                  <DetailRow icon={Calendar} label="Crossed the Bridge" value={formatDate((animal as any).dateOfPassing.time)} />
                 )}
               </div>
             </div>
 
-            {/* Compatibility card */}
+            {/* Compatibility */}
             {(animal.goodWithDogs !== undefined ||
               animal.goodWithCats !== undefined ||
               animal.goodWithKids !== undefined) && (
@@ -212,53 +230,59 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
                 <h3 className="text-sm font-semibold text-gray-900 mb-1">
                   Compatibility
                 </h3>
-                <CompatibilityRow
-                  label="Good with other dogs"
-                  value={animal.goodWithDogs}
-                  icon="🐕"
-                />
-                <CompatibilityRow
-                  label="Good with cats"
-                  value={animal.goodWithCats}
-                  icon="🐈"
-                />
-                <CompatibilityRow
-                  label="Good with children"
-                  value={animal.goodWithKids}
-                  icon="👶"
-                />
+                <CompatibilityRow label="Good with other dogs" value={animal.goodWithDogs} icon="🐕" />
+                <CompatibilityRow label="Good with cats"       value={animal.goodWithCats} icon="🐈" />
+                <CompatibilityRow label="Good with children"   value={animal.goodWithKids} icon="👶" />
+              </div>
+            )}
+
+            {/* Active medications */}
+            {activeMeds.length > 0 && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Pill className="h-4 w-4 text-blue-500" />
+                  <h3 className="text-sm font-semibold text-gray-900">
+                    Current Medications
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {activeMeds.map((med: any) => (
+                    <div key={med.id} className="rounded-lg bg-blue-50 border border-blue-100 p-3">
+                      <p className="text-sm font-semibold text-blue-900">{med.medName}</p>
+                      {med.medDosage && (
+                        <p className="text-xs text-blue-700 mt-0.5">Dose: {med.medDosage}</p>
+                      )}
+                      {med.medFrequency && (
+                        <p className="text-xs text-blue-700">Frequency: {med.medFrequency}</p>
+                      )}
+                      {med.medStartDate?.time && (
+                        <p className="text-xs text-blue-500 mt-1">
+                          Started: {formatDate(med.medStartDate.time)}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
 
-          {/* Right column: main content */}
+          {/* ── Right column ── */}
           <div className="lg:col-span-2 space-y-6">
             {/* Header */}
             <div>
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div>
-                  <h1 className="text-4xl font-bold text-gray-900">
-                    {animal.title}
-                  </h1>
+                  <h1 className="text-4xl font-bold text-gray-900">{animal.title}</h1>
                   <p className="text-lg text-gray-500 mt-1">
-                    {[speciesName, animal.animalBreed]
-                      .filter(Boolean)
-                      .join(" · ")}
+                    {[speciesName, animal.animalBreed].filter(Boolean).join(" · ")}
                   </p>
                 </div>
-                <span
-                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${
-                    statusName === "Available"
-                      ? "bg-green-100 text-green-800"
-                      : statusName === "In Foster"
-                      ? "bg-blue-100 text-blue-800"
-                      : statusName === "Adopted"
-                      ? "bg-purple-100 text-purple-800"
-                      : "bg-gray-100 text-gray-800"
-                  }`}
-                >
-                  {statusName || "Status Unknown"}
-                </span>
+                {lifecycleName && (
+                  <span className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${lifecycleColor(lifecycleName)}`}>
+                    {lifecycleName}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -270,9 +294,7 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
                 </h2>
                 <div
                   className="drupal-content text-gray-700 leading-relaxed"
-                  dangerouslySetInnerHTML={{
-                    __html: animal.body.value,
-                  }}
+                  dangerouslySetInnerHTML={{ __html: animal.body.value }}
                 />
               </div>
             )}
@@ -285,14 +307,114 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
                 </h2>
                 <div
                   className="text-amber-900 text-sm leading-relaxed"
-                  dangerouslySetInnerHTML={{
-                    __html: animal.animalNotes.value,
-                  }}
+                  dangerouslySetInnerHTML={{ __html: animal.animalNotes.value }}
                 />
               </div>
             )}
 
-            {/* Adoption CTA */}
+            {/* Current foster */}
+            {(animal as any).currentFoster?.title && (
+              <div className="bg-blue-50 rounded-2xl border border-blue-100 p-5 flex items-center gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                  <Home className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-blue-500 uppercase tracking-wide">Currently Fostered By</p>
+                  <p className="text-sm font-semibold text-blue-900">{(animal as any).currentFoster.title}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Placement history */}
+            {placements.length > 0 && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <MapPin className="h-4 w-4 text-gray-400" />
+                  <h2 className="text-lg font-semibold text-gray-900">Placement History</h2>
+                </div>
+                <div className="space-y-3">
+                  {placements.map((p: any) => (
+                    <div key={p.id} className="rounded-lg bg-gray-50 border border-gray-100 p-4">
+                      <div className="flex items-start justify-between gap-2 flex-wrap">
+                        <div>
+                          <span className="inline-flex items-center rounded-full bg-blue-100 text-blue-800 px-2.5 py-0.5 text-xs font-medium capitalize">
+                            {p.placementType ?? "Placement"}
+                          </span>
+                          {p.placementPerson?.title && (
+                            <p className="text-sm font-medium text-gray-900 mt-1">
+                              {p.placementPerson.title}
+                            </p>
+                          )}
+                        </div>
+                        <div className="text-xs text-gray-400 text-right">
+                          {p.placementStartDate?.time && (
+                            <p>{formatDate(p.placementStartDate.time)}</p>
+                          )}
+                          {p.placementEndDate?.time && (
+                            <p>→ {formatDate(p.placementEndDate.time)}</p>
+                          )}
+                          {!p.placementEndDate?.time && p.placementStartDate?.time && (
+                            <p className="text-blue-500 font-medium">Current</p>
+                          )}
+                        </div>
+                      </div>
+                      {p.placementNotes?.value && (
+                        <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                          {p.placementNotes.value.replace(/<[^>]+>/g, "")}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* History / activity log */}
+            {historyLog.length > 0 && (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <h2 className="text-lg font-semibold text-gray-900">Activity Log</h2>
+                </div>
+                <div className="relative">
+                  {/* Timeline line */}
+                  <div className="absolute left-3.5 top-0 bottom-0 w-px bg-gray-100" />
+                  <div className="space-y-4">
+                    {historyLog.map((entry: any) => (
+                      <div key={entry.id} className="relative flex gap-4 pl-10">
+                        {/* Dot */}
+                        <div className="absolute left-0 top-1 flex h-7 w-7 items-center justify-center rounded-full bg-rose-100 border-2 border-white shadow-sm">
+                          <span className="text-xs">📋</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            {entry.logType && (
+                              <span className="inline-flex items-center rounded-full bg-rose-50 text-rose-700 px-2 py-0.5 text-xs font-medium capitalize">
+                                {entry.logType}
+                              </span>
+                            )}
+                            {entry.logDate?.time && (
+                              <span className="text-xs text-gray-400">
+                                {formatDate(entry.logDate.time)}
+                              </span>
+                            )}
+                          </div>
+                          {entry.logDetails?.value && (
+                            <p className="text-sm text-gray-600 mt-1 leading-relaxed">
+                              {entry.logDetails.value.replace(/<[^>]+>/g, "")}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── CTAs based on lifecycle status ── */}
+
+            {/* Available for adoption */}
             {isAvailable && (
               <div className="bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl p-6 text-white">
                 <div className="flex items-start gap-4">
@@ -304,8 +426,8 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
                       Ready to adopt {animal.title}?
                     </h2>
                     <p className="text-rose-100 text-sm mb-4">
-                      Fill out our adoption application and we&apos;ll be in
-                      touch within 1–2 business days to discuss next steps.
+                      Fill out our adoption application and we&apos;ll be in touch
+                      within 1–2 business days to discuss next steps.
                     </p>
                     <div className="flex flex-wrap gap-3">
                       <Link
@@ -327,8 +449,8 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
               </div>
             )}
 
-            {/* Already adopted */}
-            {statusName === "Adopted" && (
+            {/* Adopted */}
+            {isAdopted && (
               <div className="bg-purple-50 rounded-2xl border border-purple-100 p-6 text-center">
                 <p className="text-purple-800 font-semibold text-lg mb-1">
                   🎉 {animal.title} has been adopted!
@@ -344,6 +466,80 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
                   <Heart className="h-4 w-4 fill-white" />
                   See Available Animals
                 </Link>
+              </div>
+            )}
+
+            {/* Sanctuary */}
+            {isSanctuary && (
+              <div className="bg-emerald-50 rounded-2xl border border-emerald-100 p-6 text-center">
+                <p className="text-emerald-800 font-semibold text-lg mb-1">
+                  🏡 {animal.title} is a permanent sanctuary resident
+                </p>
+                <p className="text-emerald-700 text-sm mb-4">
+                  This animal is not available for adoption, but you can support
+                  their care with a donation.
+                </p>
+                <div className="flex justify-center gap-3 flex-wrap">
+                  <Link
+                    href="/donate"
+                    className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors"
+                  >
+                    Support {animal.title}
+                  </Link>
+                  <Link
+                    href="/sanctuary"
+                    className="inline-flex items-center gap-2 rounded-full border border-emerald-300 px-5 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition-colors"
+                  >
+                    Meet Our Sanctuary Family
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Hospice */}
+            {isHospice && (
+              <div className="bg-orange-50 rounded-2xl border border-orange-100 p-6 text-center">
+                <p className="text-orange-800 font-semibold text-lg mb-1">
+                  💛 {animal.title} is in hospice care
+                </p>
+                <p className="text-orange-700 text-sm mb-4">
+                  {animal.title} is receiving specialized end-of-life care. Your
+                  support helps us provide comfort and dignity in their final days.
+                </p>
+                <Link
+                  href="/donate"
+                  className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-orange-600 transition-colors"
+                >
+                  Support {animal.title}
+                </Link>
+              </div>
+            )}
+
+            {/* Rainbow Bridge */}
+            {isRainbow && (
+              <div className="bg-violet-50 rounded-2xl border border-violet-100 p-6 text-center">
+                <p className="text-violet-800 font-semibold text-lg mb-1">
+                  🌈 {animal.title} has crossed the Rainbow Bridge
+                </p>
+                <p className="text-violet-600 text-sm mb-4">
+                  {animal.title} is no longer with us, but will always be
+                  remembered and loved. Consider a memorial donation in their
+                  honor.
+                </p>
+                <div className="flex justify-center gap-3 flex-wrap">
+                  <Link
+                    href="/donate"
+                    className="inline-flex items-center gap-2 rounded-full bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-violet-700 transition-colors"
+                  >
+                    Make a Memorial Donation
+                  </Link>
+                  <Link
+                    href="/rainbow-bridge"
+                    className="inline-flex items-center gap-2 rounded-full border border-violet-300 px-5 py-2.5 text-sm font-semibold text-violet-700 hover:bg-violet-50 transition-colors"
+                  >
+                    Rainbow Bridge Memorial
+                  </Link>
+                </div>
               </div>
             )}
           </div>

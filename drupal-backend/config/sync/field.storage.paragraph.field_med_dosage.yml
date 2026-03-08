@@ -1,0 +1,21 @@
+uuid: fabdee88-a99a-46ac-aa06-706a65f33ceb
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_med_dosage
+field_name: field_med_dosage
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

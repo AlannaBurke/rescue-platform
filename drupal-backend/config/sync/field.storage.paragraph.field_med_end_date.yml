@@ -1,0 +1,20 @@
+uuid: e8b0bc3d-7361-4ee1-b910-1ff5fb3982bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+id: paragraph.field_med_end_date
+field_name: field_med_end_date
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

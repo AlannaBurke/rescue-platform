@@ -1,0 +1,22 @@
+uuid: 0b9e6d35-dbd8-45d3-8a0a-ff5f7c3529a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_med_notes
+    - paragraphs.paragraphs_type.medication_log
+  module:
+    - text
+id: paragraph.medication_log.field_med_notes
+field_name: field_med_notes
+entity_type: paragraph
+bundle: medication_log
+label: 'Medication Notes'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,21 @@
+uuid: 96ecc580-63b0-42e9-97b5-627ecc5bf78b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_log_type
+    - paragraphs.paragraphs_type.log_entry
+  module:
+    - options
+id: paragraph.log_entry.field_log_type
+field_name: field_log_type
+entity_type: paragraph
+bundle: log_entry
+label: 'Log Type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

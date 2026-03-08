@@ -1,0 +1,21 @@
+uuid: 1c089f2f-8d8e-4de1-b250-8c081be7254c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_start_date
+    - paragraphs.paragraphs_type.placement
+  module:
+    - datetime
+id: paragraph.placement.field_placement_start_date
+field_name: field_placement_start_date
+entity_type: paragraph
+bundle: placement
+label: 'Start Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

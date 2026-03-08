@@ -1,0 +1,21 @@
+uuid: ff16238b-09c3-4fef-b635-57bd06d152f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_placement_type
+    - paragraphs.paragraphs_type.placement
+  module:
+    - options
+id: paragraph.placement.field_placement_type
+field_name: field_placement_type
+entity_type: paragraph
+bundle: placement
+label: 'Placement Type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

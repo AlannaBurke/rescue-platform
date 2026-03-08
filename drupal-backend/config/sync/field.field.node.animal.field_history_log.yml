@@ -1,0 +1,26 @@
+uuid: 9f018323-fc09-40d9-8b2b-52457aa1b26d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_history_log
+    - node.type.animal
+    - paragraphs.paragraphs_type.log_entry
+  module:
+    - entity_reference_revisions
+id: node.animal.field_history_log
+field_name: field_history_log
+entity_type: node
+bundle: animal
+label: 'History Log'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      log_entry: log_entry
+field_type: entity_reference_revisions

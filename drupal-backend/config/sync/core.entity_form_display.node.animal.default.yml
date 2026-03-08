@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.animal.body
+    - field.field.node.animal.field_adopted_by
     - field.field.node.animal.field_adoption_date
     - field.field.node.animal.field_animal_age_months
     - field.field.node.animal.field_animal_age_years
@@ -13,15 +14,23 @@ dependencies:
     - field.field.node.animal.field_animal_notes
     - field.field.node.animal.field_animal_sex
     - field.field.node.animal.field_animal_size
+    - field.field.node.animal.field_animal_source
     - field.field.node.animal.field_animal_species
     - field.field.node.animal.field_animal_status
     - field.field.node.animal.field_current_foster
+    - field.field.node.animal.field_date_of_passing
+    - field.field.node.animal.field_exclude_public
     - field.field.node.animal.field_foster_history
     - field.field.node.animal.field_good_with_cats
     - field.field.node.animal.field_good_with_dogs
     - field.field.node.animal.field_good_with_kids
+    - field.field.node.animal.field_history_log
     - field.field.node.animal.field_intake_date
+    - field.field.node.animal.field_is_featured
+    - field.field.node.animal.field_lifecycle_status
+    - field.field.node.animal.field_medication_log
     - field.field.node.animal.field_microchip
+    - field.field.node.animal.field_placement_history
     - node.type.animal
     - workflows.workflow.animal_intake
   module:
@@ -101,6 +110,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_adopted_by: true
   field_adoption_date: true
   field_animal_age_months: true
   field_animal_age_years: true
@@ -110,12 +120,20 @@ hidden:
   field_animal_notes: true
   field_animal_sex: true
   field_animal_size: true
+  field_animal_source: true
   field_animal_species: true
   field_animal_status: true
   field_current_foster: true
+  field_date_of_passing: true
+  field_exclude_public: true
   field_foster_history: true
   field_good_with_cats: true
   field_good_with_dogs: true
   field_good_with_kids: true
+  field_history_log: true
   field_intake_date: true
+  field_is_featured: true
+  field_lifecycle_status: true
+  field_medication_log: true
   field_microchip: true
+  field_placement_history: true
