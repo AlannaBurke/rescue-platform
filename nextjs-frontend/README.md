@@ -1,43 +1,36 @@
-# Rescue Platform: Next.js Frontend
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This directory contains the Next.js 15 public-facing website for the Rescue Platform.
+## Getting Started
 
-## Status
+First, run the development server:
 
-**Phase 3 development has not yet started.** See the [Development Roadmap](../docs/roadmap.md).
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Overview
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The Next.js frontend is the public-facing website for the rescue. It consumes data from the Drupal backend via GraphQL and renders a fast, modern, and accessible website for potential adopters and supporters.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Tech Stack
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-| Technology | Purpose |
-| :--- | :--- |
-| Next.js 15 (App Router) | React framework |
-| TypeScript | Type-safe JavaScript |
-| Tailwind CSS | Utility-first styling |
-| `next-drupal` | Drupal integration library |
-| GraphQL | API query language |
+## Learn More
 
-## Setup
+To learn more about Next.js, take a look at the following resources:
 
-See the [Frontend Setup Guide](../docs/frontend-setup.md) for installation and configuration instructions.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Key Routes
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-| Route | Description |
-| :--- | :--- |
-| `/` | Homepage |
-| `/animals` | Animal listings with search and filters |
-| `/animals/[slug]` | Individual animal profile |
-| `/adopt` | Adoption information and application form |
-| `/blog` | Blog post listing |
-| `/blog/[slug]` | Individual blog post |
-| `/events` | Events listing |
-| `/about` | About the rescue |
-| `/contact` | Contact page |
+## Deploy on Vercel
 
-## Deployment
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Designed for one-click deployment on [Vercel](https://vercel.com). See the [Frontend Setup Guide](../docs/frontend-setup.md#deployment) for instructions.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
