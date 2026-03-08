@@ -1,0 +1,25 @@
+# === Drupal Backend ===
+drupal-backend/vendor/
+drupal-backend/web/core/
+drupal-backend/web/modules/contrib/
+drupal-backend/web/themes/contrib/
+drupal-backend/web/profiles/contrib/
+drupal-backend/web/sites/default/settings.php
+drupal-backend/web/sites/default/services.yml
+drupal-backend/web/sites/default/files/
+drupal-backend/.env
+
+# === Next.js Frontend ===
+nextjs-frontend/node_modules/
+nextjs-frontend/.next/
+nextjs-frontend/out/
+nextjs-frontend/.env.local
+nextjs-frontend/.env.development.local
+nextjs-frontend/.env.test.local
+nextjs-frontend/.env.production.local
+
+# === General ===
+.DS_Store
+*.log
+.idea/
+.vscode/
