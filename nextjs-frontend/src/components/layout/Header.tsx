@@ -5,22 +5,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { type NavItem, DEFAULT_NAV } from "@/lib/nav-utils";
 
-const navigation = [
-  { name: "Adopt", href: "/adopt" },
-  { name: "Sanctuary", href: "/sanctuary" },
-  { name: "Rainbow Bridge", href: "/rainbow-bridge" },
-  { name: "Foster", href: "/foster" },
-  { name: "Volunteer", href: "/volunteer" },
-  { name: "Events", href: "/events" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-];
+// Re-export so existing imports still work
+export type { NavItem };
+export { parseNavItems } from "@/lib/nav-utils";
 
-export default function Header() {
+interface HeaderProps {
+  /** Nav items parsed from Drupal site settings. Falls back to DEFAULT_NAV. */
+  navItems?: NavItem[];
+  orgName?: string;
+  orgTagline?: string;
+}
+
+export default function Header({ navItems, orgName, orgTagline }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  const navigation = navItems ?? DEFAULT_NAV;
+
+  // Separate "Surrender" from main nav — it always goes in the CTA area
+  const mainNav = navigation.filter((n) => n.href !== "/surrender");
+  const hasSurrender = navigation.some((n) => n.href === "/surrender");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -28,9 +35,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMobileMenuOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
@@ -53,7 +58,7 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center gap-2.5 group no-underline"
-            aria-label="Rescue Platform — Home"
+            aria-label={`${orgName ?? "Rescue Platform"} — Home`}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#2099a1] to-[#105f66] shadow-[0_2px_15px_-3px_rgba(32,153,161,0.4)] group-hover:scale-105 transition-transform duration-200">
               <Heart className="h-5 w-5 text-white fill-white" />
@@ -63,21 +68,21 @@ export default function Header() {
                 className="text-xl leading-none text-[#105f66]"
                 style={{ fontFamily: "'Fredoka One', ui-rounded, system-ui, sans-serif" }}
               >
-                Rescue Platform
+                {orgName ?? "Rescue Platform"}
               </div>
               <div className="text-xs text-[#8c8c7c] font-medium leading-none mt-0.5">
-                Every little life matters
+                {orgTagline ?? "Every little life matters"}
               </div>
             </div>
           </Link>
 
           {/* Desktop navigation */}
           <div className="hidden lg:flex lg:items-center lg:gap-0.5">
-            {navigation.map((item) => {
+            {mainNav.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
               return (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   className={cn(
                     "px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-200 no-underline",
@@ -94,12 +99,14 @@ export default function Header() {
 
           {/* Desktop CTAs */}
           <div className="hidden lg:flex lg:items-center lg:gap-2">
-            <Link
-              href="/surrender"
-              className="text-sm font-semibold text-[#8c8c7c] hover:text-[#1a7f87] transition-colors no-underline px-3 py-2"
-            >
-              Surrender
-            </Link>
+            {hasSurrender && (
+              <Link
+                href="/surrender"
+                className="text-sm font-semibold text-[#8c8c7c] hover:text-[#1a7f87] transition-colors no-underline px-3 py-2"
+              >
+                Surrender
+              </Link>
+            )}
             <Link
               href="/adopt/apply"
               className="inline-flex items-center gap-1.5 rounded-full bg-[#2099a1] px-4 py-2 text-sm font-bold text-white hover:bg-[#1a7f87] transition-all duration-200 shadow-[0_2px_15px_-3px_rgba(32,153,161,0.4)] hover:shadow-[0_8px_32px_-4px_rgba(32,153,161,0.35)] no-underline"
@@ -136,15 +143,15 @@ export default function Header() {
         <div
           className={cn(
             "lg:hidden transition-all duration-300 ease-in-out overflow-hidden",
-            mobileMenuOpen ? "max-h-[36rem] pb-4" : "max-h-0"
+            mobileMenuOpen ? "max-h-[40rem] pb-4" : "max-h-0"
           )}
         >
           <div className="space-y-0.5 pt-2">
-            {[...navigation, { name: "Surrender", href: "/surrender" }].map((item) => {
+            {[...mainNav, ...(hasSurrender ? [{ name: "Surrender", href: "/surrender", enabled: true }] : [])].map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
               return (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   className={cn(
                     "flex items-center rounded-2xl px-4 py-3 text-base font-semibold transition-all duration-200 no-underline",
