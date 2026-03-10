@@ -6,8 +6,6 @@ Rescue Platform is an all-in-one solution designed to help small, volunteer-run 
 
 This project was born from the idea that every rescue, regardless of size or technical skill, deserves access to the same high-quality tools as larger organizations. By providing a free, open-source, and easy-to-deploy platform, we aim to empower rescues to save more lives.
 
-[![Deploy to Pantheon](https://www.pantheon.io/assets/images/deploy-to-pantheon.svg)](https://dashboard.pantheon.io/sites/create?upstream_id=YOUR_UPSTREAM_UUID_HERE)
-
 ---
 
 ## Features
@@ -15,84 +13,17 @@ This project was born from the idea that every rescue, regardless of size or tec
 | Feature | Description | Status |
 | :--- | :--- | :--- |
 | **Animal Management** | Track every animal from intake to adoption with detailed profiles, medical history, and status updates. | ✅ Complete |
-| **Foster & Volunteer Hub** | Manage foster parents and volunteers, track their availability, skills, and assignments. | ✅ Complete |
-| **Expense & Donation Tracking** | Log expenses with receipt uploads and track incoming donations for financial transparency. | ✅ Complete |
-| **Content Moderation** | Robust, permission-based workflows for publishing content, from blog posts to animal profiles. | ✅ Complete |
-| **Decoupled Frontend** | A lightning-fast, SEO-friendly, and mobile-responsive public website built with Next.js. | ✅ Complete |
+| **People Management** | Manage fosters, volunteers, adopters, and donors with detailed contact info, roles, and history. | ✅ Complete |
+| **Content Management** | Create and manage blog posts, events, resources, and more with a user-friendly interface. | ✅ Complete |
 | **Online Forms** | Adoption, foster, surrender, and volunteer applications that submit directly to Drupal. | ✅ Complete |
-| **Image Management** | Upload and display photos for animals, blog posts, and events. | ✅ Complete |
+| **Decoupled Frontend** | A lightning-fast, SEO-friendly, and mobile-responsive public website built with Next.js. | ✅ Complete |
+| **Configurable Site** | Easily customize navigation, social media links, and site-wide settings from the Drupal admin. | ✅ Complete |
 | **GraphQL API** | A comprehensive and flexible API to connect the backend to the frontend and any future applications. | ✅ Complete |
-| **One-Click Deployment** | Deploy the entire Drupal backend to Pantheon with a single click. | ✅ Complete |
 | **Local Development** | A fully containerized local development environment powered by Docker Compose. | ✅ Complete |
 
 ## Getting Started
 
-There are two primary ways to use Rescue Platform:
-
-1.  **Local Development (Recommended for contributors):** Clone this repository and use Docker to spin up the full environment on your local machine.
-2.  **Pantheon Deployment (Recommended for rescues):** Use the "Deploy to Pantheon" button to create a free Drupal backend, then connect it to a Vercel-hosted frontend.
-
-### Local Development with Docker
-
-**Prerequisites:**
-
-*   [Docker](https://www.docker.com/get-started) and Docker Compose
-*   [Node.js](https://nodejs.org/) (v20+) and [pnpm](https://pnpm.io/)
-*   [Composer](https://getcomposer.org/)
-
-**Installation Steps:**
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/AlannaBurke/rescue-platform.git
-    cd rescue-platform
-    ```
-
-2.  **Set up environment variables:**
-
-    ```bash
-    cp .env.example .env
-    ```
-
-    *Open the `.env` file and fill in the required values. The defaults are suitable for local development.*
-
-3.  **Start the Docker containers:**
-
-    ```bash
-    docker compose up -d
-    ```
-
-4.  **Install Drupal:**
-
-    ```bash
-    docker compose exec drupal composer install
-    docker compose exec drupal ./scripts/install.sh
-    ```
-
-5.  **Install Next.js dependencies:**
-
-    ```bash
-    cd nextjs-frontend
-    pnpm install
-    ```
-
-6.  **Run the Next.js dev server:**
-
-    ```bash
-    pnpm dev
-    ```
-
-Your local environment is now ready!
-
-*   **Drupal Admin:** [http://localhost:8080](http://localhost:8080)
-*   **Next.js Frontend:** [http://localhost:3000](http://localhost:3000)
-*   **Mailpit (Email Catcher):** [http://localhost:8025](http://localhost:8025)
-*   **phpMyAdmin (Database GUI):** [http://localhost:8081](http://localhost:8081) (enable in `docker-compose.yml`)
-
-### Deployment
-
-For detailed instructions on deploying the Drupal backend to Pantheon and the Next.js frontend to Vercel, please see our comprehensive **[Deployment Guide](docs/deployment.md)**.
+For detailed instructions on setting up a local development environment or deploying to production, please see our comprehensive **[Getting Started & Hosting Guide](docs/getting-started.md)**.
 
 ## Documentation
 
@@ -100,9 +31,10 @@ All project documentation can be found in the `/docs` directory:
 
 | Document | Description |
 | :--- | :--- |
-| [**`architecture.md`**](docs/architecture.md) | The complete system architecture, data models, and technical decisions. |
-| [**`deployment.md`**](docs/deployment.md) | Step-by-step guides for deploying to Pantheon and Vercel. |
-| [**`distribution.md`**](docs/distribution.md) | How to use Rescue Platform as a Drupal distribution. |
+| [**`getting-started.md`**](docs/getting-started.md) | How to set up a local development environment and deploy to production. |
+| [**`content-types.md`**](docs/content-types.md) | A complete reference for all content types and their fields. |
+| [**`admin-guide.md`**](docs/admin-guide.md) | An overview of key administrative areas in the Drupal backend. |
+| [**`theme-guide.md`**](docs/theme-guide.md) | How to customize the visual appearance of your website. |
 | [**`contributing.md`**](docs/contributing.md) | Guidelines for contributing to the project. |
 
 ## Contributing
