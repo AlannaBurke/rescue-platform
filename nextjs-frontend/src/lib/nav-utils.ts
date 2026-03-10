@@ -27,7 +27,6 @@ export function parseNavItems(raw: string[]): NavItem[] {
 export const DEFAULT_NAV: NavItem[] = [
   { name: "Adopt",          href: "/adopt",          enabled: true },
   { name: "Sanctuary",      href: "/sanctuary",       enabled: true },
-  { name: "Rainbow Bridge", href: "/rainbow-bridge",  enabled: true },
   { name: "Foster",         href: "/foster",          enabled: true },
   { name: "Volunteer",      href: "/volunteer",       enabled: true },
   { name: "Events",         href: "/events",          enabled: true },
