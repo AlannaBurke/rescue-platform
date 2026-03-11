@@ -1,0 +1,23 @@
+uuid: d9a264d9-9c57-458d-a709-ac321f12068f
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - rescue_gin
+_core:
+  default_config_hash: yEBET0cqDbk8dkWzaJw-8CKft0961VBflsISoSR6Lj8
+id: rescue_gin_search_form_narrow
+theme: rescue_gin
+region: primary_menu
+weight: -4
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

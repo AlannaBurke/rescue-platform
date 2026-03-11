@@ -1,0 +1,22 @@
+uuid: 5cf532b3-e0b8-45be-ab7a-c4526562b854
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - rescue_gin
+_core:
+  default_config_hash: VfPFqqxfkomud5CO8DUijw85QIl9GIxh_nIxLOYESxg
+id: rescue_gin_help
+theme: rescue_gin
+region: header
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

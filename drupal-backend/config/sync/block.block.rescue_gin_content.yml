@@ -1,0 +1,22 @@
+uuid: 5a9d243b-2739-4a3d-a951-97be6c96a39f
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - rescue_gin
+_core:
+  default_config_hash: erQSEZF2XUjNmgTl0uNRBzmg18ZGXwUcw2FhApoeuHk
+id: rescue_gin_content
+theme: rescue_gin
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,4 @@
+rescue_gin_mobile:
+  css:
+    theme:
+      css/rescue_gin_mobile.css: {}

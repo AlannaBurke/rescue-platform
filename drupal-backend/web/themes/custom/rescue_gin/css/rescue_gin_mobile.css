@@ -1,0 +1,399 @@
+/**
+ * Rescue Gin — Mobile-first admin theme improvements
+ *
+ * Goals:
+ *  1. Large, easy-to-tap form fields and buttons on mobile
+ *  2. Readable font sizes on small screens
+ *  3. Better spacing so content isn't cramped
+ *  4. Autosave notification that's clearly visible
+ *  5. Sidebar collapses cleanly on mobile
+ *  6. Action buttons always reachable at the bottom
+ */
+
+/* ── CSS custom property overrides for mobile ─────────────────────────────── */
+:root {
+  --rescue-tap-min: 44px;   /* WCAG 2.5.5 minimum tap target */
+  --rescue-font-base: 16px; /* Prevent iOS auto-zoom on inputs */
+}
+
+/* ── Global: prevent iOS zoom on form inputs ──────────────────────────────── */
+@media (max-width: 60.99em) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="date"],
+  input[type="time"],
+  select,
+  textarea {
+    font-size: var(--rescue-font-base) !important;
+  }
+}
+
+/* ── Form fields: larger tap targets on mobile ────────────────────────────── */
+@media (max-width: 60.99em) {
+  .form-item input[type="text"],
+  .form-item input[type="email"],
+  .form-item input[type="url"],
+  .form-item input[type="number"],
+  .form-item input[type="tel"],
+  .form-item input[type="date"],
+  .form-item input[type="time"],
+  .form-item select {
+    min-height: var(--rescue-tap-min);
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .form-item textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    min-height: 120px;
+  }
+
+  /* Checkboxes and radios: larger tap targets */
+  .form-item input[type="checkbox"],
+  .form-item input[type="radio"] {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+  }
+
+  /* Labels: larger and more readable */
+  .form-item label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  /* Field descriptions: readable but not too large */
+  .form-item .description,
+  .form-item .form-item__description {
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+}
+
+/* ── Buttons: minimum tap target ──────────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .button,
+  .button--primary,
+  .button--secondary,
+  input[type="submit"],
+  input[type="button"],
+  .form-actions .button {
+    min-height: var(--rescue-tap-min);
+    min-width: var(--rescue-tap-min);
+    padding: 10px 18px;
+    font-size: 15px;
+    border-radius: 8px;
+    touch-action: manipulation;
+  }
+
+  /* Primary save button: extra prominent */
+  .button--primary,
+  input[type="submit"].button--primary {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 24px;
+  }
+
+  /* Form actions bar: stack buttons vertically on very small screens */
+  @media (max-width: 30em) {
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-actions .button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+/* ── Content edit form: full-width on mobile ──────────────────────────────── */
+@media (max-width: 60.99em) {
+  /* Remove the sidebar meta panel on mobile — it stacks below */
+  .layout-node-form {
+    display: block !important;
+  }
+
+  .layout-node-form .layout-region-node-main,
+  .layout-node-form .layout-region-node-secondary {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure the main content area uses full width */
+  .gin--has-toolbar .layout-container {
+    padding-left: 0 !important;
+  }
+}
+
+/* ── Autosave notification: more visible on mobile ────────────────────────── */
+#autosave-notification {
+  font-size: 14px !important;
+  padding: 10px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  font-weight: 600 !important;
+  background: #1a7a5e !important;
+  color: #fff !important;
+  border: none !important;
+  z-index: 9999 !important;
+}
+
+@media (max-width: 60.99em) {
+  #autosave-notification {
+    /* On mobile, show at top center instead of bottom right */
+    inset-block-end: auto !important;
+    inset-inline-end: auto !important;
+    inset-block-start: 12px !important;
+    inset-inline-start: 50% !important;
+    transform: translateX(-50%) !important;
+    white-space: nowrap !important;
+    font-size: 13px !important;
+    padding: 8px 16px !important;
+  }
+}
+
+/* ── Toolbar: better mobile experience ────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  /* Ensure toolbar items are tappable */
+  .toolbar-bar .toolbar-item,
+  .toolbar-menu .toolbar-item {
+    min-height: var(--rescue-tap-min);
+    display: flex;
+    align-items: center;
+  }
+
+  /* Admin menu links: larger tap targets */
+  .toolbar-menu a {
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* ── Node edit form: better mobile layout ─────────────────────────────────── */
+@media (max-width: 60.99em) {
+  /* Sticky action bar: make it more prominent on mobile */
+  .gin--has-sticky-form-actions .form-actions {
+    padding: 12px 16px !important;
+    gap: 8px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Preview in Frontend button: style it distinctively */
+  .button--preview-frontend {
+    background: #2099a1 !important;
+    color: #fff !important;
+    border-color: #2099a1 !important;
+  }
+
+  /* Collapse field groups by default on mobile to reduce scroll */
+  .field-group-tab-wrapper .field-group-tab > legend,
+  .field-group-details > summary {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    padding: 12px 16px !important;
+    cursor: pointer !important;
+  }
+}
+
+/* ── Tables: horizontal scroll on mobile ─────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .views-table,
+  .responsive-enabled {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Content list: larger row tap targets */
+  .views-table tbody tr {
+    min-height: var(--rescue-tap-min);
+  }
+
+  .views-table td,
+  .views-table th {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  /* Operations links: bigger tap targets */
+  .views-table .dropbutton-wrapper .dropbutton-action a,
+  .views-table .dropbutton-wrapper .dropbutton-action button {
+    min-height: 36px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ── Webform submissions: better mobile ───────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .webform-submission-form .form-item {
+    margin-bottom: 20px !important;
+  }
+
+  /* Webform submission table: readable on mobile */
+  .webform-results-table td,
+  .webform-results-table th {
+    font-size: 13px !important;
+    padding: 10px 8px !important;
+  }
+}
+
+/* ── Dialogs: full-screen on mobile ──────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .ui-dialog {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    left: 2.5vw !important;
+    top: 5vh !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* ── Media library: better grid on mobile ────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .media-library-views-form .media-library-item {
+    width: calc(50% - 8px) !important;
+  }
+
+  .media-library-item__preview {
+    height: 120px !important;
+  }
+}
+
+/* ── CKEditor 5: usable on mobile ────────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .ck.ck-editor__main .ck-editor__editable {
+    min-height: 200px !important;
+    font-size: 16px !important;
+  }
+
+  /* Toolbar: wrap on mobile */
+  .ck.ck-toolbar {
+    flex-wrap: wrap !important;
+  }
+
+  .ck.ck-toolbar .ck-toolbar__items {
+    flex-wrap: wrap !important;
+  }
+}
+
+/* ── Field groups / details: better mobile expand/collapse ───────────────── */
+@media (max-width: 60.99em) {
+  details.field-group-details {
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    border: 1px solid #e0e0e0 !important;
+  }
+
+  details.field-group-details > summary {
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    background: #f8f8f8 !important;
+    border-radius: 8px !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+
+  details.field-group-details[open] > summary {
+    border-radius: 8px 8px 0 0 !important;
+  }
+
+  details.field-group-details > .details-wrapper {
+    padding: 16px !important;
+  }
+}
+
+/* ── Gin sidebar: better mobile ──────────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  /* Ensure the node sidebar (scheduling, URL alias, etc.) is readable */
+  .layout-region-node-secondary {
+    margin-top: 24px !important;
+  }
+
+  .layout-region-node-secondary .form-item {
+    margin-bottom: 16px !important;
+  }
+}
+
+/* ── Breadcrumb: truncate on mobile ──────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .breadcrumb {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ── Page title: smaller on mobile ──────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .page-title,
+  h1.page-title {
+    font-size: 22px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+/* ── Tabs: scrollable on mobile ──────────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  .tabs--primary {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    padding-bottom: 4px !important;
+  }
+
+  .tabs--primary .tabs__tab {
+    flex-shrink: 0 !important;
+  }
+
+  .tabs--primary .tabs__tab a {
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    min-height: var(--rescue-tap-min) !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+/* ── Rescue-specific: animal form field groups ───────────────────────────── */
+@media (max-width: 60.99em) {
+  /* Make the animal photo upload area more prominent */
+  .field--name-field-animal-photos .field-multiple-table {
+    display: block !important;
+    overflow-x: auto !important;
+  }
+
+  /* Image upload button: full width on mobile */
+  .field--name-field-animal-photos .file-upload-help,
+  .field--name-field-animal-photos input[type="file"] {
+    width: 100% !important;
+  }
+}
+
+/* ── Accessibility: focus indicators ─────────────────────────────────────── */
+@media (max-width: 60.99em) {
+  :focus-visible {
+    outline: 3px solid var(--gin-color-focus, #e8a87c) !important;
+    outline-offset: 2px !important;
+  }
+}

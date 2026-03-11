@@ -1,0 +1,22 @@
+uuid: cf869b15-9cdc-43b4-86cd-2ebf8ed9fdbd
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - rescue_gin
+_core:
+  default_config_hash: eYL19CLDyinGTWYQfBD1DswWzglEotE_kHnHx3AxTXM
+id: rescue_gin_powered
+theme: rescue_gin
+region: header
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

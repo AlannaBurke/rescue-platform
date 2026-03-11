@@ -1,0 +1,22 @@
+uuid: d24974f1-6d5a-4ff7-a757-758f948633f2
+langcode: en
+status: true
+dependencies:
+  theme:
+    - rescue_gin
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: rescue_gin_secondary_local_tasks
+theme: rescue_gin
+region: highlighted
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

@@ -1,0 +1,21 @@
+name: Rescue Gin
+type: theme
+description: 'Mobile-first admin theme for rescue staff. Sub-theme of Gin.'
+base theme: gin
+core_version_requirement: ^10.3 || ^11
+package: Rescue Platform
+
+libraries:
+  - rescue_gin/rescue_gin_mobile
+
+regions:
+  header: Header
+  primary_menu: Primary menu
+  secondary_menu: Secondary menu
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  sidebar_first: Left sidebar
+  sidebar_second: Right sidebar
+  footer: Footer
+  breadcrumb: Breadcrumb

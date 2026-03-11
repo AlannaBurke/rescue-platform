@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
+import { headers } from "next/headers";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { parseNavItems } from "@/lib/nav-utils";
@@ -54,16 +55,23 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Determine if this is an admin route — suppress public Header/Footer for admin
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") ?? headersList.get("x-invoke-path") ?? "";
+  const isAdminRoute = pathname.startsWith("/admin");
+
   // Fetch site settings server-side; gracefully degrade on error
   let siteSettings: Record<string, unknown> | null = null;
-  try {
-    const { data } = await getClient().query({
-      query: GET_SITE_SETTINGS_LAYOUT,
-      variables: { id: SITE_SETTINGS_ID },
-    });
-    siteSettings = data?.nodeSiteSetting ?? null;
-  } catch {
-    // Settings unavailable — fall back to defaults in Header/Footer
+  if (!isAdminRoute) {
+    try {
+      const { data } = await getClient().query({
+        query: GET_SITE_SETTINGS_LAYOUT,
+        variables: { id: SITE_SETTINGS_ID },
+      });
+      siteSettings = data?.nodeSiteSetting ?? null;
+    } catch {
+      // Settings unavailable — fall back to defaults in Header/Footer
+    }
   }
 
   const navItems = siteSettings?.navItems
@@ -85,13 +93,24 @@ export default async function RootLayout({
         >
           Skip to main content
         </a>
-        {/* Yellow banner shown only in preview/draft mode */}
-        {isPreview && <PreviewBanner />}
-        <Header navItems={navItems} orgName={orgName} orgTagline={orgTagline} />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer settings={siteSettings as Parameters<typeof Footer>[0]["settings"]} />
+
+        {isAdminRoute ? (
+          /* Admin shell — no public header/footer */
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+        ) : (
+          /* Public site shell — full header/footer */
+          <>
+            {/* Yellow banner shown only in preview/draft mode */}
+            {isPreview && <PreviewBanner />}
+            <Header navItems={navItems} orgName={orgName} orgTagline={orgTagline} />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer settings={siteSettings as Parameters<typeof Footer>[0]["settings"]} />
+          </>
+        )}
       </body>
     </html>
   );

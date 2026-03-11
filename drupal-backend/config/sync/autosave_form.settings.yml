@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: KHFceIX-fbXlWawKfwtwtF54lAHxnYxy1yQbxam4p5k
+langcode: en
+interval: 30000
+only_on_form_change: true
+active_on:
+  content_entity_forms: true
+  config_entity_forms: false
+notification:
+  active: true
+  message: 'Draft saved automatically'
+  delay: 800
+allowed_content_entity_types: {  }
+allowed_new: true

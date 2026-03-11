@@ -1,0 +1,20 @@
+uuid: 6e153455-289a-447b-ac13-265128712c74
+langcode: en
+status: true
+dependencies:
+  theme:
+    - rescue_gin
+_core:
+  default_config_hash: 6aOgWsNTXjqrDm98TXSAjP6qd2nCijD1xw45MrnbK-Y
+id: rescue_gin_page_title
+theme: rescue_gin
+region: header
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }
