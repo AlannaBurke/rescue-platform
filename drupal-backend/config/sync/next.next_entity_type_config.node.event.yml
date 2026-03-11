@@ -1,0 +1,13 @@
+uuid: fbf28957-1948-4a60-aa83-d0ff454326a0
+langcode: en
+status: true
+dependencies: {  }
+id: node.event
+site_resolver: site_selector
+configuration:
+  sites:
+    - rescue_frontend
+revalidator: path
+revalidator_configuration:
+  revalidate_page: true
+  additional_paths: ''

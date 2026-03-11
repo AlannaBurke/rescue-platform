@@ -1,3 +1,4 @@
+import { draftMode } from 'next/headers';
 import { getClient } from '@/lib/apollo-client';
 import { GET_EVENT } from '@/lib/graphql/content';
 import Link from 'next/link';
@@ -29,6 +30,7 @@ export default async function EventDetailPage({
 }: {
   params: { id: string };
 }) {
+  const { isEnabled: isPreview } = await draftMode();
   const client = getClient();
   let event: any = null;
 
@@ -42,7 +44,8 @@ export default async function EventDetailPage({
     console.error('Failed to fetch event:', error);
   }
 
-  if (!event) {
+  // In preview/draft mode, show unpublished content; otherwise require published
+  if (!event || (!event.status && !isPreview)) {
     notFound();
   }
 
@@ -66,6 +69,13 @@ export default async function EventDetailPage({
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-10">
+        {/* Unpublished badge in preview mode */}
+        {isPreview && !event.status && (
+          <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800">
+            <strong>Draft</strong> — This event is not yet published and is only visible in preview mode.
+          </div>
+        )}
+
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           {/* Header */}
           <div className={`px-8 py-8 ${isUpcoming ? 'bg-gradient-to-br from-amber-50 to-orange-50' : 'bg-gray-50'}`}>

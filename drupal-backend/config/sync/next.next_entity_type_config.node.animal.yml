@@ -1,0 +1,13 @@
+uuid: 580977d8-e4c2-4c5b-8328-b576989044cb
+langcode: en
+status: true
+dependencies: {  }
+id: node.animal
+site_resolver: site_selector
+configuration:
+  sites:
+    - rescue_frontend
+revalidator: path
+revalidator_configuration:
+  revalidate_page: true
+  additional_paths: ''

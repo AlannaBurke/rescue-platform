@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { Tag, ArrowLeft, Share2 } from "lucide-react";
@@ -18,6 +19,7 @@ interface ResourceNode {
   id: string;
   title: string;
   path: string;
+  status: boolean;
   resourceCategory: string;
   shareTargets: string[];
   tags: Array<{ id: string; name: string; path: string }>;
@@ -64,10 +66,27 @@ export default async function ResourceDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const { isEnabled: isPreview } = await draftMode();
   const { data } = await getClient().query({ query: GET_RESOURCE, variables: { id } });
   const resource: ResourceNode = data?.nodeResource;
 
   if (!resource) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl text-stone-700 mb-4" style={{ fontFamily: "'Fredoka One', ui-rounded, system-ui, sans-serif" }}>
+            Resource not found
+          </h1>
+          <Link href="/resources" className="text-primary-600 hover:underline">
+            ← Back to Resources
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // In preview/draft mode, show unpublished content; otherwise require published
+  if (!resource.status && !isPreview) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -105,6 +124,15 @@ export default async function ResourceDetailPage({
           </Link>
         </div>
       </div>
+
+      {/* Unpublished badge in preview mode */}
+      {isPreview && !resource.status && (
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-4">
+          <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800">
+            <strong>Draft</strong> — This resource is not yet published and is only visible in preview mode.
+          </div>
+        </div>
+      )}
 
       {/* Hero image */}
       <div className="relative w-full h-64 sm:h-80 bg-primary-50 overflow-hidden">

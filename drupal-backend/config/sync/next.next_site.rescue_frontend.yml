@@ -1,0 +1,11 @@
+uuid: ca004037-bc48-46cc-8c10-ecae3d4976b4
+langcode: en
+status: true
+dependencies: {  }
+id: rescue_frontend
+label: 'Rescue Frontend'
+base_url: 'https://3000-isdhhzdmj1aqxs0a2pp57-20a9ef4f.us2.manus.computer'
+preview_url: 'https://3000-isdhhzdmj1aqxs0a2pp57-20a9ef4f.us2.manus.computer/api/preview'
+preview_secret: _JHUCKR1GuY-VPclOsxKr_CWMtG25mZHK1vALJIWGDc
+revalidate_url: null
+revalidate_secret: null

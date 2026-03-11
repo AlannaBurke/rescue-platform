@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -154,6 +155,7 @@ function lifecycleColor(status?: string) {
 
 export default async function AnimalPage({ params }: AnimalPageProps) {
   const { id } = await params;
+  const { isEnabled: isPreview } = await draftMode();
 
   const { data } = await getClient().query<GetAnimalQuery>({
     query: GET_ANIMAL,
@@ -161,7 +163,7 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
   });
 
   const animal: Animal | null = data?.nodeAnimal ?? null;
-  if (!animal || !animal.status) notFound();
+  if (!animal || (!animal.status && !isPreview)) notFound();
 
   const age = formatAge(animal.animalAgeYears, animal.animalAgeMonths);
   const speciesName = animal.animalSpecies?.name;

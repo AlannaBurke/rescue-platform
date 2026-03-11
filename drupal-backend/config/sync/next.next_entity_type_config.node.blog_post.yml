@@ -1,0 +1,13 @@
+uuid: 56e4175f-9895-4b81-b8e5-b5f2cc356c7e
+langcode: en
+status: true
+dependencies: {  }
+id: node.blog_post
+site_resolver: site_selector
+configuration:
+  sites:
+    - rescue_frontend
+revalidator: path
+revalidator_configuration:
+  revalidate_page: true
+  additional_paths: ''

@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Rescue Admin API module hooks.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter() for node_form.
+ *
+ * Adds a "Preview in Frontend" button to node edit forms for content types
+ * that have a Next.js entity type config (animal, blog_post, event, resource).
+ * The button opens the Next.js Draft Mode preview in a new tab.
+ */
+function rescue_admin_api_form_node_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+
+  // Only add the button for existing (saved) nodes.
+  if ($node->isNew()) {
+    return;
+  }
+
+  $bundle = $node->bundle();
+
+  // Only add for content types that have a frontend detail page.
+  $supported_bundles = ['animal', 'blog_post', 'event', 'resource'];
+  if (!in_array($bundle, $supported_bundles, TRUE)) {
+    return;
+  }
+
+  // Check if a next_entity_type_config exists for this bundle.
+  $entity_type_config_id = 'node.' . $bundle;
+  $next_entity_type_config = \Drupal::entityTypeManager()
+    ->getStorage('next_entity_type_config')
+    ->load($entity_type_config_id);
+
+  if (!$next_entity_type_config) {
+    return;
+  }
+
+  // Get the next_site and generate the preview URL.
+  $sites = \Drupal::service('next.entity_type.manager')->getSitesForEntity($node);
+  if (empty($sites)) {
+    return;
+  }
+
+  $site = reset($sites);
+  try {
+    $preview_url = $site->getPreviewUrlForEntity($node);
+    $preview_url_string = $preview_url->toString();
+  }
+  catch (\Exception $e) {
+    return;
+  }
+
+  // Hide the built-in Drupal preview button (shows Drupal-themed preview, not the frontend theme).
+  // Editors should use "Preview in Frontend" instead.
+  if (isset($form['actions']['preview'])) {
+    $form['actions']['preview']['#access'] = FALSE;
+  }
+
+  // Also hide from Gin sticky header.
+  if (isset($form['gin_actions']['preview'])) {
+    $form['gin_actions']['preview']['#access'] = FALSE;
+  }
+
+  // Add the "Preview in Frontend" button to the actions area.
+  $form['actions']['preview_frontend'] = [
+    '#type'       => 'link',
+    '#title'      => t('Preview in Frontend'),
+    '#url'        => \Drupal\Core\Url::fromUri($preview_url_string),
+    '#attributes' => [
+      'class'  => ['button', 'button--secondary', 'button--small'],
+      'target' => '_blank',
+      'rel'    => 'noopener noreferrer',
+      'title'  => t('Preview this content in the public-facing website theme'),
+    ],
+    '#weight' => 15,
+  ];
+
+  // Also add to the Gin sticky header actions if present.
+  if (isset($form['gin_actions'])) {
+    $form['gin_actions']['preview_frontend'] = $form['actions']['preview_frontend'];
+    $form['gin_actions']['preview_frontend']['#weight'] = 15;
+  }
+}

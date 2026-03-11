@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
@@ -42,6 +43,7 @@ function estimateReadTime(html?: string): string {
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { id } = await params;
+  const { isEnabled: isPreview } = await draftMode();
 
   const { data } = await getClient().query<GetBlogPostQuery>({
     query: GET_BLOG_POST,
@@ -49,7 +51,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   });
 
   const post: BlogPost | null = data?.nodeBlogPost ?? null;
-  if (!post || !post.status) notFound();
+
+  // In preview/draft mode, show unpublished content; otherwise require published
+  if (!post || (!post.status && !isPreview)) notFound();
 
   const dateStr = post.created?.time ? formatDate(post.created.time) : null;
   const readTime = estimateReadTime(post.body?.value);
@@ -76,6 +80,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Article */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+        {/* Unpublished badge in preview mode */}
+        {isPreview && !post.status && (
+          <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800">
+            <strong>Draft</strong> — This post is not yet published and is only visible in preview mode.
+          </div>
+        )}
+
         <article className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="p-6 sm:p-10">
             {/* Meta */}

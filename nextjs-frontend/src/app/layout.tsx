@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { draftMode } from "next/headers";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { parseNavItems } from "@/lib/nav-utils";
 import Footer from "@/components/layout/Footer";
+import PreviewBanner from "@/components/ui/PreviewBanner";
 import { getClient } from "@/lib/apollo-client";
 import { gql } from "@apollo/client";
 
@@ -71,6 +73,9 @@ export default async function RootLayout({
   const orgName    = (siteSettings?.title as string | undefined) ?? undefined;
   const orgTagline = (siteSettings?.orgTagline as string | undefined) ?? undefined;
 
+  // Check if Next.js Draft Mode is active (set by /api/preview)
+  const { isEnabled: isPreview } = await draftMode();
+
   return (
     <html lang="en">
       <body className="antialiased min-h-screen flex flex-col bg-stone-50">
@@ -80,6 +85,8 @@ export default async function RootLayout({
         >
           Skip to main content
         </a>
+        {/* Yellow banner shown only in preview/draft mode */}
+        {isPreview && <PreviewBanner />}
         <Header navItems={navItems} orgName={orgName} orgTagline={orgTagline} />
         <main id="main-content" className="flex-1">
           {children}
