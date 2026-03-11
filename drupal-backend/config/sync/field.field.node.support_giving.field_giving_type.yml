@@ -1,0 +1,21 @@
+uuid: 5f121829-f5e8-4e76-bbf5-f09ff10d1b51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_type
+    - node.type.support_giving
+  module:
+    - options
+id: node.support_giving.field_giving_type
+field_name: field_giving_type
+entity_type: node
+bundle: support_giving
+label: 'Giving Type'
+description: 'Select the type of giving method.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

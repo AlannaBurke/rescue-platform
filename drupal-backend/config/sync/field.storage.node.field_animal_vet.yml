@@ -1,0 +1,19 @@
+uuid: b4b96d4b-25a2-4812-9d4f-f9a1e53bb6a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_animal_vet
+field_name: field_animal_vet
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

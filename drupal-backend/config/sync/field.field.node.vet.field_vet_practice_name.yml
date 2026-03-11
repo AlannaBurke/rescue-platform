@@ -1,0 +1,19 @@
+uuid: 4db5dce4-29e9-44a3-be9b-5fe66db066c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_practice_name
+    - node.type.vet
+id: node.vet.field_vet_practice_name
+field_name: field_vet_practice_name
+entity_type: node
+bundle: vet
+label: 'Practice / Clinic Name'
+description: 'The official name of the practice (e.g., "Exotic Animal Hospital of the Midwest").'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -12,7 +12,7 @@ field_name: field_expense_receipt
 entity_type: node
 bundle: expense
 label: 'Receipt / Documentation'
-description: 'Upload receipt images or PDF documents (max 3 files).'
+description: 'Upload a photo or PDF of the receipt. Supported formats: JPG, PNG, PDF (max 3 files).'
 required: false
 translatable: true
 default_value: {  }

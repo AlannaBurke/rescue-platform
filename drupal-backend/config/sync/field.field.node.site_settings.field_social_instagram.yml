@@ -1,0 +1,19 @@
+uuid: 633d3166-c34b-4b21-8ee0-7920ef50daa0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_instagram
+    - node.type.site_settings
+id: node.site_settings.field_social_instagram
+field_name: field_social_instagram
+entity_type: node
+bundle: site_settings
+label: 'Instagram Handle (e.g. @myrescue)'
+description: 'Your Instagram handle, including the @ (e.g., @myrescue).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

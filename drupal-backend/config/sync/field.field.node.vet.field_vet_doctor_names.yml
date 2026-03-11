@@ -1,0 +1,19 @@
+uuid: c1811874-7db0-4580-835a-c24a981a8b9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_doctor_names
+    - node.type.vet
+id: node.vet.field_vet_doctor_names
+field_name: field_vet_doctor_names
+entity_type: node
+bundle: vet
+label: 'Doctor Name(s)'
+description: 'The names of the veterinarians at this practice, one per line.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,19 @@
+uuid: c48def36-356e-46c4-baee-289031228cce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_facebook
+    - node.type.site_settings
+id: node.site_settings.field_social_facebook
+field_name: field_social_facebook
+entity_type: node
+bundle: site_settings
+label: 'Facebook Page URL or Handle'
+description: 'Your Facebook page URL or handle.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

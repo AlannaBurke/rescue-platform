@@ -1,0 +1,19 @@
+uuid: 20752e70-62d3-4674-adc1-8692bcc91351
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_preferred_contact
+    - node.type.person
+id: node.person.field_preferred_contact
+field_name: field_preferred_contact
+entity_type: node
+bundle: person
+label: 'Preferred Contact Method'
+description: 'How does this person prefer to be contacted? (e.g., Email, Text, Phone call, Facebook Messenger)'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

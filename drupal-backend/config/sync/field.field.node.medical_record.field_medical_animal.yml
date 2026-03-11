@@ -11,7 +11,7 @@ field_name: field_medical_animal
 entity_type: node
 bundle: medical_record
 label: Animal
-description: ''
+description: 'The animal this medical record is for.'
 required: true
 translatable: true
 default_value: {  }

@@ -1,0 +1,19 @@
+uuid: b5f56815-a5e9-4d75-bf6d-2849b3823114
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_state
+    - node.type.organization
+id: node.organization.field_org_state
+field_name: field_org_state
+entity_type: node
+bundle: organization
+label: 'State / Province'
+description: 'State or Province.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

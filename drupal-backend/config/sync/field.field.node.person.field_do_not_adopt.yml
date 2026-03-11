@@ -1,0 +1,21 @@
+uuid: 93a3fd62-789b-4546-b394-9f3b5069151b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_do_not_adopt
+    - node.type.person
+id: node.person.field_do_not_adopt
+field_name: field_do_not_adopt
+entity_type: node
+bundle: person
+label: 'Do Not Adopt Flag'
+description: 'IMPORTANT: Check this box if this person should NOT be approved for adoption or fostering. This flag is visible only to admins.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

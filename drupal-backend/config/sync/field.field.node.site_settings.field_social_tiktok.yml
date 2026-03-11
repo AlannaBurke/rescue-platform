@@ -1,0 +1,19 @@
+uuid: 20005872-153b-4c11-97cc-fe350c4fb25d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_tiktok
+    - node.type.site_settings
+id: node.site_settings.field_social_tiktok
+field_name: field_social_tiktok
+entity_type: node
+bundle: site_settings
+label: 'TikTok Handle'
+description: 'Your TikTok handle, including the @ (e.g., @myrescue).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

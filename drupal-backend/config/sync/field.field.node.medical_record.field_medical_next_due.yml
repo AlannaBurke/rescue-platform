@@ -12,7 +12,7 @@ field_name: field_medical_next_due
 entity_type: node
 bundle: medical_record
 label: 'Next Due Date'
-description: ''
+description: 'The date the next follow-up, booster, or check-up is due.'
 required: false
 translatable: true
 default_value: {  }

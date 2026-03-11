@@ -1,0 +1,21 @@
+uuid: 87554775-c984-4fc1-95e8-e846e839b6df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_is_active
+    - node.type.support_giving
+id: node.support_giving.field_giving_is_active
+field_name: field_giving_is_active
+entity_type: node
+bundle: support_giving
+label: 'Currently Active?'
+description: 'Uncheck to temporarily hide this giving method from the public Support page without deleting it.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

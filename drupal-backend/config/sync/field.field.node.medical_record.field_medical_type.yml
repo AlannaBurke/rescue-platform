@@ -11,7 +11,7 @@ field_name: field_medical_type
 entity_type: node
 bundle: medical_record
 label: Type
-description: ''
+description: 'Select the type of medical record. If the type is not listed, you can add it under Structure > Taxonomy > Medical Record Types.'
 required: true
 translatable: true
 default_value: {  }

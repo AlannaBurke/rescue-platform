@@ -12,7 +12,7 @@ field_name: field_event_end_date
 entity_type: node
 bundle: event
 label: 'Event End Date'
-description: ''
+description: 'The date and time the event ends. Leave blank for all-day events.'
 required: false
 translatable: true
 default_value: {  }

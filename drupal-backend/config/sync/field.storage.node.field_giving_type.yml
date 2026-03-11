@@ -1,0 +1,69 @@
+uuid: f9779964-7b43-44bf-b98e-189575fcaf45
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_giving_type
+field_name: field_giving_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: venmo
+      label: Venmo
+    -
+      value: cashapp
+      label: 'Cash App'
+    -
+      value: paypal
+      label: PayPal
+    -
+      value: zelle
+      label: Zelle
+    -
+      value: stripe
+      label: 'Stripe / Credit Card'
+    -
+      value: check
+      label: 'Check / Mail'
+    -
+      value: amazon
+      label: 'Amazon Wishlist'
+    -
+      value: chewy
+      label: 'Chewy Wishlist'
+    -
+      value: gift_card
+      label: 'Gift Card'
+    -
+      value: vet_payment
+      label: 'Pay a Vet Bill Directly'
+    -
+      value: supply_drive
+      label: 'Supply Drive / Donation Drop'
+    -
+      value: volunteer
+      label: 'Volunteer Your Time'
+    -
+      value: foster
+      label: 'Become a Foster'
+    -
+      value: sponsor
+      label: 'Sponsor an Animal'
+    -
+      value: fundraiser
+      label: 'Fundraiser / Event'
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

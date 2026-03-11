@@ -11,7 +11,7 @@ field_name: field_currently_fostering
 entity_type: node
 bundle: person
 label: 'Currently Fostering'
-description: 'Animals this person is currently fostering.'
+description: 'Animals this person is currently fostering. This is updated automatically when you assign a foster to an animal.'
 required: false
 translatable: true
 default_value: {  }

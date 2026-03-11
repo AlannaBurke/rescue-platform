@@ -1,0 +1,20 @@
+uuid: 7be1a7b6-fce1-4e75-a0e1-fd94d9279ac1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_giving_sort_weight
+field_name: field_giving_sort_weight
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

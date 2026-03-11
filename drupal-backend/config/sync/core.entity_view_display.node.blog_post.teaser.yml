@@ -5,6 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.blog_post.body
+    - field.field.node.blog_post.field_share_targets
+    - field.field.node.blog_post.field_social_share_image
+    - field.field.node.blog_post.field_tags
     - node.type.blog_post
   module:
     - text
@@ -27,4 +30,7 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  field_share_targets: true
+  field_social_share_image: true
+  field_tags: true

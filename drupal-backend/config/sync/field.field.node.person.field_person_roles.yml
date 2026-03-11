@@ -11,7 +11,7 @@ field_name: field_person_roles
 entity_type: node
 bundle: person
 label: Role(s)
-description: ''
+description: 'Select all roles that apply to this person. A person can have multiple roles (e.g., both a Foster and a Volunteer).'
 required: true
 translatable: true
 default_value: {  }

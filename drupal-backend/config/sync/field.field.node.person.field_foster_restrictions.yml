@@ -12,7 +12,7 @@ field_name: field_foster_restrictions
 entity_type: node
 bundle: person
 label: 'Foster Restrictions'
-description: 'Any restrictions on what animals this foster can take (e.g., no cats, dogs only, kittens only).'
+description: 'Any restrictions on what animals this foster can take (e.g., "No cats", "Dogs only", "Kittens only", "No animals with other pets").'
 required: false
 translatable: true
 default_value: {  }

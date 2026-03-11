@@ -10,7 +10,7 @@ field_name: field_animal_age_years
 entity_type: node
 bundle: animal
 label: 'Age (Years)'
-description: ''
+description: "The animal's age in years. For animals under 1 year, enter 0 here and use the months field."
 required: false
 translatable: true
 default_value: {  }

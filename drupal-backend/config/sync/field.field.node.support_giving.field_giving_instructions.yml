@@ -1,0 +1,19 @@
+uuid: 7de7e30c-c300-4dbe-bca1-ccb2a30a357a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_instructions
+    - node.type.support_giving
+id: node.support_giving.field_giving_instructions
+field_name: field_giving_instructions
+entity_type: node
+bundle: support_giving
+label: Instructions
+description: 'Step-by-step instructions for donors (e.g., "1. Open Venmo, 2. Search for @myrescue, 3. Add a note: donation").'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

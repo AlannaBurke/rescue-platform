@@ -1,0 +1,19 @@
+uuid: 2c85042f-798f-4bf5-88e3-2281c36d71f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_city
+    - node.type.vet
+id: node.vet.field_vet_city
+field_name: field_vet_city
+entity_type: node
+bundle: vet
+label: City
+description: City.
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

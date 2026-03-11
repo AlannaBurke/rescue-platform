@@ -12,7 +12,7 @@ field_name: field_intake_date
 entity_type: node
 bundle: animal
 label: 'Intake Date'
-description: ''
+description: 'The date this animal came into your care.'
 required: false
 translatable: true
 default_value: {  }

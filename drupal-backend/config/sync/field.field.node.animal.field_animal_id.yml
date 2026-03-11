@@ -10,7 +10,7 @@ field_name: field_animal_id
 entity_type: node
 bundle: animal
 label: 'Animal ID'
-description: ''
+description: 'Your internal ID or intake number for this animal (e.g., "2024-001"). Used for internal tracking only.'
 required: true
 translatable: true
 default_value: {  }

@@ -10,7 +10,7 @@ field_name: field_donation_amount
 entity_type: node
 bundle: donation
 label: Amount
-description: ''
+description: 'The amount of the donation in USD.'
 required: true
 translatable: true
 default_value: {  }

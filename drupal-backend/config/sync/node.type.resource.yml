@@ -1,0 +1,11 @@
+uuid: 52324cc6-6faa-4f4c-aae5-285dcaf81abe
+langcode: en
+status: true
+dependencies: {  }
+name: Resource
+type: resource
+description: 'Informational pages, guides, and care sheets for the public resource library.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

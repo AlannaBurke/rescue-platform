@@ -1,0 +1,11 @@
+uuid: 83b862b2-7987-49c0-9fbd-30cc1525d58e
+langcode: en
+status: true
+dependencies: {  }
+name: Organization
+type: organization
+description: 'Partner rescues, shelters, sanctuaries, transport groups, and other organizations.'
+help: 'Use this content type to track partner rescues, shelters, transport groups, and other organizations.'
+new_revision: true
+preview_mode: 1
+display_submitted: true

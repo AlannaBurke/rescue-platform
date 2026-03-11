@@ -11,7 +11,7 @@ field_name: field_expense_category
 entity_type: node
 bundle: expense
 label: Category
-description: ''
+description: 'Select the expense category. If the category is not listed, you can add it under Structure > Taxonomy > Expense Categories.'
 required: true
 translatable: true
 default_value: {  }

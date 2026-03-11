@@ -1,0 +1,19 @@
+uuid: 80ecfba3-57bc-4f4e-9638-1771dfca6623
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_pinterest
+    - node.type.site_settings
+id: node.site_settings.field_social_pinterest
+field_name: field_social_pinterest
+entity_type: node
+bundle: site_settings
+label: 'Pinterest Handle'
+description: 'Your Pinterest handle.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

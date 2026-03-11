@@ -11,7 +11,7 @@ field_name: field_donation_for_animal
 entity_type: node
 bundle: donation
 label: 'Designated For Animal'
-description: 'If this donation is designated for a specific animal (e.g., memorial donation).'
+description: "If this donation is designated for a specific animal (e.g., a memorial donation or a fundraiser for a specific animal's vet bills), select that animal here."
 required: false
 translatable: true
 default_value: {  }

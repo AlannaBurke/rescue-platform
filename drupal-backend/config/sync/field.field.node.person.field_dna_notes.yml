@@ -1,0 +1,19 @@
+uuid: 1c66f004-96c8-4f90-9a4a-db4393fd67ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dna_notes
+    - node.type.person
+id: node.person.field_dna_notes
+field_name: field_dna_notes
+entity_type: node
+bundle: person
+label: 'Do Not Adopt Notes'
+description: 'Internal notes explaining why this person is flagged as Do Not Adopt. Be factual and specific. Visible only to admins.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

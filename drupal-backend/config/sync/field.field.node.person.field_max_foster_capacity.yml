@@ -10,7 +10,7 @@ field_name: field_max_foster_capacity
 entity_type: node
 bundle: person
 label: 'Max Foster Capacity'
-description: 'Maximum number of animals this foster can house at one time.'
+description: 'The maximum number of animals this foster can house at one time.'
 required: false
 translatable: true
 default_value: {  }

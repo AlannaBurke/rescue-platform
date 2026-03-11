@@ -6,6 +6,15 @@ entity_config:
       enabled: true
       query_load_enabled: true
       edges_enabled: true
+      fields:
+        field_good_with:
+          field_name: field_good_with
+          enabled: true
+          multiple: true
+        field_not_good_with:
+          field_name: field_not_good_with
+          enabled: true
+          multiple: true
     person:
       enabled: true
       query_load_enabled: true
@@ -40,6 +49,33 @@ entity_config:
       edges_enabled: true
       simple_queries: false
       base_fields: true
+    site_settings:
+      enabled: true
+      query_load_enabled: true
+    organization:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+    vet:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+    resource:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+      fields:
+        body:
+          enabled: true
+          multiple: false
+    support_giving:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+      fields:
+        body:
+          enabled: true
+          multiple: false
   taxonomy_term:
     animal_status:
       enabled: true
@@ -62,6 +98,10 @@ entity_config:
       query_load_enabled: true
       edges_enabled: true
     animal_lifecycle_status:
+      enabled: true
+      query_load_enabled: true
+      edges_enabled: true
+    tags:
       enabled: true
       query_load_enabled: true
       edges_enabled: true
@@ -147,12 +187,6 @@ field_config:
         enabled: true
       field_current_foster:
         enabled: true
-      field_good_with_cats:
-        enabled: true
-      field_good_with_dogs:
-        enabled: true
-      field_good_with_kids:
-        enabled: true
       field_intake_date:
         enabled: true
       field_microchip:
@@ -174,6 +208,14 @@ field_config:
       field_medication_log:
         enabled: true
       field_placement_history:
+        enabled: true
+      field_animal_photos:
+        enabled: true
+      field_animal_vet:
+        enabled: true
+      field_good_with:
+        enabled: true
+      field_not_good_with:
         enabled: true
     person:
       nid:
@@ -229,6 +271,32 @@ field_config:
       field_person_roles:
         enabled: true
       field_person_skills:
+        enabled: true
+      field_do_not_adopt:
+        enabled: true
+      field_dna_notes:
+        enabled: true
+      field_person_phone2:
+        enabled: true
+      field_person_address:
+        enabled: true
+      field_person_city:
+        enabled: true
+      field_person_state:
+        enabled: true
+      field_person_zip:
+        enabled: true
+      field_person_country:
+        enabled: true
+      field_person_instagram:
+        enabled: true
+      field_person_facebook:
+        enabled: true
+      field_person_photo:
+        enabled: true
+      field_person_bio:
+        enabled: true
+      field_preferred_contact:
         enabled: true
     medical_record:
       nid:
@@ -379,6 +447,12 @@ field_config:
         enabled: true
       body:
         enabled: true
+      field_tags:
+        enabled: true
+      field_social_share_image:
+        enabled: true
+      field_share_targets:
+        enabled: true
     event:
       nid:
         enabled: true
@@ -485,6 +559,137 @@ field_config:
       field_donation_type:
         enabled: true
       field_donor_name:
+        enabled: true
+    site_settings:
+      field_org_tagline:
+        enabled: true
+      field_org_email:
+        enabled: true
+      field_org_phone:
+        enabled: true
+      field_org_address:
+        enabled: true
+      field_org_ein:
+        enabled: true
+      field_social_instagram:
+        enabled: true
+      field_social_facebook:
+        enabled: true
+      field_social_tiktok:
+        enabled: true
+      field_social_twitter:
+        enabled: true
+      field_social_youtube:
+        enabled: true
+      field_social_threads:
+        enabled: true
+      field_social_bluesky:
+        enabled: true
+      field_social_pinterest:
+        enabled: true
+      field_nav_items:
+        enabled: true
+    organization:
+      field_org_type:
+        enabled: true
+      field_org_contact_name:
+        enabled: true
+      field_org_contact_email:
+        enabled: true
+      field_org_contact_phone:
+        enabled: true
+      field_org_website:
+        enabled: true
+      field_org_street:
+        enabled: true
+      field_org_city:
+        enabled: true
+      field_org_state:
+        enabled: true
+      field_org_zip:
+        enabled: true
+      field_org_country:
+        enabled: true
+      field_org_instagram:
+        enabled: true
+      field_org_facebook:
+        enabled: true
+      field_org_logo:
+        enabled: true
+      field_org_notes:
+        enabled: true
+      field_org_is_partner:
+        enabled: true
+      body:
+        enabled: true
+    vet:
+      field_vet_practice_name:
+        enabled: true
+      field_vet_doctor_names:
+        enabled: true
+      field_vet_specialties:
+        enabled: true
+      field_vet_phone:
+        enabled: true
+      field_vet_emergency_phone:
+        enabled: true
+      field_vet_email:
+        enabled: true
+      field_vet_website:
+        enabled: true
+      field_vet_street:
+        enabled: true
+      field_vet_city:
+        enabled: true
+      field_vet_state:
+        enabled: true
+      field_vet_zip:
+        enabled: true
+      field_vet_hours:
+        enabled: true
+      field_vet_is_emergency:
+        enabled: true
+      field_vet_is_preferred:
+        enabled: true
+      field_vet_notes:
+        enabled: true
+      field_vet_public_notes:
+        enabled: true
+      field_vet_photo:
+        enabled: true
+      body:
+        enabled: true
+    resource:
+      field_resource_category:
+        enabled: true
+      field_tags:
+        enabled: true
+      field_resource_image:
+        enabled: true
+      field_social_share_image:
+        enabled: true
+      field_share_targets:
+        enabled: true
+      body:
+        enabled: true
+    support_giving:
+      field_giving_type:
+        enabled: true
+      field_giving_handle:
+        enabled: true
+      field_giving_url:
+        enabled: true
+      field_giving_instructions:
+        enabled: true
+      field_giving_goal:
+        enabled: true
+      field_giving_is_active:
+        enabled: true
+      field_giving_sort_weight:
+        enabled: true
+      field_giving_image:
+        enabled: true
+      body:
         enabled: true
   taxonomy_term:
     animal_status:
@@ -756,3 +961,9 @@ entity_types:
     expense_category:
       enabled: true
       query_load_enabled: true
+node:
+  animal:
+    field_good_with:
+      enabled: true
+    field_not_good_with:
+      enabled: true

@@ -1,0 +1,21 @@
+uuid: b357ea81-fe9d-4d82-bf56-66e6e8613b66
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_good_with
+    - node.type.animal
+  module:
+    - options
+id: node.animal.field_good_with
+field_name: field_good_with
+entity_type: node
+bundle: animal
+label: 'Good With'
+description: 'Select every type this animal is known to get along well with. Only selected items will be shown on the public profile.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

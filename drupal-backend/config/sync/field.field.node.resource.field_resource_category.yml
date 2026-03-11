@@ -1,0 +1,21 @@
+uuid: 10ac0fd8-cdea-4a7b-90e5-21a355068d3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resource_category
+    - node.type.resource
+  module:
+    - options
+id: node.resource.field_resource_category
+field_name: field_resource_category
+entity_type: node
+bundle: resource
+label: Category
+description: 'Select the category that best describes this resource.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

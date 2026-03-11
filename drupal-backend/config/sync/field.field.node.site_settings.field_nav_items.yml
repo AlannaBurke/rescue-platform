@@ -1,0 +1,19 @@
+uuid: a84427b1-20f3-4acd-bc44-f86362e8106b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_nav_items
+    - node.type.site_settings
+id: node.site_settings.field_nav_items
+field_name: field_nav_items
+entity_type: node
+bundle: site_settings
+label: 'Navigation Items (one per line: Label|/path|1)'
+description: 'Define the navigation items for the public website header. Each line is one nav item in the format: Label|/path|enabled(1 or 0). Example: Adopt|/adopt|1. Set the last value to 0 to temporarily hide a nav item without deleting it.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

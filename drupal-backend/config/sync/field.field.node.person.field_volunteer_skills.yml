@@ -11,7 +11,7 @@ field_name: field_volunteer_skills
 entity_type: node
 bundle: person
 label: 'Volunteer Skills'
-description: ''
+description: 'Select the skills this volunteer has. Used for matching volunteers to tasks.'
 required: false
 translatable: true
 default_value: {  }

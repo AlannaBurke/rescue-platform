@@ -1,0 +1,19 @@
+uuid: b853bbe6-d7d2-4628-aba8-49584919218d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - telephone
+id: node.field_vet_emergency_phone
+field_name: field_vet_emergency_phone
+entity_type: node
+type: telephone
+settings: {  }
+module: telephone
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

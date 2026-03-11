@@ -1,0 +1,19 @@
+uuid: 1cb20b63-cad1-4d72-91d7-2df3cb2e4038
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_notes
+    - node.type.vet
+id: node.vet.field_vet_notes
+field_name: field_vet_notes
+entity_type: node
+bundle: vet
+label: 'Internal Notes'
+description: 'Internal notes visible only to admins (e.g., "Gives us a 15% rescue discount", "Call Dr. Jones directly for emergencies").'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

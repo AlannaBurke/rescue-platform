@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // AI copy generation for social media posts
 // Uses the OpenAI-compatible API (gpt-4.1-mini)
-// ─────────────────────────="────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 import type { SocialPlatform } from "./types";
 
 export interface AnimalSocialData {
@@ -25,6 +25,8 @@ export interface BlogSocialData {
   summary?: string;
   body?: string;
   tags?: string[];
+  contentType?: "blog_post" | "resource";
+  category?: string;
   linkUrl: string;
   orgName?: string;
   orgHandle?: Record<string, string>;
@@ -63,10 +65,12 @@ function buildAnimalContext(data: AnimalSocialData): string {
 }
 
 function buildBlogContext(data: BlogSocialData): string {
+  const typeLabel = data.contentType === "resource" ? "Care resource / guide" : "Blog post";
   const parts = [
-    `Article title: ${data.title}`,
+    `${typeLabel} title: ${data.title}`,
+    data.category ? `Category: ${data.category.replace(/_/g, " ")}` : null,
     data.summary ? `Summary: ${data.summary}` : null,
-    data.body ? `Content excerpt: ${data.body.slice(0, 500)}` : null,
+    data.body ? `Content excerpt: ${data.body.slice(0, 600)}` : null,
     data.tags?.length ? `Tags: ${data.tags.join(", ")}` : null,
     `Org: ${data.orgName ?? "our rescue"}`,
     `Link: ${data.linkUrl}`,
@@ -86,7 +90,12 @@ export async function generateSocialCopy(
   });
 
   const context = isAnimal(data) ? buildAnimalContext(data) : buildBlogContext(data);
-  const contentType = isAnimal(data) ? "adoptable animal profile" : "blog post / resource article";
+  const blogData = !isAnimal(data) ? (data as BlogSocialData) : null;
+  const contentType = isAnimal(data)
+    ? "adoptable animal profile"
+    : blogData?.contentType === "resource"
+    ? "animal care resource / guide"
+    : "blog post from an animal rescue";
 
   const results: Partial<Record<SocialPlatform, string>> = {};
 

@@ -10,7 +10,7 @@ field_name: field_vendor
 entity_type: node
 bundle: expense
 label: 'Vendor / Payee'
-description: 'Name of the store, clinic, or service provider.'
+description: 'The name of the store, clinic, or service provider.'
 required: false
 translatable: true
 default_value: {  }

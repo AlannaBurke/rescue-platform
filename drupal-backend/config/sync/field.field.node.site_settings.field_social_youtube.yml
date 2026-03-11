@@ -1,0 +1,19 @@
+uuid: 458870bd-d66d-447e-afdd-7a37551e3bf4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_youtube
+    - node.type.site_settings
+id: node.site_settings.field_social_youtube
+field_name: field_social_youtube
+entity_type: node
+bundle: site_settings
+label: 'YouTube Channel URL'
+description: 'Your YouTube channel URL.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

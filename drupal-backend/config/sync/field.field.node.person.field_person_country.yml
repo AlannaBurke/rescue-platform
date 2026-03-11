@@ -1,0 +1,19 @@
+uuid: 5289c28e-df22-4d94-b453-8a2679973263
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_country
+    - node.type.person
+id: node.person.field_person_country
+field_name: field_person_country
+entity_type: node
+bundle: person
+label: Country
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

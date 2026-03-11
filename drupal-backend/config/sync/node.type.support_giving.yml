@@ -1,0 +1,11 @@
+uuid: 24deed60-3822-4015-ad39-a67635b6d59e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Support / Giving'
+type: support_giving
+description: 'Every way someone can support the rescue: Venmo, CashApp, wishlists, gift cards, calling the vet, etc.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -12,7 +12,7 @@ field_name: field_donation_platform
 entity_type: node
 bundle: donation
 label: 'Platform / Source'
-description: ''
+description: 'Select the platform or source through which the donation was received.'
 required: false
 translatable: true
 default_value: {  }

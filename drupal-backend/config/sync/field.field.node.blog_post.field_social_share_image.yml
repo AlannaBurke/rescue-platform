@@ -1,0 +1,38 @@
+uuid: 507fa5d5-4f5a-4526-aff5-cdf15ec1c0be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_share_image
+    - node.type.blog_post
+  module:
+    - image
+id: node.blog_post.field_social_share_image
+field_name: field_social_share_image
+entity_type: node
+bundle: blog_post
+label: 'Social Share Image (1200×630)'
+description: 'Upload an image optimized for social media sharing (recommended size: 1200x630 pixels). If left blank, the first image in the body will be used.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg webp'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: null
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

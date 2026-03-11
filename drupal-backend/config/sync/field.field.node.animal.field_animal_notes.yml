@@ -12,7 +12,7 @@ field_name: field_animal_notes
 entity_type: node
 bundle: animal
 label: 'Internal Notes'
-description: ''
+description: 'Internal notes visible only to admins. Use for medical alerts, behavioral notes, or anything staff need to know.'
 required: false
 translatable: true
 default_value: {  }

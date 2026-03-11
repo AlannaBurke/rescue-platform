@@ -1,0 +1,19 @@
+uuid: 3b1290f7-8d68-42b5-a491-56fcd93ed6f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_bluesky
+    - node.type.site_settings
+id: node.site_settings.field_social_bluesky
+field_name: field_social_bluesky
+entity_type: node
+bundle: site_settings
+label: 'Bluesky Handle'
+description: 'Your Bluesky handle (e.g., myrescue.bsky.social).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

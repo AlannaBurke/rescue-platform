@@ -1,0 +1,48 @@
+uuid: 3f2898d4-9ce2-459c-8096-22452e61bed4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_resource_category
+field_name: field_resource_category
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: care_guide
+      label: 'Care Guide'
+    -
+      value: health
+      label: 'Health & Medical'
+    -
+      value: behavior
+      label: 'Behavior & Training'
+    -
+      value: housing
+      label: 'Housing & Enrichment'
+    -
+      value: nutrition
+      label: 'Nutrition & Diet'
+    -
+      value: adoption
+      label: 'Adoption & Foster'
+    -
+      value: emergency
+      label: 'Emergency & First Aid'
+    -
+      value: faq
+      label: FAQ
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

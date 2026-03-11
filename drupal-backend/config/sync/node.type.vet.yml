@@ -1,0 +1,11 @@
+uuid: 634f5fe1-fadc-461b-a74a-0b2a2c5ffb8c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Veterinarian / Clinic'
+type: vet
+description: 'Veterinary practices, clinics, and individual vets used by or recommended by the rescue.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

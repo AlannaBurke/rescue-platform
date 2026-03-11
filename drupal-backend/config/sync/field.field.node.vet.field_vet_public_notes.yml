@@ -1,0 +1,19 @@
+uuid: 7ccb07f3-b210-4ce6-ac7d-42f227737858
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_public_notes
+    - node.type.vet
+id: node.vet.field_vet_public_notes
+field_name: field_vet_public_notes
+entity_type: node
+bundle: vet
+label: 'Public Description'
+description: 'A short description shown on the public Vets & Care page (e.g., "Dr. Smith has been our primary vet for 5 years and specializes in rabbit dentistry").'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

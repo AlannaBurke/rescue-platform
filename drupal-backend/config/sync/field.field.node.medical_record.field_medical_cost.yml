@@ -10,7 +10,7 @@ field_name: field_medical_cost
 entity_type: node
 bundle: medical_record
 label: Cost
-description: ''
+description: 'The cost of this medical visit or procedure.'
 required: false
 translatable: true
 default_value: {  }

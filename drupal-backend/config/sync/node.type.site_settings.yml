@@ -1,0 +1,11 @@
+uuid: 9cde6558-3581-4f4d-863d-59a15cb8e6fe
+langcode: en
+status: true
+dependencies: {  }
+name: 'Site Settings'
+type: site_settings
+description: 'Singleton: global site configuration, navigation, and social handles.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

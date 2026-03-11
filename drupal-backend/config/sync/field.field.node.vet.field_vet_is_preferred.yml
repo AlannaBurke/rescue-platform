@@ -1,0 +1,21 @@
+uuid: 6f99c549-5613-4b5b-a101-fcdb709b0b54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_is_preferred
+    - node.type.vet
+id: node.vet.field_vet_is_preferred
+field_name: field_vet_is_preferred
+entity_type: node
+bundle: vet
+label: 'Preferred / Recommended Vet?'
+description: 'Check if this is a preferred or recommended vet for your rescue. Preferred vets are highlighted on the public Vets page.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

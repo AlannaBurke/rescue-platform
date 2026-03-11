@@ -1,0 +1,21 @@
+uuid: e8296a6d-5793-4ed8-86c9-fea5ac485f20
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_not_good_with
+    - node.type.animal
+  module:
+    - options
+id: node.animal.field_not_good_with
+field_name: field_not_good_with
+entity_type: node
+bundle: animal
+label: 'Not Good With'
+description: 'Select every type this animal should NOT live with or be placed near. Only selected items will be shown on the public profile.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

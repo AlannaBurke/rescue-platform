@@ -1,0 +1,21 @@
+uuid: c4846970-4dd9-44cf-90fd-1abd904d5d4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_is_emergency
+    - node.type.vet
+id: node.vet.field_vet_is_emergency
+field_name: field_vet_is_emergency
+entity_type: node
+bundle: vet
+label: 'Offers Emergency Care?'
+description: 'Check if this practice offers emergency or after-hours care.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

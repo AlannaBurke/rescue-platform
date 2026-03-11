@@ -1,0 +1,21 @@
+uuid: 5d5e82aa-912b-4b19-a08b-5a52d46cf124
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_phone
+    - node.type.site_settings
+  module:
+    - telephone
+id: node.site_settings.field_org_phone
+field_name: field_org_phone
+entity_type: node
+bundle: site_settings
+label: 'Phone Number'
+description: "Your organization's main phone number."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

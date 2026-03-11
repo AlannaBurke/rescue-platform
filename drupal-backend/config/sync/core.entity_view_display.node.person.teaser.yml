@@ -7,14 +7,27 @@ dependencies:
     - field.field.node.person.body
     - field.field.node.person.field_availability_notes
     - field.field.node.person.field_currently_fostering
+    - field.field.node.person.field_dna_notes
+    - field.field.node.person.field_do_not_adopt
     - field.field.node.person.field_foster_restrictions
     - field.field.node.person.field_max_foster_capacity
     - field.field.node.person.field_person_active_since
+    - field.field.node.person.field_person_address
     - field.field.node.person.field_person_availability
+    - field.field.node.person.field_person_bio
+    - field.field.node.person.field_person_city
+    - field.field.node.person.field_person_country
     - field.field.node.person.field_person_email
+    - field.field.node.person.field_person_facebook
+    - field.field.node.person.field_person_instagram
     - field.field.node.person.field_person_phone
+    - field.field.node.person.field_person_phone2
+    - field.field.node.person.field_person_photo
     - field.field.node.person.field_person_roles
     - field.field.node.person.field_person_skills
+    - field.field.node.person.field_person_state
+    - field.field.node.person.field_person_zip
+    - field.field.node.person.field_preferred_contact
     - field.field.node.person.field_volunteer_shifts
     - field.field.node.person.field_volunteer_skills
     - node.type.person
@@ -42,13 +55,26 @@ content:
 hidden:
   field_availability_notes: true
   field_currently_fostering: true
+  field_dna_notes: true
+  field_do_not_adopt: true
   field_foster_restrictions: true
   field_max_foster_capacity: true
   field_person_active_since: true
+  field_person_address: true
   field_person_availability: true
+  field_person_bio: true
+  field_person_city: true
+  field_person_country: true
   field_person_email: true
+  field_person_facebook: true
+  field_person_instagram: true
   field_person_phone: true
+  field_person_phone2: true
+  field_person_photo: true
   field_person_roles: true
   field_person_skills: true
+  field_person_state: true
+  field_person_zip: true
+  field_preferred_contact: true
   field_volunteer_shifts: true
   field_volunteer_skills: true

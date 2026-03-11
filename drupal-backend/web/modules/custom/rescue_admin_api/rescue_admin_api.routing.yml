@@ -1,0 +1,12 @@
+rescue_admin_api.submission_counts:
+  path: '/api/rescue/submission-counts'
+  defaults:
+    _controller: '\Drupal\rescue_admin_api\Controller\SubmissionCountsController::getCounts'
+    _title: 'Webform Submission Counts'
+  requirements:
+    _permission: 'access administration pages'
+  methods: [GET]
+  options:
+    _auth:
+      - basic_auth
+      - cookie

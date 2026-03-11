@@ -1,15 +1,20 @@
+uuid: null
+langcode: en
 status: true
+dependencies: {  }
 name: rescue_platform
 label: 'Rescue Platform'
 endpoint: /graphql
 debug_flag: 0
 schema: graphql_compose
 caching: false
-query_depth: 10
-query_complexity: 100
+batching: true
+disable_introspection: false
+query_depth: 15
+query_complexity: 500
 schema_configuration:
   graphql_compose:
     extensions:
       graphql_compose_route: graphql_compose_route
       graphql_compose_menus: graphql_compose_menus
-id: rescue_platform
+persisted_queries_settings: {  }

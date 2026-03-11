@@ -1,0 +1,19 @@
+uuid: 377dbf36-44e8-4c64-98d4-ff98a5a9c7e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_threads
+    - node.type.site_settings
+id: node.site_settings.field_social_threads
+field_name: field_social_threads
+entity_type: node
+bundle: site_settings
+label: 'Threads Handle'
+description: 'Your Threads handle, including the @ (e.g., @myrescue).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

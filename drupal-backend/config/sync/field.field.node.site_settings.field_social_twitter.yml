@@ -1,0 +1,19 @@
+uuid: bab8e649-7969-499e-b106-52646e8e59de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_twitter
+    - node.type.site_settings
+id: node.site_settings.field_social_twitter
+field_name: field_social_twitter
+entity_type: node
+bundle: site_settings
+label: 'X / Twitter Handle'
+description: 'Your X (formerly Twitter) handle, including the @ (e.g., @myrescue).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

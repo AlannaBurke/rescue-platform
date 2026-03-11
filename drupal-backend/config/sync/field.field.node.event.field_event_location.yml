@@ -10,7 +10,7 @@ field_name: field_event_location
 entity_type: node
 bundle: event
 label: Location
-description: ''
+description: 'The full address or location name of the event.'
 required: false
 translatable: true
 default_value: {  }

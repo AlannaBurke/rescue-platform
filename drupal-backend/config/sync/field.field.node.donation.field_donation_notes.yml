@@ -12,7 +12,7 @@ field_name: field_donation_notes
 entity_type: node
 bundle: donation
 label: Notes
-description: ''
+description: 'Any additional notes about this donation.'
 required: false
 translatable: true
 default_value: {  }

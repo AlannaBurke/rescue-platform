@@ -1,0 +1,19 @@
+uuid: b788b2ce-8879-455b-9ccf-186e4aafc4e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_facebook
+    - node.type.organization
+id: node.organization.field_org_facebook
+field_name: field_org_facebook
+entity_type: node
+bundle: organization
+label: 'Facebook Page'
+description: 'Their Facebook page URL.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

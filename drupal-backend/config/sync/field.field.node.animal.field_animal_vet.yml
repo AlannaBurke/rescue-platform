@@ -1,0 +1,24 @@
+uuid: cc65dcb8-b63b-40ee-a081-f465d90764e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_animal_vet
+    - node.type.animal
+    - node.type.vet
+id: node.animal.field_animal_vet
+field_name: field_animal_vet
+entity_type: node
+bundle: animal
+label: Veterinarian(s)
+description: 'The veterinarian(s) associated with this animal. Select from your Vets list.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      vet: vet
+field_type: entity_reference

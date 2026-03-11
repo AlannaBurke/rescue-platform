@@ -1,0 +1,19 @@
+uuid: a88c8322-e9f7-4e0c-b3c0-2cef44a6fefc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_notes
+    - node.type.organization
+id: node.organization.field_org_notes
+field_name: field_org_notes
+entity_type: node
+bundle: organization
+label: 'Internal Notes'
+description: 'Internal notes about this organization (e.g., "Contact for transport runs", "They have a waiting list for rabbits").'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

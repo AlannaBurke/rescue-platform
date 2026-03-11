@@ -1,0 +1,19 @@
+uuid: a47bf439-749c-44d0-b085-e5cb691f93e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_ein
+    - node.type.site_settings
+id: node.site_settings.field_org_ein
+field_name: field_org_ein
+entity_type: node
+bundle: site_settings
+label: 'EIN / Tax ID'
+description: "Your organization's EIN (Employer Identification Number) or Tax ID. This may be displayed on donation receipts."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

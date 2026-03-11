@@ -11,7 +11,7 @@ field_name: field_expense_animal
 entity_type: node
 bundle: expense
 label: 'Associated Animal'
-description: ''
+description: 'The animal this expense is associated with, if applicable.'
 required: false
 translatable: true
 default_value: {  }

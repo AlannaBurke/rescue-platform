@@ -12,7 +12,7 @@ field_name: field_donation_date
 entity_type: node
 bundle: donation
 label: 'Donation Date'
-description: ''
+description: 'The date the donation was received.'
 required: true
 translatable: true
 default_value: {  }

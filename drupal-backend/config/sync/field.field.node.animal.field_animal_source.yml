@@ -12,7 +12,7 @@ field_name: field_animal_source
 entity_type: node
 bundle: animal
 label: 'Source / Origin'
-description: ''
+description: 'Where did this animal come from? (e.g., "Owner surrender - family moving", "Stray found by Good Samaritan", "Transfer from XYZ Shelter"). This is shown publicly.'
 required: false
 translatable: true
 default_value: {  }

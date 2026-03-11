@@ -1,0 +1,48 @@
+uuid: 9a3c7d32-84ab-4f64-a173-bac290a559ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_good_with
+field_name: field_good_with
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: dogs
+      label: Dogs
+    -
+      value: cats
+      label: Cats
+    -
+      value: kids
+      label: Kids
+    -
+      value: rabbits
+      label: Rabbits
+    -
+      value: guinea_pigs
+      label: 'Guinea Pigs'
+    -
+      value: rats
+      label: Rats
+    -
+      value: birds
+      label: Birds
+    -
+      value: reptiles
+      label: Reptiles
+    -
+      value: small_animals
+      label: 'Other Small Animals'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

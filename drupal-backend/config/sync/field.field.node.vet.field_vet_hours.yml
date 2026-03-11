@@ -1,0 +1,19 @@
+uuid: 56cc5a5f-2025-463e-b852-e2567e6f5c5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_hours
+    - node.type.vet
+id: node.vet.field_vet_hours
+field_name: field_vet_hours
+entity_type: node
+bundle: vet
+label: 'Office Hours'
+description: 'Office hours (e.g., "Mon-Fri 8am-6pm, Sat 9am-2pm").'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

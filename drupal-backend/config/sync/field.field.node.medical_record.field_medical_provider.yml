@@ -10,7 +10,7 @@ field_name: field_medical_provider
 entity_type: node
 bundle: medical_record
 label: 'Vet / Provider'
-description: ''
+description: 'The name of the vet or provider who performed this service.'
 required: false
 translatable: true
 default_value: {  }

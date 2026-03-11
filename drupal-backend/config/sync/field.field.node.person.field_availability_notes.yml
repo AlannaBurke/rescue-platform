@@ -12,7 +12,7 @@ field_name: field_availability_notes
 entity_type: node
 bundle: person
 label: 'Availability Notes'
-description: 'Describe availability for fostering or volunteering (e.g., weekends only, no dogs over 30 lbs, etc.)'
+description: 'Describe this person''s availability for fostering or volunteering (e.g., "Weekends only", "No dogs over 30 lbs", "Can take emergency fosters").'
 required: false
 translatable: true
 default_value: {  }

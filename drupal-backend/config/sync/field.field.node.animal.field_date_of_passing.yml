@@ -12,7 +12,7 @@ field_name: field_date_of_passing
 entity_type: node
 bundle: animal
 label: 'Date of Passing'
-description: ''
+description: 'The date this animal passed away. Filling this in will move the animal to the Rainbow Bridge section.'
 required: false
 translatable: true
 default_value: {  }

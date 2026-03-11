@@ -1,0 +1,19 @@
+uuid: 89bc47d7-625b-40ac-b678-91d8367454b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_state
+    - node.type.person
+id: node.person.field_person_state
+field_name: field_person_state
+entity_type: node
+bundle: person
+label: 'State / Province'
+description: 'State or Province.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

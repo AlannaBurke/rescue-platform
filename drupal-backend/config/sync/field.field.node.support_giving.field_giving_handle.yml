@@ -1,0 +1,19 @@
+uuid: 57a954aa-2496-4e5f-a54d-4c98e6d2e44f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_handle
+    - node.type.support_giving
+id: node.support_giving.field_giving_handle
+field_name: field_giving_handle
+entity_type: node
+bundle: support_giving
+label: 'Handle / Username / Email'
+description: 'The handle, username, or email for this platform (e.g., "@myrescue" for Venmo, "rescue@email.com" for PayPal).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

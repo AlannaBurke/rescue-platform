@@ -1,0 +1,21 @@
+uuid: 4f1d9f89-dcd2-4c68-b9e1-9f47ce70c105
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_phone2
+    - node.type.person
+  module:
+    - telephone
+id: node.person.field_person_phone2
+field_name: field_person_phone2
+entity_type: node
+bundle: person
+label: 'Alternate Phone'
+description: "An alternate phone number (e.g., work phone, partner's phone)."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

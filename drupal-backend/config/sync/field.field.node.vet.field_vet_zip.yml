@@ -1,0 +1,19 @@
+uuid: 1d8667cd-b670-4e1f-9855-61c0aa6caa22
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_zip
+    - node.type.vet
+id: node.vet.field_vet_zip
+field_name: field_vet_zip
+entity_type: node
+bundle: vet
+label: 'ZIP / Postal Code'
+description: 'ZIP or Postal Code.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

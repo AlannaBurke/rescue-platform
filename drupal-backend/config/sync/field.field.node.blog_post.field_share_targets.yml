@@ -1,0 +1,21 @@
+uuid: 20d43b2f-3564-4686-85b1-9b371ce43768
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_share_targets
+    - node.type.blog_post
+  module:
+    - options
+id: node.blog_post.field_share_targets
+field_name: field_share_targets
+entity_type: node
+bundle: blog_post
+label: 'Social Share Targets'
+description: 'Select which social media platforms to show share buttons for on this post.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

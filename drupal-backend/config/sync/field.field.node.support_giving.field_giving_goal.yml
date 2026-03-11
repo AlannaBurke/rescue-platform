@@ -1,0 +1,19 @@
+uuid: e58a13e2-b26f-4822-b750-c141d92b1749
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_goal
+    - node.type.support_giving
+id: node.support_giving.field_giving_goal
+field_name: field_giving_goal
+entity_type: node
+bundle: support_giving
+label: 'Current Goal / Campaign'
+description: 'Describe a current fundraising goal or campaign (e.g., "Help us cover Biscuit''s dental surgery - $450 needed"). Leave blank if there is no specific goal.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

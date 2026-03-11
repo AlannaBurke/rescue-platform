@@ -11,7 +11,7 @@ field_name: field_lifecycle_status
 entity_type: node
 bundle: animal
 label: 'Lifecycle Status'
-description: ''
+description: "The animal's public-facing status. This controls which section of the website the animal appears in (Available for Adoption, Sanctuary, Rainbow Bridge, etc.)."
 required: false
 translatable: true
 default_value: {  }

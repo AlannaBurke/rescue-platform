@@ -35,8 +35,9 @@ const QUERIES: Record<string, string> = {
         id
         title
         body { value }
-        tags { name }
+        tags { ... on TermTag { name } }
         path
+        socialShareImage { url alt }
       }
     }
   }`,
@@ -46,8 +47,11 @@ const QUERIES: Record<string, string> = {
         id
         title
         body { value }
-        tags { name }
+        tags { ... on TermTag { name } }
         path
+        resourceCategory
+        resourceImage { url alt }
+        socialShareImage { url alt }
       }
     }
   }`,

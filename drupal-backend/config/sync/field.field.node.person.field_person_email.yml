@@ -10,7 +10,7 @@ field_name: field_person_email
 entity_type: node
 bundle: person
 label: Email
-description: ''
+description: "The person's primary email address."
 required: true
 translatable: true
 default_value: {  }

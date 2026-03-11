@@ -11,6 +11,7 @@ dependencies:
     - file
     - filter
     - graphql
+    - node
     - search
     - shortcut
     - system
@@ -23,8 +24,10 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'access content overview'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'access user profiles'
   - 'delete own files'
   - 'execute rescue_platform arbitrary graphql requests'
   - 'post comments'
@@ -32,3 +35,4 @@ permissions:
   - 'skip comment approval'
   - 'use text format basic_html'
   - 'use text format webform_default'
+  - 'view own unpublished content'

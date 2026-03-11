@@ -1,0 +1,23 @@
+uuid: b535e102-64f6-412c-bebf-fe55a5b878fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_url
+    - node.type.support_giving
+  module:
+    - link
+id: node.support_giving.field_giving_url
+field_name: field_giving_url
+entity_type: node
+bundle: support_giving
+label: 'Link / URL'
+description: 'A direct link to the giving page, wishlist, or payment form.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

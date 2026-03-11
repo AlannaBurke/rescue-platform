@@ -13,24 +13,25 @@ dependencies:
     - field.field.node.animal.field_animal_color
     - field.field.node.animal.field_animal_id
     - field.field.node.animal.field_animal_notes
+    - field.field.node.animal.field_animal_photos
     - field.field.node.animal.field_animal_sex
     - field.field.node.animal.field_animal_size
     - field.field.node.animal.field_animal_source
     - field.field.node.animal.field_animal_species
     - field.field.node.animal.field_animal_status
+    - field.field.node.animal.field_animal_vet
     - field.field.node.animal.field_current_foster
     - field.field.node.animal.field_date_of_passing
     - field.field.node.animal.field_exclude_public
     - field.field.node.animal.field_foster_history
-    - field.field.node.animal.field_good_with_cats
-    - field.field.node.animal.field_good_with_dogs
-    - field.field.node.animal.field_good_with_kids
+    - field.field.node.animal.field_good_with
     - field.field.node.animal.field_history_log
     - field.field.node.animal.field_intake_date
     - field.field.node.animal.field_is_featured
     - field.field.node.animal.field_lifecycle_status
     - field.field.node.animal.field_medication_log
     - field.field.node.animal.field_microchip
+    - field.field.node.animal.field_not_good_with
     - field.field.node.animal.field_placement_history
     - node.type.animal
   module:
@@ -68,22 +69,23 @@ hidden:
   field_animal_color: true
   field_animal_id: true
   field_animal_notes: true
+  field_animal_photos: true
   field_animal_sex: true
   field_animal_size: true
   field_animal_source: true
   field_animal_species: true
   field_animal_status: true
+  field_animal_vet: true
   field_current_foster: true
   field_date_of_passing: true
   field_exclude_public: true
   field_foster_history: true
-  field_good_with_cats: true
-  field_good_with_dogs: true
-  field_good_with_kids: true
+  field_good_with: true
   field_history_log: true
   field_intake_date: true
   field_is_featured: true
   field_lifecycle_status: true
   field_medication_log: true
   field_microchip: true
+  field_not_good_with: true
   field_placement_history: true

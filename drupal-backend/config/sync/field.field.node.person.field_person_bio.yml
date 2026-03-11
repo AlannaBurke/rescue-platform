@@ -1,0 +1,19 @@
+uuid: 50b5ee44-769d-460b-b691-8f46aaee3da0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_bio
+    - node.type.person
+id: node.person.field_person_bio
+field_name: field_person_bio
+entity_type: node
+bundle: person
+label: 'Bio / Notes'
+description: 'Internal notes about this person. Not shown publicly.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

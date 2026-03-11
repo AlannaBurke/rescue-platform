@@ -87,9 +87,26 @@ export default function SocialPublishPage() {
       const nodes = json.data?.[nodeKey]?.nodes ?? [];
 
       const options: ContentOption[] = nodes.map((node: Record<string, unknown>) => {
-        const photos = (node.animalPhotos as { url: string; alt?: string }[] | undefined) ?? [];
-        const imageUrls = photos.map((p) => drupalImageUrl(p.url));
-        const altTexts  = photos.map((p) => p.alt ?? (node.title as string));
+        // Collect images from all possible image fields
+        const rawImages: { url: string; alt?: string }[] = [];
+
+        // Animal photos (array)
+        const animalPhotos = (node.animalPhotos as { url: string; alt?: string }[] | undefined) ?? [];
+        rawImages.push(...animalPhotos);
+
+        // socialShareImage (single image)
+        const socialImg = node.socialShareImage as { url: string; alt?: string } | null | undefined;
+        if (socialImg?.url) rawImages.push(socialImg);
+
+        // resourceImage (single image)
+        const resourceImg = node.resourceImage as { url: string; alt?: string } | null | undefined;
+        if (resourceImg?.url && !rawImages.some((i) => i.url === resourceImg.url)) {
+          rawImages.push(resourceImg);
+        }
+
+        const imageUrls = rawImages.map((p) => drupalImageUrl(p.url));
+        const altTexts  = rawImages.map((p) => p.alt ?? (node.title as string));
+
         // path is a plain string in GraphQL Compose (e.g. "/adopt/2")
         const alias     = typeof node.path === "string" ? node.path : undefined;
         const linkUrl   = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://yourrescue.org"}${alias ?? `/${type}/${node.id}`}`;
@@ -146,12 +163,23 @@ export default function SocialPublishPage() {
         lifecycleStatus: (node.lifecycleStatus as { name: string } | undefined)?.name,
         linkUrl:         selectedContent.linkUrl,
       };
-    } else {
+    } else if (selectedContent.type === "blog") {
       data = {
-        title:   node.title,
-        body:    node.body ? stripHtml((node.body as { value: string }).value) : undefined,
-        tags:    (node.tags as { name: string }[] | undefined)?.map((t) => t.name),
-        linkUrl: selectedContent.linkUrl,
+        title:       node.title,
+        body:        node.body ? stripHtml((node.body as { value: string }).value) : undefined,
+        tags:        (node.tags as { name: string }[] | undefined)?.map((t) => t.name),
+        contentType: "blog_post",
+        linkUrl:     selectedContent.linkUrl,
+      };
+    } else {
+      // resource
+      data = {
+        title:       node.title,
+        body:        node.body ? stripHtml((node.body as { value: string }).value) : undefined,
+        tags:        (node.tags as { name: string }[] | undefined)?.map((t) => t.name),
+        category:    node.resourceCategory as string | undefined,
+        contentType: "resource",
+        linkUrl:     selectedContent.linkUrl,
       };
     }
 

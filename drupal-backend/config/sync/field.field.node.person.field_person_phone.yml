@@ -12,7 +12,7 @@ field_name: field_person_phone
 entity_type: node
 bundle: person
 label: Phone
-description: ''
+description: "The person's primary phone number."
 required: false
 translatable: true
 default_value: {  }

@@ -10,7 +10,7 @@ field_name: field_donor_name
 entity_type: node
 bundle: donation
 label: 'Donor Name'
-description: 'Leave blank for anonymous donations.'
+description: "The donor's name. Leave blank for anonymous donations."
 required: false
 translatable: true
 default_value: {  }

@@ -12,7 +12,7 @@ field_name: field_animal_size
 entity_type: node
 bundle: animal
 label: Size
-description: ''
+description: "Select the animal's approximate size."
 required: false
 translatable: true
 default_value: {  }

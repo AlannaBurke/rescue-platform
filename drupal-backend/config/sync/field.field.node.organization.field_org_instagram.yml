@@ -1,0 +1,19 @@
+uuid: aca4dee9-0ec1-4f47-9158-31575a459212
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_instagram
+    - node.type.organization
+id: node.organization.field_org_instagram
+field_name: field_org_instagram
+entity_type: node
+bundle: organization
+label: 'Instagram Handle'
+description: 'Their Instagram handle (without the @).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

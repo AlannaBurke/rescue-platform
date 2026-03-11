@@ -12,7 +12,7 @@ field_name: field_medical_date
 entity_type: node
 bundle: medical_record
 label: Date
-description: ''
+description: 'The date of this medical visit or procedure.'
 required: true
 translatable: true
 default_value: {  }

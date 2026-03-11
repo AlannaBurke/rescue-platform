@@ -1,0 +1,21 @@
+uuid: eb3141d9-106d-4017-944b-cda14a137d4e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_phone
+    - node.type.vet
+  module:
+    - telephone
+id: node.vet.field_vet_phone
+field_name: field_vet_phone
+entity_type: node
+bundle: vet
+label: 'Phone Number'
+description: 'The main phone number for the practice.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

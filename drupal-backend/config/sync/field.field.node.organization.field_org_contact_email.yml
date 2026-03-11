@@ -1,0 +1,19 @@
+uuid: 7a4f68a9-9992-4c1b-b8a4-95816d48bd55
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_org_contact_email
+    - node.type.organization
+id: node.organization.field_org_contact_email
+field_name: field_org_contact_email
+entity_type: node
+bundle: organization
+label: 'Contact Email'
+description: 'The email address for your primary contact.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

@@ -1,0 +1,23 @@
+uuid: b127f2b9-babb-4fbe-b08d-15d1f7906d51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_giving_sort_weight
+    - node.type.support_giving
+id: node.support_giving.field_giving_sort_weight
+field_name: field_giving_sort_weight
+entity_type: node
+bundle: support_giving
+label: 'Sort Order'
+description: 'Controls the order in which giving methods appear on the Support page. Lower numbers appear first.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

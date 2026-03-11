@@ -1,0 +1,19 @@
+uuid: 254b66a1-001f-43ba-b38f-8b0e02eb86c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_zip
+    - node.type.person
+id: node.person.field_person_zip
+field_name: field_person_zip
+entity_type: node
+bundle: person
+label: 'ZIP / Postal Code'
+description: 'ZIP or Postal Code.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

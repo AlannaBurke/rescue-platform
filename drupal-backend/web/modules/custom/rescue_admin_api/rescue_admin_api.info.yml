@@ -1,0 +1,9 @@
+name: Rescue Admin API
+type: module
+description: Provides REST endpoints for the rescue platform admin dashboard.
+core_version_requirement: ^10
+package: Rescue Platform
+dependencies:
+  - drupal:rest
+  - drupal:serialization
+  - drupal:webform

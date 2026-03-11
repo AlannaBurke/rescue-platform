@@ -1,0 +1,19 @@
+uuid: 292337a9-4b2f-45b1-8a0f-cd2ad7d852c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_vet_public_notes
+field_name: field_vet_public_notes
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

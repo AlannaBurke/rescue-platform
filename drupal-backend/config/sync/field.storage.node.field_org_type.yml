@@ -1,0 +1,42 @@
+uuid: 1ac80939-c689-4f46-a917-f4529e9496f9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_org_type
+field_name: field_org_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: rescue
+      label: Rescue
+    -
+      value: shelter
+      label: 'Shelter / Humane Society'
+    -
+      value: sanctuary
+      label: Sanctuary
+    -
+      value: transport
+      label: 'Transport Group'
+    -
+      value: foster_network
+      label: 'Foster Network'
+    -
+      value: vet
+      label: 'Veterinary Practice'
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

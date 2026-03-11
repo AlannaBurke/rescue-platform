@@ -12,7 +12,7 @@ field_name: field_person_active_since
 entity_type: node
 bundle: person
 label: 'Active Since'
-description: ''
+description: 'The date this person first became active with your organization.'
 required: false
 translatable: true
 default_value: {  }

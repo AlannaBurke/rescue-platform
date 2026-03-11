@@ -1,0 +1,19 @@
+uuid: e16c15a2-ee80-4d2f-a49b-b23845230654
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_state
+    - node.type.vet
+id: node.vet.field_vet_state
+field_name: field_vet_state
+entity_type: node
+bundle: vet
+label: 'State / Province'
+description: 'State or Province.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

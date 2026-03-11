@@ -10,7 +10,7 @@ field_name: field_fiscal_year
 entity_type: node
 bundle: expense
 label: 'Fiscal Year'
-description: 'The fiscal year this expense belongs to (e.g., 2025). Auto-populated from expense date.'
+description: 'The fiscal year this expense belongs to. This is auto-populated from the expense date but can be overridden.'
 required: false
 translatable: true
 default_value:
