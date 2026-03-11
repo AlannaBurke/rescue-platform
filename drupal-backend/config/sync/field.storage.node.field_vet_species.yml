@@ -1,0 +1,57 @@
+uuid: 8d09cb0f-6191-4988-bcf8-f46152ecf45b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_vet_species
+field_name: field_vet_species
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: rabbit
+      label: Rabbits
+    -
+      value: guinea_pig
+      label: 'Guinea Pigs'
+    -
+      value: rat
+      label: 'Rats & Mice'
+    -
+      value: chinchilla
+      label: Chinchillas
+    -
+      value: hamster
+      label: 'Hamsters & Gerbils'
+    -
+      value: ferret
+      label: Ferrets
+    -
+      value: bird
+      label: 'Birds / Avian'
+    -
+      value: reptile
+      label: Reptiles
+    -
+      value: hedgehog
+      label: Hedgehogs
+    -
+      value: sugar_glider
+      label: 'Sugar Gliders'
+    -
+      value: fish
+      label: Fish
+    -
+      value: other_exotic
+      label: 'Other Exotics / Pocket Pets'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

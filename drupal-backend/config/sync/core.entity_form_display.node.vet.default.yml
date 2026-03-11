@@ -1,0 +1,288 @@
+uuid: c237d0fb-154b-42b4-aafa-b9474fec2ad7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.vet.body
+    - field.field.node.vet.field_vet_city
+    - field.field.node.vet.field_vet_cost_rating
+    - field.field.node.vet.field_vet_discount_details
+    - field.field.node.vet.field_vet_doctor_names
+    - field.field.node.vet.field_vet_email
+    - field.field.node.vet.field_vet_emergency_phone
+    - field.field.node.vet.field_vet_endorsement
+    - field.field.node.vet.field_vet_hours
+    - field.field.node.vet.field_vet_is_emergency
+    - field.field.node.vet.field_vet_is_preferred
+    - field.field.node.vet.field_vet_notes
+    - field.field.node.vet.field_vet_phone
+    - field.field.node.vet.field_vet_photo
+    - field.field.node.vet.field_vet_practice_name
+    - field.field.node.vet.field_vet_procedures
+    - field.field.node.vet.field_vet_public_notes
+    - field.field.node.vet.field_vet_rescue_discount
+    - field.field.node.vet.field_vet_sees_exotics
+    - field.field.node.vet.field_vet_specialties
+    - field.field.node.vet.field_vet_species
+    - field.field.node.vet.field_vet_staff
+    - field.field.node.vet.field_vet_state
+    - field.field.node.vet.field_vet_street
+    - field.field.node.vet.field_vet_treating_animals
+    - field.field.node.vet.field_vet_website
+    - field.field.node.vet.field_vet_zip
+    - image.style.thumbnail
+    - node.type.vet
+  module:
+    - content_moderation
+    - image
+    - link
+    - paragraphs
+    - telephone
+id: node.vet.default
+targetEntityType: node
+bundle: vet
+mode: default
+content:
+  field_vet_city:
+    type: string_textfield
+    weight: 11
+    region: content
+    settings:
+      size: 40
+      placeholder: Portland
+    third_party_settings: {  }
+  field_vet_cost_rating:
+    type: options_select
+    weight: 44
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_vet_discount_details:
+    type: string_textarea
+    weight: 43
+    region: content
+    settings:
+      rows: 2
+      placeholder: 'e.g. 10% off all services for rescue animals with proof of rescue status'
+    third_party_settings: {  }
+  field_vet_email:
+    type: email_default
+    weight: 16
+    region: content
+    settings:
+      placeholder: info@vetclinic.com
+      size: 60
+    third_party_settings: {  }
+  field_vet_emergency_phone:
+    type: telephone_default
+    weight: 15
+    region: content
+    settings:
+      placeholder: 'After-hours / emergency line'
+    third_party_settings: {  }
+  field_vet_endorsement:
+    type: options_select
+    weight: 40
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_vet_hours:
+    type: string_textarea
+    weight: 18
+    region: content
+    settings:
+      rows: 4
+      placeholder: |-
+        Mon-Fri: 8am-6pm
+        Sat: 9am-2pm
+        Sun: Closed
+    third_party_settings: {  }
+  field_vet_is_emergency:
+    type: boolean_checkbox
+    weight: 45
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_vet_is_preferred:
+    type: boolean_checkbox
+    weight: 41
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_vet_notes:
+    type: string_textarea
+    weight: 51
+    region: content
+    settings:
+      rows: 4
+      placeholder: 'Internal notes — not visible to the public'
+    third_party_settings: {  }
+  field_vet_phone:
+    type: telephone_default
+    weight: 14
+    region: content
+    settings:
+      placeholder: '(503) 555-0100'
+    third_party_settings: {  }
+  field_vet_photo:
+    type: image_image
+    weight: 3
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_vet_practice_name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: 'e.g. Portland Exotic Animal Hospital'
+    third_party_settings: {  }
+  field_vet_procedures:
+    type: paragraphs
+    weight: 60
+    region: content
+    settings:
+      title: 'Procedure / Visit'
+      title_plural: 'Procedures / Visits'
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: vet_procedure
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_vet_public_notes:
+    type: string_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 4
+      placeholder: 'Public-facing description of this practice...'
+    third_party_settings: {  }
+  field_vet_rescue_discount:
+    type: boolean_checkbox
+    weight: 42
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_vet_sees_exotics:
+    type: boolean_checkbox
+    weight: 30
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_vet_specialties:
+    type: string_textarea
+    weight: 32
+    region: content
+    settings:
+      rows: 3
+      placeholder: 'Any additional specialties or notes about species seen...'
+    third_party_settings: {  }
+  field_vet_species:
+    type: options_buttons
+    weight: 31
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_vet_staff:
+    type: paragraphs
+    weight: 20
+    region: content
+    settings:
+      title: 'Staff Member'
+      title_plural: 'Staff Members'
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: vet_staff
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_vet_state:
+    type: string_textfield
+    weight: 12
+    region: content
+    settings:
+      size: 20
+      placeholder: OR
+    third_party_settings: {  }
+  field_vet_street:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: '123 Main St'
+    third_party_settings: {  }
+  field_vet_treating_animals:
+    type: entity_reference_autocomplete
+    weight: 50
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: 'Start typing an animal name...'
+    third_party_settings: {  }
+  field_vet_website:
+    type: link_default
+    weight: 17
+    region: content
+    settings:
+      placeholder_url: 'https://...'
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_vet_zip:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 15
+      placeholder: '97201'
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 120
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: 'Display name (can match practice name)'
+    third_party_settings: {  }
+hidden:
+  body: true
+  comment: true
+  created: true
+  field_vet_doctor_names: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

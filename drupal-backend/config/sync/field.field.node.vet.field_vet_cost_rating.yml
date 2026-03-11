@@ -1,0 +1,21 @@
+uuid: 63a7fec2-b351-489e-961b-52f70e7da491
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_cost_rating
+    - node.type.vet
+  module:
+    - options
+id: node.vet.field_vet_cost_rating
+field_name: field_vet_cost_rating
+entity_type: node
+bundle: vet
+label: 'Cost Rating'
+description: '1 = $ (very affordable) to 5 = $$$$$ (very expensive)'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

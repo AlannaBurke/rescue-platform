@@ -1,0 +1,21 @@
+uuid: 913c3f81-dc8b-4d21-83b6-4829ddfcf309
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_rescue_discount
+    - node.type.vet
+id: node.vet.field_vet_rescue_discount
+field_name: field_vet_rescue_discount
+entity_type: node
+bundle: vet
+label: 'Offers Rescue Discount?'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,19 @@
+uuid: e6ccf390-791b-48a9-abbe-221e1e54d24c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_discount_details
+    - node.type.vet
+id: node.vet.field_vet_discount_details
+field_name: field_vet_discount_details
+entity_type: node
+bundle: vet
+label: 'Rescue Discount Details'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

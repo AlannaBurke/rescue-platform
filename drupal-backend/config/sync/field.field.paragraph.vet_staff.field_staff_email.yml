@@ -1,0 +1,19 @@
+uuid: f1512493-6610-4d47-9dea-2c0988c17d3d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_staff_email
+    - paragraphs.paragraphs_type.vet_staff
+id: paragraph.vet_staff.field_staff_email
+field_name: field_staff_email
+entity_type: paragraph
+bundle: vet_staff
+label: 'Direct Email'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

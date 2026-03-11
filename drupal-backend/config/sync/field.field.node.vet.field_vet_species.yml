@@ -1,0 +1,21 @@
+uuid: 282d7cb1-936f-4c85-9574-b6d80e19d86a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_species
+    - node.type.vet
+  module:
+    - options
+id: node.vet.field_vet_species
+field_name: field_vet_species
+entity_type: node
+bundle: vet
+label: 'Species Seen'
+description: 'Which exotic/pocket pet species does this practice see?'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

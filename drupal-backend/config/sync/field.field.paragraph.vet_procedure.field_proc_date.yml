@@ -1,0 +1,21 @@
+uuid: 2d7052c9-0bdd-4705-b417-e7842b99857a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_proc_date
+    - paragraphs.paragraphs_type.vet_procedure
+  module:
+    - datetime
+id: paragraph.vet_procedure.field_proc_date
+field_name: field_proc_date
+entity_type: paragraph
+bundle: vet_procedure
+label: 'Date of Visit / Procedure'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,27 @@
+uuid: 7acc00ab-0515-405d-9b8c-007027ff99b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_staff
+    - node.type.vet
+    - paragraphs.paragraphs_type.vet_staff
+  module:
+    - entity_reference_revisions
+id: node.vet.field_vet_staff
+field_name: field_vet_staff
+entity_type: node
+bundle: vet
+label: 'Staff Members'
+description: 'Add vets, technicians, receptionists, and other staff we may need to contact.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      vet_staff: vet_staff
+    negate: 0
+field_type: entity_reference_revisions

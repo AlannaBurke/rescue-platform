@@ -118,6 +118,12 @@ entity_config:
       enabled: true
       query_load_enabled: true
       edges_enabled: true
+    vet_staff:
+      enabled: true
+      query_load_enabled: false
+    vet_procedure:
+      enabled: true
+      query_load_enabled: false
 field_config:
   node:
     animal:
@@ -659,6 +665,24 @@ field_config:
         enabled: true
       body:
         enabled: true
+      field_vet_sees_exotics:
+        enabled: true
+      field_vet_rescue_discount:
+        enabled: true
+      field_vet_discount_details:
+        enabled: true
+      field_vet_endorsement:
+        enabled: true
+      field_vet_cost_rating:
+        enabled: true
+      field_vet_species:
+        enabled: true
+      field_vet_treating_animals:
+        enabled: true
+      field_vet_staff:
+        enabled: true
+      field_vet_procedures:
+        enabled: true
     resource:
       field_resource_category:
         enabled: true
@@ -909,6 +933,28 @@ field_config:
         enabled: true
       field_placement_notes:
         enabled: true
+    vet_staff:
+      field_staff_name:
+        enabled: true
+      field_staff_role:
+        enabled: true
+      field_staff_phone:
+        enabled: true
+      field_staff_email:
+        enabled: true
+      field_staff_notes:
+        enabled: true
+    vet_procedure:
+      field_proc_date:
+        enabled: true
+      field_proc_name:
+        enabled: true
+      field_proc_cost:
+        enabled: true
+      field_proc_notes:
+        enabled: true
+      field_proc_animal:
+        enabled: true
 settings:
   exclude_unpublished: true
   expose_entity_ids: true
@@ -945,6 +991,15 @@ entity_types:
     page:
       enabled: true
       query_load_enabled: true
+    vet:
+      enabled: true
+      query_load_enabled: true
+    resource:
+      enabled: true
+      query_load_enabled: true
+    site_settings:
+      enabled: true
+      query_load_enabled: true
   taxonomy_term:
     animal_status:
       enabled: true
@@ -961,9 +1016,58 @@ entity_types:
     expense_category:
       enabled: true
       query_load_enabled: true
+  paragraph:
+    vet_staff:
+      enabled: true
+      query_load_enabled: false
+    vet_procedure:
+      enabled: true
+      query_load_enabled: false
 node:
   animal:
     field_good_with:
       enabled: true
     field_not_good_with:
+      enabled: true
+  vet:
+    field_vet_sees_exotics:
+      enabled: true
+    field_vet_rescue_discount:
+      enabled: true
+    field_vet_discount_details:
+      enabled: true
+    field_vet_endorsement:
+      enabled: true
+    field_vet_cost_rating:
+      enabled: true
+    field_vet_species:
+      enabled: true
+    field_vet_treating_animals:
+      enabled: true
+    field_vet_staff:
+      enabled: true
+    field_vet_procedures:
+      enabled: true
+paragraph:
+  vet_staff:
+    field_staff_name:
+      enabled: true
+    field_staff_role:
+      enabled: true
+    field_staff_phone:
+      enabled: true
+    field_staff_email:
+      enabled: true
+    field_staff_notes:
+      enabled: true
+  vet_procedure:
+    field_proc_date:
+      enabled: true
+    field_proc_name:
+      enabled: true
+    field_proc_cost:
+      enabled: true
+    field_proc_notes:
+      enabled: true
+    field_proc_animal:
       enabled: true

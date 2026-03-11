@@ -1,0 +1,19 @@
+uuid: 489e27bd-fff6-4178-96a3-6cffedc0bd4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_proc_notes
+    - paragraphs.paragraphs_type.vet_procedure
+id: paragraph.vet_procedure.field_proc_notes
+field_name: field_proc_notes
+entity_type: paragraph
+bundle: vet_procedure
+label: Notes
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

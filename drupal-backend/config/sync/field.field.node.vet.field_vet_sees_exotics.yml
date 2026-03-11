@@ -1,0 +1,21 @@
+uuid: fc96d940-0b93-4d12-8f0a-c2e420529bc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_sees_exotics
+    - node.type.vet
+id: node.vet.field_vet_sees_exotics
+field_name: field_vet_sees_exotics
+entity_type: node
+bundle: vet
+label: 'Sees Exotics / Pocket Pets?'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'Yes — sees exotics'
+  off_label: 'No'
+field_type: boolean

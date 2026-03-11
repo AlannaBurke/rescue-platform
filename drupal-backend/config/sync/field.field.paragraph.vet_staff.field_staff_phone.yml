@@ -1,0 +1,21 @@
+uuid: 771d45ab-3a93-4759-9fdf-6a61f2af69d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_staff_phone
+    - paragraphs.paragraphs_type.vet_staff
+  module:
+    - telephone
+id: paragraph.vet_staff.field_staff_phone
+field_name: field_staff_phone
+entity_type: paragraph
+bundle: vet_staff
+label: 'Direct Phone'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

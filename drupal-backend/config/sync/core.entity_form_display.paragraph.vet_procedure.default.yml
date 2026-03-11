@@ -1,0 +1,60 @@
+uuid: 32646c0a-736c-43e7-8907-b4d784340ab8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.vet_procedure.field_proc_animal
+    - field.field.paragraph.vet_procedure.field_proc_cost
+    - field.field.paragraph.vet_procedure.field_proc_date
+    - field.field.paragraph.vet_procedure.field_proc_name
+    - field.field.paragraph.vet_procedure.field_proc_notes
+    - paragraphs.paragraphs_type.vet_procedure
+  module:
+    - datetime
+id: paragraph.vet_procedure.default
+targetEntityType: paragraph
+bundle: vet_procedure
+mode: default
+content:
+  field_proc_animal:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 40
+      placeholder: 'Which animal?'
+    third_party_settings: {  }
+  field_proc_cost:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: '0.00'
+    third_party_settings: {  }
+  field_proc_date:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_proc_name:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: 'e.g. Spay, Dental cleaning, Emergency visit'
+    third_party_settings: {  }
+  field_proc_notes:
+    type: string_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 2
+      placeholder: 'Notes about this visit or procedure...'
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

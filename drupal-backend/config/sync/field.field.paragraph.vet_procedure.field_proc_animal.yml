@@ -1,0 +1,27 @@
+uuid: a666a84b-65f4-4d35-8a1e-2894abd0d67d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_proc_animal
+    - node.type.animal
+    - paragraphs.paragraphs_type.vet_procedure
+id: paragraph.vet_procedure.field_proc_animal
+field_name: field_proc_animal
+entity_type: paragraph
+bundle: vet_procedure
+label: Animal
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      animal: animal
+    sort:
+      field: title
+      direction: ASC
+field_type: entity_reference

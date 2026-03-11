@@ -1,0 +1,23 @@
+uuid: 4aa2f2c4-74b8-494e-a2f9-24a5eb656ecf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_endorsement
+    - node.type.vet
+  module:
+    - options
+id: node.vet.field_vet_endorsement
+field_name: field_vet_endorsement
+entity_type: node
+bundle: vet
+label: 'Endorsement Level'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: none
+default_value_callback: ''
+settings: {  }
+field_type: list_string

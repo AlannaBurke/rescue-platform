@@ -1,0 +1,19 @@
+uuid: ae24d4b3-8da2-4875-a3cc-f0c0700982ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_staff_notes
+    - paragraphs.paragraphs_type.vet_staff
+id: paragraph.vet_staff.field_staff_notes
+field_name: field_staff_notes
+entity_type: paragraph
+bundle: vet_staff
+label: Notes
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

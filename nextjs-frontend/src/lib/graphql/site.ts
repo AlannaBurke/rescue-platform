@@ -142,6 +142,21 @@ export const VET_CARD_FRAGMENT = gql`
       width
       height
     }
+    vetSeesExotics
+    vetSpecies
+    vetRescueDiscount
+    vetDiscountDetails
+    vetEndorsement
+    vetCostRating
+    vetStaff {
+      ... on ParagraphVetStaff {
+        staffName
+        staffRole
+        staffPhone
+        staffEmail
+        staffNotes
+      }
+    }
   }
 `;
 
@@ -232,6 +247,24 @@ export const GET_BLOG_POSTS_WITH_TAGS = gql`
         hasPreviousPage
         startCursor
         endCursor
+      }
+    }
+  }
+`;
+
+export const GET_VET = gql`
+  ${VET_CARD_FRAGMENT}
+  query GetVet($id: ID!) {
+    nodeVet(id: $id) {
+      ...VetCard
+      body { value processed }
+      vetProcedures {
+        ... on ParagraphVetProcedure {
+          procDate { time timestamp }
+          procName
+          procCost
+          procNotes
+        }
       }
     }
   }

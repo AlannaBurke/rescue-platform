@@ -1,0 +1,19 @@
+uuid: 08a938ac-9a7f-4351-9973-84cc3fb19cfc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_staff_role
+    - paragraphs.paragraphs_type.vet_staff
+id: paragraph.vet_staff.field_staff_role
+field_name: field_staff_role
+entity_type: paragraph
+bundle: vet_staff
+label: 'Role / Title (e.g. DVM, Receptionist)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

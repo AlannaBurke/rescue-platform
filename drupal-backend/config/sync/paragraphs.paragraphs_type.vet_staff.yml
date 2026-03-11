@@ -1,0 +1,10 @@
+uuid: af1afc8b-26fb-4d6d-a65f-1b2ded894f2f
+langcode: en
+status: true
+dependencies: {  }
+id: vet_staff
+label: 'Vet Staff Member'
+icon_uuid: null
+icon_default: null
+description: null
+behavior_plugins: {  }

@@ -1,0 +1,23 @@
+uuid: bc1d9801-66bb-4747-bddd-e716f4e4e2a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_proc_cost
+    - paragraphs.paragraphs_type.vet_procedure
+id: paragraph.vet_procedure.field_proc_cost
+field_name: field_proc_cost
+entity_type: paragraph
+bundle: vet_procedure
+label: 'Cost ($)'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

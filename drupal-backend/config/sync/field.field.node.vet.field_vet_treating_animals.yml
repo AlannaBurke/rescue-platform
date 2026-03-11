@@ -1,0 +1,28 @@
+uuid: bf990b56-db0f-461c-bc95-ba938516cea2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_treating_animals
+    - node.type.animal
+    - node.type.vet
+id: node.vet.field_vet_treating_animals
+field_name: field_vet_treating_animals
+entity_type: node
+bundle: vet
+label: 'Currently Treating (Our Animals)'
+description: 'Internal only — which of our animals is this vet currently treating?'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      animal: animal
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,36 @@
+uuid: e0f6d3a1-6e8d-4d3b-9c5a-b6a26c7658b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_vet_cost_rating
+field_name: field_vet_cost_rating
+entity_type: node
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 1
+      label: '$ — Very affordable'
+    -
+      value: 2
+      label: '$$ — Affordable'
+    -
+      value: 3
+      label: '$$$ — Moderate'
+    -
+      value: 4
+      label: '$$$$ — Expensive'
+    -
+      value: 5
+      label: '$$$$$ — Very expensive'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

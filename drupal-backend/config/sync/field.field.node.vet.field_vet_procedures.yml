@@ -1,0 +1,27 @@
+uuid: 1b8a2c83-e2e1-479d-9d34-686c31ad2b32
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vet_procedures
+    - node.type.vet
+    - paragraphs.paragraphs_type.vet_procedure
+  module:
+    - entity_reference_revisions
+id: node.vet.field_vet_procedures
+field_name: field_vet_procedures
+entity_type: node
+bundle: vet
+label: 'Procedures / Visits Log'
+description: 'Internal — log visits, procedures, and costs for tracking purposes.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      vet_procedure: vet_procedure
+    negate: 0
+field_type: entity_reference_revisions
