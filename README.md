@@ -5,9 +5,6 @@
 Rescue Platform is an all-in-one solution designed to help small, volunteer-run animal rescues manage their operations and online presence efficiently. It combines a powerful Drupal backend for data management with a beautiful, fast, and modern Next.js frontend for the public-facing website.
 
 This project was born from the idea that every rescue, regardless of size or technical skill, deserves access to the same high-quality tools as larger organizations. By providing a free, open-source, and easy-to-deploy platform, we aim to empower rescues to save more lives.
-
-[![Deploy to Pantheon](https://www.pantheon.io/assets/images/deploy-to-pantheon.svg)](https://dashboard.pantheon.io/sites/create?upstream_id=YOUR_UPSTREAM_UUID_HERE)
-
 ---
 
 ## Features
