@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { Tag, ArrowLeft, Share2 } from "lucide-react";
+import { Tag, ArrowLeft } from "lucide-react";
 import { getClient } from "@/lib/apollo-client";
 import { GET_RESOURCE } from "@/lib/graphql/site";
 import { drupalImageUrl } from "@/lib/utils";
-import ResourceShareButtons from "@/components/resources/ResourceShareButtons";
+import PublicShareBar from "@/components/social/PublicShareBar";
+import StaffSocialWidget from "@/components/social/StaffSocialWidget";
 
 interface ResourceImage {
   url: string;
@@ -105,9 +106,12 @@ export default async function ResourceDetailPage({
     ? drupalImageUrl(resource.resourceImage.url)
     : "/images/defaults/resources-banner.png";
 
-  const shareImg = resource.socialShareImage?.url
-    ? drupalImageUrl(resource.socialShareImage.url)
-    : heroImg;
+  // Build canonical URL and description for share buttons
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const canonicalUrl = `${siteUrl}/resources/${id}`;
+  const description = resource.body?.summary
+    || resource.body?.value?.replace(/<[^>]*>/g, '').slice(0, 160)
+    || `${CATEGORY_LABELS[resource.resourceCategory] ?? 'Resource'} from our library`;
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -204,22 +208,14 @@ export default async function ResourceDetailPage({
             )}
 
             {/* Share */}
-            {resource.shareTargets && resource.shareTargets.length > 0 && (
-              <div className="bg-white rounded-2xl p-5 shadow-soft border border-stone-100">
-                <h3
-                  className="text-sm font-bold text-stone-700 mb-3 flex items-center gap-2"
-                  style={{ fontFamily: "'Fredoka One', ui-rounded, system-ui, sans-serif" }}
-                >
-                  <Share2 className="h-4 w-4 text-primary-500" />
-                  Share This Resource
-                </h3>
-                <ResourceShareButtons
-                  title={resource.title}
-                  shareTargets={resource.shareTargets}
-                  imageUrl={shareImg}
-                />
-              </div>
-            )}
+            <div className="bg-white rounded-2xl p-5 shadow-soft border border-stone-100">
+              <PublicShareBar
+                title={resource.title}
+                description={description}
+                url={canonicalUrl}
+                label="Share this resource"
+              />
+            </div>
 
             {/* Back to resources */}
             <Link
@@ -231,6 +227,18 @@ export default async function ResourceDetailPage({
             </Link>
           </aside>
         </div>
+
+        {/* Staff social publisher widget — only shown in preview/admin mode */}
+        {isPreview && (
+          <div className="mt-6">
+            <StaffSocialWidget
+              contentId={resource.id}
+              contentType="resource"
+              title={resource.title}
+              show={true}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

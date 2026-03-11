@@ -24,6 +24,8 @@ import { GET_ANIMAL } from "@/lib/graphql/animals";
 import { formatAge, capitalize, formatDate, drupalImageUrl } from "@/lib/utils";
 import type { Animal } from "@/types/drupal";
 import type { GetAnimalQuery } from "@/types/graphql";
+import PublicShareBar from "@/components/social/PublicShareBar";
+import StaffSocialWidget from "@/components/social/StaffSocialWidget";
 
 interface AnimalPageProps {
   params: Promise<{ id: string }>;
@@ -196,6 +198,13 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
       new Date(b.placementStartDate?.time ?? 0).getTime() -
       new Date(a.placementStartDate?.time ?? 0).getTime()
   );
+
+  // Build canonical URL and description for share buttons
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const canonicalUrl = `${siteUrl}/adopt/${id}`;
+  const shareDescription =
+    animal.body?.summary ||
+    `Meet ${animal.title}, a ${speciesName ?? 'animal'} looking for a forever home.`;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -585,6 +594,28 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
             )}
           </div>
         </div>
+
+        {/* Public share bar */}
+        <div className="mt-8">
+          <PublicShareBar
+            title={`Meet ${animal.title} — ${speciesName ?? 'Animal'} looking for a forever home`}
+            description={shareDescription}
+            url={canonicalUrl}
+            label="Help find a home"
+          />
+        </div>
+
+        {/* Staff social publisher widget — only shown in preview/admin mode */}
+        {isPreview && (
+          <div className="mt-6">
+            <StaffSocialWidget
+              contentId={animal.id}
+              contentType="animal"
+              title={animal.title}
+              show={true}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

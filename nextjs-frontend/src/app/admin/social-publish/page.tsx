@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import type { SocialPlatform } from "@/lib/social/types";
 import { PLATFORM_LIMITS } from "@/lib/social/types";
@@ -10,7 +11,7 @@ import { PLATFORM_LIMITS } from "@/lib/social/types";
 interface ContentOption {
   id: string;
   title: string;
-  type: "animal" | "blog" | "resource";
+  type: "animal" | "blog" | "resource" | "event";
   imageUrls: string[];
   altTexts: string[];
   linkUrl: string;
@@ -80,6 +81,12 @@ function StepIndicator({
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function SocialPublishPage() {
+  const searchParams = useSearchParams();
+  // URL params for pre-selection from content pages:
+  //   ?contentType=animal|blog|resource&contentId=<uuid>
+  const preloadType = (searchParams.get("contentType") ?? "animal") as "animal" | "blog" | "resource" | "event";
+  const preloadId   = searchParams.get("contentId") ?? null;
+
   const [contentOptions, setContentOptions] = useState<ContentOption[]>([]);
   const [selectedContent, setSelectedContent] = useState<ContentOption | null>(null);
   const [selectedPlatforms, setSelectedPlatforms] = useState<Set<SocialPlatform>>(new Set(ALL_PLATFORMS));
@@ -87,31 +94,44 @@ export default function SocialPublishPage() {
   const [status, setStatus] = useState<PublishStatus>("idle");
   const [results, setResults] = useState<Partial<Record<SocialPlatform, PlatformResult>>>({});
   const [loadingContent, setLoadingContent] = useState(true);
-  const [contentType, setContentType] = useState<"animal" | "blog" | "resource">("animal");
+  const [contentType, setContentType] = useState<"animal" | "blog" | "resource" | "event">(preloadType);
   // Mobile stepper: 1=pick content, 2=pick platforms, 3=review+publish
   const [mobileStep, setMobileStep] = useState(1);
+  // Track whether we've already auto-selected the pre-loaded content
+  const autoSelectedRef = useRef(false);
 
   // ── Fetch content list ──────────────────────────────────────────────────────
-  const fetchContent = useCallback(async (type: "animal" | "blog" | "resource") => {
+  const fetchContent = useCallback(async (type: "animal" | "blog" | "resource" | "event") => {
     setLoadingContent(true);
-    setSelectedContent(null);
+    if (!preloadId) {
+      setSelectedContent(null);
+    }
     setCopies({});
     setResults({});
     try {
       const res = await fetch(`/api/social/content?type=${type}`);
       const json = await res.json() as { items: ContentOption[] };
-      setContentOptions(
-        (json.items ?? []).map((item) => ({
-          ...item,
-          imageUrls: (item.imageUrls ?? []).map(drupalImageUrl),
-        }))
-      );
+      const items = (json.items ?? []).map((item) => ({
+        ...item,
+        imageUrls: (item.imageUrls ?? []).map(drupalImageUrl),
+      }));
+      setContentOptions(items);
+      // Auto-select the pre-loaded content if we haven't yet
+      if (preloadId && !autoSelectedRef.current) {
+        const match = items.find((item) => item.id === preloadId);
+        if (match) {
+          setSelectedContent(match);
+          // On mobile, skip straight to step 2 (platforms)
+          setMobileStep(2);
+          autoSelectedRef.current = true;
+        }
+      }
     } catch {
       setContentOptions([]);
     } finally {
       setLoadingContent(false);
     }
-  }, []);
+  }, [preloadId]);
 
   useEffect(() => { fetchContent(contentType); }, [contentType, fetchContent]);
 
@@ -153,6 +173,19 @@ export default function SocialPublishPage() {
         tags:        (node.tags as { name: string }[] | undefined)?.map((t) => t.name),
         contentType: "blog_post",
         linkUrl:     selectedContent.linkUrl,
+      };
+    } else if (selectedContent.type === "event") {
+      const eventDate = (node.eventDate as { time: string } | undefined)?.time;
+      const dateStr = eventDate
+        ? new Date(eventDate).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })
+        : undefined;
+      data = {
+        title:         node.title,
+        body:          node.body ? stripHtml((node.body as { value: string }).value) : undefined,
+        eventDate:     dateStr,
+        eventLocation: node.eventLocation as string | undefined,
+        contentType:   "event",
+        linkUrl:       selectedContent.linkUrl,
       };
     } else {
       data = {
@@ -249,6 +282,17 @@ export default function SocialPublishPage() {
         </div>
       </div>
 
+      {/* ── Pre-loaded content banner ── */}
+      {preloadId && (
+        <div className="bg-teal-600 text-white px-4 sm:px-6 py-2.5">
+          <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm">
+            <span className="text-teal-200">✦</span>
+            <span className="font-medium">Opened from a content page</span>
+            <span className="text-teal-200 hidden sm:inline">— content is pre-selected below. Choose your platforms and generate copy.</span>
+          </div>
+        </div>
+      )}
+
       {/* ── Mobile step indicator ── */}
       <div className="sm:hidden bg-white border-b border-amber-100 px-4 py-3">
         <div className="flex items-center justify-between max-w-xs mx-auto">
@@ -272,7 +316,7 @@ export default function SocialPublishPage() {
             <div className="bg-white rounded-2xl shadow-sm border border-amber-100 p-4">
               <h2 className="font-semibold text-amber-900 mb-3">1. Choose Content</h2>
               <div className="flex gap-2 mb-4 flex-wrap">
-                {(["animal", "blog", "resource"] as const).map((t) => (
+                {(["animal", "blog", "resource", "event"] as const).map((t) => (
                   <button
                     key={t}
                     onClick={() => setContentType(t)}
@@ -282,7 +326,7 @@ export default function SocialPublishPage() {
                         : "bg-amber-100 text-amber-700 hover:bg-amber-200"
                     }`}
                   >
-                    {t === "animal" ? "🐾 Animals" : t === "blog" ? "📝 Blog" : "📚 Resources"}
+                    {t === "animal" ? "🐾 Animals" : t === "blog" ? "📝 Blog" : t === "resource" ? "📚 Resources" : "📅 Events"}
                   </button>
                 ))}
               </div>
@@ -385,8 +429,8 @@ export default function SocialPublishPage() {
             <div className="space-y-4">
               <div className="bg-white rounded-2xl shadow-sm border border-amber-100 p-4">
                 <h2 className="font-semibold text-amber-900 mb-3 text-base">Choose what to post</h2>
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  {(["animal", "blog", "resource"] as const).map((t) => (
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  {(["animal", "blog", "resource", "event"] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setContentType(t)}
@@ -396,7 +440,8 @@ export default function SocialPublishPage() {
                           : "bg-amber-100 text-amber-700"
                       }`}
                     >
-                      {t === "animal" ? "🐾 Animals" : t === "blog" ? "📝 Blog" : "📚 Resources"}
+                      {t === "animal" ? "🐾" : t === "blog" ? "📝" : t === "resource" ? "📚" : "📅"}
+                      <span className="block text-xs mt-0.5">{t === "animal" ? "Animals" : t === "blog" ? "Blog" : t === "resource" ? "Resources" : "Events"}</span>
                     </button>
                   ))}
                 </div>

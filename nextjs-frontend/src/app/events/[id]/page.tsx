@@ -4,7 +4,8 @@ import { GET_EVENT } from '@/lib/graphql/content';
 import Link from 'next/link';
 import { Calendar, MapPin, Clock, ArrowLeft } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import ShareButton from '@/components/ShareButton';
+import PublicShareBar from '@/components/social/PublicShareBar';
+import StaffSocialWidget from '@/components/social/StaffSocialWidget';
 
 export const revalidate = 300;
 
@@ -52,6 +53,13 @@ export default async function EventDetailPage({
   const isUpcoming = event.eventDate
     ? new Date(event.eventDate.time) >= new Date()
     : true;
+
+  // Build canonical URL and description for share buttons
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const canonicalUrl = `${siteUrl}/events/${params.id}`;
+  const description = event.body?.summary
+    || event.body?.value?.replace(/<[^>]*>/g, '').slice(0, 160)
+    || (event.eventLocation ? `Join us at ${event.eventLocation}` : '');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -167,19 +175,38 @@ export default async function EventDetailPage({
                   <p className="font-semibold text-gray-900">Can&apos;t wait to see you there!</p>
                   <p className="text-sm text-gray-600">Questions? Reach out to us before the event.</p>
                 </div>
-                <div className="flex gap-3">
-                  <Link
-                    href="/contact"
-                    className="bg-amber-600 text-white font-bold px-6 py-2.5 rounded-full hover:bg-amber-700 transition-colors text-sm"
-                  >
-                    Contact Us
-                  </Link>
-                  <ShareButton title={event.title} />
-                </div>
+                <Link
+                  href="/contact"
+                  className="bg-amber-600 text-white font-bold px-6 py-2.5 rounded-full hover:bg-amber-700 transition-colors text-sm"
+                >
+                  Contact Us
+                </Link>
               </div>
             </div>
           )}
+
+          {/* Public share bar */}
+          <div className="px-8 pb-8">
+            <PublicShareBar
+              title={event.title}
+              description={description}
+              url={canonicalUrl}
+              label="Spread the word"
+            />
+          </div>
         </div>
+
+        {/* Staff social publisher widget — only shown in preview/admin mode */}
+        {isPreview && (
+          <div className="mt-6">
+            <StaffSocialWidget
+              contentId={event.id}
+              contentType="event"
+              title={event.title}
+              show={true}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

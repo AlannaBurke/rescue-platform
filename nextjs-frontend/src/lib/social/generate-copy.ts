@@ -25,8 +25,10 @@ export interface BlogSocialData {
   summary?: string;
   body?: string;
   tags?: string[];
-  contentType?: "blog_post" | "resource";
+  contentType?: "blog_post" | "resource" | "event";
   category?: string;
+  eventDate?: string;
+  eventLocation?: string;
   linkUrl: string;
   orgName?: string;
   orgHandle?: Record<string, string>;
@@ -65,9 +67,14 @@ function buildAnimalContext(data: AnimalSocialData): string {
 }
 
 function buildBlogContext(data: BlogSocialData): string {
-  const typeLabel = data.contentType === "resource" ? "Care resource / guide" : "Blog post";
+  const typeLabel =
+    data.contentType === "resource" ? "Care resource / guide" :
+    data.contentType === "event"    ? "Upcoming event" :
+    "Blog post";
   const parts = [
     `${typeLabel} title: ${data.title}`,
+    data.eventDate     ? `Date: ${data.eventDate}` : null,
+    data.eventLocation ? `Location: ${data.eventLocation}` : null,
     data.category ? `Category: ${data.category.replace(/_/g, " ")}` : null,
     data.summary ? `Summary: ${data.summary}` : null,
     data.body ? `Content excerpt: ${data.body.slice(0, 600)}` : null,
@@ -95,6 +102,8 @@ export async function generateSocialCopy(
     ? "adoptable animal profile"
     : blogData?.contentType === "resource"
     ? "animal care resource / guide"
+    : blogData?.contentType === "event"
+    ? "upcoming event from an animal rescue"
     : "blog post from an animal rescue";
 
   const results: Partial<Record<SocialPlatform, string>> = {};

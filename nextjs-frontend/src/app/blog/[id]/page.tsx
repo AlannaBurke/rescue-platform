@@ -8,6 +8,8 @@ import { GET_BLOG_POST } from "@/lib/graphql/content";
 import { formatDate } from "@/lib/utils";
 import type { BlogPost } from "@/types/drupal";
 import type { GetBlogPostQuery } from "@/types/graphql";
+import PublicShareBar from "@/components/social/PublicShareBar";
+import StaffSocialWidget from "@/components/social/StaffSocialWidget";
 
 interface BlogPostPageProps {
   params: Promise<{ id: string }>;
@@ -57,6 +59,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const dateStr = post.created?.time ? formatDate(post.created.time) : null;
   const readTime = estimateReadTime(post.body?.value);
+
+  // Build canonical URL for share buttons
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+  const canonicalUrl = `${siteUrl}/blog/${id}`;
+  const description =
+    post.body?.summary ||
+    post.body?.value?.replace(/<[^>]*>/g, "").slice(0, 160) ||
+    "";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -125,8 +135,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             ) : (
               <p className="text-gray-500 italic">No content available.</p>
             )}
+
+            {/* Public share bar */}
+            <PublicShareBar
+              title={post.title}
+              description={description}
+              url={canonicalUrl}
+              label="Share this post"
+            />
           </div>
         </article>
+
+        {/* Staff social publisher widget — only shown in preview/admin mode */}
+        {isPreview && (
+          <div className="mt-6">
+            <StaffSocialWidget
+              contentId={post.id}
+              contentType="blog"
+              title={post.title}
+              show={true}
+            />
+          </div>
+        )}
 
         {/* Back link */}
         <div className="mt-8 text-center">
