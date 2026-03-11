@@ -1,46 +1,46 @@
-# 🐾 Rescue Platform
+# Rescue Platform
 
-**A comprehensive, open-source content management and website platform for small animal rescues.**
-
-Rescue Platform is an all-in-one solution designed to help small, volunteer-run animal rescues manage their operations and online presence efficiently. It combines a powerful Drupal backend for data management with a beautiful, fast, and modern Next.js frontend for the public-facing website.
-
-This project was born from the idea that every rescue, regardless of size or technical skill, deserves access to the same high-quality tools as larger organizations. By providing a free, open-source, and easy-to-deploy platform, we aim to empower rescues to save more lives.
+**Every little life matters.** An open-source, mobile-first, headless Drupal + Next.js platform for animal rescues and sanctuaries.
 
 ---
 
 ## Features
 
-| Feature | Description | Status |
-| :--- | :--- | :--- |
-| **Animal Management** | Track every animal from intake to adoption with detailed profiles, medical history, and status updates. | ✅ Complete |
-| **People Management** | Manage fosters, volunteers, adopters, and donors with detailed contact info, roles, and history. | ✅ Complete |
-| **Content Management** | Create and manage blog posts, events, resources, and more with a user-friendly interface. | ✅ Complete |
-| **Online Forms** | Adoption, foster, surrender, and volunteer applications that submit directly to Drupal. | ✅ Complete |
-| **Decoupled Frontend** | A lightning-fast, SEO-friendly, and mobile-responsive public website built with Next.js. | ✅ Complete |
-| **Configurable Site** | Easily customize navigation, social media links, and site-wide settings from the Drupal admin. | ✅ Complete |
-| **GraphQL API** | A comprehensive and flexible API to connect the backend to the frontend and any future applications. | ✅ Complete |
-| **Local Development** | A fully containerized local development environment powered by Docker Compose. | ✅ Complete |
+- **Animal Management:** Full lifecycle tracking from intake to adoption, including medical records, foster history, and detailed profiles.
+- **People Management:** Centralized database of fosters, adopters, volunteers, donors, and contacts with a "Do Not Adopt" flag.
+- **Content Management:** Built-in content types for blog posts, events, resources, and site pages.
+- **Configurable Site:** Easily edit navigation, social media handles, and organization info directly in the admin UI.
+- **Online Forms:** Webforms for adoption, foster, and surrender applications that submit directly to the Drupal backend.
+- **Social Media Publisher:** Post animals, blog posts, and resources to Facebook, Bluesky, Threads, Mastodon, and Instagram with AI-generated, platform-appropriate copy.
 
-## Getting Started
+## Tech Stack
 
-For detailed instructions on setting up a local development environment or deploying to production, please see our comprehensive **[Getting Started & Hosting Guide](docs/getting-started.md)**.
+- **Backend:** Drupal 10 (headless)
+- **Frontend:** Next.js 14 (App Router)
+- **API:** GraphQL
+- **Styling:** Tailwind CSS
+- **Local Dev:** Docker
 
 ## Documentation
 
-All project documentation can be found in the `/docs` directory:
+- [**Getting Started**](docs/getting-started.md) — Local development, production hosting, and environment variables.
+- [**Content Types**](docs/content-types.md) — A complete reference for all 14 content types and their fields.
+- [**Drupal Admin Guide**](docs/admin-guide.md) — An overview of the Drupal admin dashboard.
+- [**Theme Customization**](docs/theme-guide.md) — How to change colors, fonts, illustrations, and layout.
+- [**Social Publishing**](docs/social-publishing.md) — How to set up and use the social media publisher.
 
-| Document | Description |
-| :--- | :--- |
-| [**`getting-started.md`**](docs/getting-started.md) | How to set up a local development environment and deploy to production. |
-| [**`content-types.md`**](docs/content-types.md) | A complete reference for all content types and their fields. |
-| [**`admin-guide.md`**](docs/admin-guide.md) | An overview of key administrative areas in the Drupal backend. |
-| [**`theme-guide.md`**](docs/theme-guide.md) | How to customize the visual appearance of your website. |
-| [**`contributing.md`**](docs/contributing.md) | Guidelines for contributing to the project. |
+## Local Development
 
-## Contributing
+1. **Prerequisites:** Docker, Node.js (v18+), pnpm, Composer
+2. **Clone the repo:** `git clone https://github.com/AlannaBurke/rescue-platform.git`
+3. **Install dependencies:**
+   - `cd rescue-platform/drupal-backend && composer install`
+   - `cd ../nextjs-frontend && pnpm install`
+4. **Start the services:** `docker compose up -d`
+5. **Access the sites:**
+   - **Frontend:** http://localhost:3000
+   - **Drupal:** http://localhost:8888 (admin/admin)
 
-We welcome contributions of all kinds! Whether you are a developer, designer, writer, or just passionate about animal rescue, there are many ways to help. Please see our [**Contributing Guide**](docs/contributing.md) to get started.
+## Production Hosting
 
-## License
-
-Rescue Platform is open-source software licensed under the [GPL-2.0-or-later](LICENSE).
+See the [Getting Started](docs/getting-started.md) guide for detailed instructions on deploying to Vercel and Railway.

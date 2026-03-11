@@ -39,3 +39,19 @@ All online forms (adoption, foster, surrender, etc.) are managed as webforms. Yo
 ### Site Settings
 
 Global site settings, such as your organization's name, social media handles, and navigation items, are managed in a special "Site Settings" content item. To edit these, go to the **Content** section, filter by the "Site Settings" content type, and edit the single entry.
+
+
+---
+
+## Social Media Publisher
+
+The platform includes a powerful social media publisher that lets you post content directly to Facebook, Bluesky, Threads, Mastodon, and Instagram.
+
+1. **Navigate to `/admin/social-publish`** on your site.
+2. **Choose Content:** Select an animal, blog post, or resource from the left panel.
+3. **Select Platforms:** Toggle which social networks you want to post to.
+4. **Generate Copy:** Click the "Generate Copy" button. The AI will write platform-appropriate copy for each selected network.
+5. **Review & Edit:** You can edit the generated text in each platform's text box.
+6. **Publish:** Click "Publish Now" to post to all selected platforms simultaneously.
+
+For a full guide on setting up the credentials for each platform, see the [Social Publishing Guide](social-publishing.md).
