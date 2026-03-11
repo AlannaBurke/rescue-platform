@@ -1,3 +1,29 @@
+rescue_admin_api.vet_import:
+  path: '/api/rescue/vet-import'
+  defaults:
+    _controller: '\Drupal\rescue_admin_api\Controller\VetCsvImportController::import'
+    _title: 'Vet CSV Import'
+  requirements:
+    _permission: 'access administration pages'
+  methods: [POST]
+  options:
+    _auth:
+      - basic_auth
+      - cookie
+
+rescue_admin_api.vet_import_preview:
+  path: '/api/rescue/vet-import/preview'
+  defaults:
+    _controller: '\Drupal\rescue_admin_api\Controller\VetCsvImportController::preview'
+    _title: 'Vet CSV Import Preview'
+  requirements:
+    _permission: 'access administration pages'
+  methods: [POST]
+  options:
+    _auth:
+      - basic_auth
+      - cookie
+
 rescue_admin_api.submission_counts:
   path: '/api/rescue/submission-counts'
   defaults:

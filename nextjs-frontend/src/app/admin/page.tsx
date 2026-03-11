@@ -318,6 +318,13 @@ export default function AdminDashboard() {
           />
 
           <QuickCard
+            icon="📥"
+            label="Import Vets (CSV)"
+            description="Bulk-add vet practices from a spreadsheet — download the template to get started"
+            href="/admin/vet-import"
+          />
+
+          <QuickCard
             icon="🏠"
             label="About & Pages"
             description="Edit your organization info, mission, and static pages"
