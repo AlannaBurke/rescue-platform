@@ -13,9 +13,8 @@ export const ANIMAL_CARD_FRAGMENT = gql`
     animalColor
     animalAgeYears
     animalAgeMonths
-    goodWithDogs
-    goodWithCats
-    goodWithKids
+    goodWith
+    notGoodWith
     isFeatured
     excludePublic
     intakeDate {

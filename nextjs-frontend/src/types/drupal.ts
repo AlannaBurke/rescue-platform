@@ -137,10 +137,9 @@ export interface Animal {
   // People
   currentFoster?: Person;
   adoptedBy?: Person;
-  // Compatibility
-  goodWithDogs?: boolean;
-  goodWithCats?: boolean;
-  goodWithKids?: boolean;
+  // Compatibility — arrays of string keys (dogs, cats, kids, rabbits, guinea_pigs, rats, birds, reptiles, small_animals)
+  goodWith?: string[] | null;
+  notGoodWith?: string[] | null;
   // Content
   body?: DrupalTextSummary;
   animalNotes?: DrupalText;

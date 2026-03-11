@@ -87,31 +87,53 @@ function DetailRow({
   );
 }
 
-function CompatibilityRow({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value?: boolean | null;
-  icon: string;
-}) {
-  if (value === undefined || value === null) return null;
+// Map of compatibility keys to display labels and emoji
+const COMPAT_MAP: Record<string, { label: string; icon: string }> = {
+  dogs:          { label: "Dogs",          icon: "🐕" },
+  cats:          { label: "Cats",          icon: "🐈" },
+  kids:          { label: "Children",      icon: "👶" },
+  rabbits:       { label: "Rabbits",       icon: "🐇" },
+  guinea_pigs:   { label: "Guinea Pigs",   icon: "🐹" },
+  rats:          { label: "Rats",          icon: "🐀" },
+  birds:         { label: "Birds",         icon: "🐦" },
+  reptiles:      { label: "Reptiles",      icon: "🦎" },
+  small_animals: { label: "Small Animals", icon: "🐾" },
+};
+
+function CompatibilitySection({ animal }: { animal: Animal }) {
+  const goodWith    = animal.goodWith    ?? [];
+  const notGoodWith = animal.notGoodWith ?? [];
+  if (goodWith.length === 0 && notGoodWith.length === 0) return null;
+
   return (
-    <div className="flex items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
-      <span className="text-xl">{icon}</span>
-      <span className="flex-1 text-sm text-gray-700">{label}</span>
-      {value ? (
-        <div className="flex items-center gap-1 text-green-600">
-          <CheckCircle className="h-4 w-4" />
-          <span className="text-xs font-medium">Yes</span>
-        </div>
-      ) : (
-        <div className="flex items-center gap-1 text-red-500">
-          <XCircle className="h-4 w-4" />
-          <span className="text-xs font-medium">No</span>
-        </div>
-      )}
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <h3 className="text-sm font-semibold text-gray-900 mb-1">Compatibility</h3>
+      {goodWith.map((key) => {
+        const meta = COMPAT_MAP[key] ?? { label: key, icon: "🐾" };
+        return (
+          <div key={`good-${key}`} className="flex items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
+            <span className="text-xl">{meta.icon}</span>
+            <span className="flex-1 text-sm text-gray-700">Good with {meta.label}</span>
+            <div className="flex items-center gap-1 text-green-600">
+              <CheckCircle className="h-4 w-4" />
+              <span className="text-xs font-medium">Yes</span>
+            </div>
+          </div>
+        );
+      })}
+      {notGoodWith.map((key) => {
+        const meta = COMPAT_MAP[key] ?? { label: key, icon: "🐾" };
+        return (
+          <div key={`no-${key}`} className="flex items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
+            <span className="text-xl">{meta.icon}</span>
+            <span className="flex-1 text-sm text-gray-700">Good with {meta.label}</span>
+            <div className="flex items-center gap-1 text-red-500">
+              <XCircle className="h-4 w-4" />
+              <span className="text-xs font-medium">No</span>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -251,18 +273,7 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
             </div>
 
             {/* Compatibility */}
-            {(animal.goodWithDogs !== undefined ||
-              animal.goodWithCats !== undefined ||
-              animal.goodWithKids !== undefined) && (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                  Compatibility
-                </h3>
-                <CompatibilityRow label="Good with other dogs" value={animal.goodWithDogs} icon="🐕" />
-                <CompatibilityRow label="Good with cats"       value={animal.goodWithCats} icon="🐈" />
-                <CompatibilityRow label="Good with children"   value={animal.goodWithKids} icon="👶" />
-              </div>
-            )}
+            <CompatibilitySection animal={animal} />
 
             {/* Active medications */}
             {activeMeds.length > 0 && (

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Heart, Dog, Cat } from "lucide-react";
+import { Heart } from "lucide-react";
 import { cn, formatAge, capitalize, drupalImageUrl } from "@/lib/utils";
 import type { Animal } from "@/types/drupal";
 
@@ -51,33 +51,54 @@ function StatusBadge({ status }: { status?: string }) {
   );
 }
 
-function CompatibilityIcons({ animal }: { animal: Animal }) {
-  const items = [
-    { label: "Dogs", value: animal.goodWithDogs, icon: "🐕" },
-    { label: "Cats", value: animal.goodWithCats, icon: "🐈" },
-    { label: "Kids", value: animal.goodWithKids, icon: "👶" },
-  ];
+// Map of all possible compatibility keys to display labels and emoji
+const COMPAT_MAP: Record<string, { label: string; icon: string }> = {
+  dogs:          { label: "Dogs",              icon: "🐕" },
+  cats:          { label: "Cats",              icon: "🐈" },
+  kids:          { label: "Kids",              icon: "👶" },
+  rabbits:       { label: "Rabbits",           icon: "🐇" },
+  guinea_pigs:   { label: "Guinea Pigs",       icon: "🐹" },
+  rats:          { label: "Rats",              icon: "🐀" },
+  birds:         { label: "Birds",             icon: "🐦" },
+  reptiles:      { label: "Reptiles",          icon: "🦎" },
+  small_animals: { label: "Small Animals",     icon: "🐾" },
+};
 
-  const known = items.filter((i) => i.value !== undefined && i.value !== null);
-  if (known.length === 0) return null;
+function CompatibilityIcons({ animal }: { animal: Animal }) {
+  const goodWith    = animal.goodWith    ?? [];
+  const notGoodWith = animal.notGoodWith ?? [];
+
+  // Only render if at least one value is explicitly set
+  if (goodWith.length === 0 && notGoodWith.length === 0) return null;
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      {known.map((item) => (
-        <span
-          key={item.label}
-          className={cn(
-            "inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full",
-            item.value
-              ? "bg-green-50 text-green-700"
-              : "bg-red-50 text-red-600 line-through opacity-60"
-          )}
-          title={`${item.value ? "Good" : "Not good"} with ${item.label}`}
-        >
-          <span>{item.icon}</span>
-          <span>{item.label}</span>
-        </span>
-      ))}
+      {goodWith.map((key) => {
+        const meta = COMPAT_MAP[key] ?? { label: key, icon: "🐾" };
+        return (
+          <span
+            key={`good-${key}`}
+            className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-green-50 text-green-700"
+            title={`Good with ${meta.label}`}
+          >
+            <span>{meta.icon}</span>
+            <span>{meta.label}</span>
+          </span>
+        );
+      })}
+      {notGoodWith.map((key) => {
+        const meta = COMPAT_MAP[key] ?? { label: key, icon: "🐾" };
+        return (
+          <span
+            key={`no-${key}`}
+            className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-600 line-through opacity-60"
+            title={`Not good with ${meta.label}`}
+          >
+            <span>{meta.icon}</span>
+            <span>{meta.label}</span>
+          </span>
+        );
+      })}
     </div>
   );
 }
