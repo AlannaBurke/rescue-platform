@@ -129,8 +129,8 @@ export default function AnimalCard({ animal }: AnimalCardProps) {
           </h3>
           <div className="flex items-center gap-2 mt-1 text-sm text-gray-500">
             {speciesName && (
-              <span className="flex items-center gap-1">
-                {speciesName === "Dog" ? "🐕" : speciesName === "Cat" ? "🐈" : "🐾"}
+              <span className="flex items-center gap-1.5">
+                <span className="mr-0.5">{speciesName === "Dog" ? "🐕" : speciesName === "Cat" ? "🐈" : "🐾"}</span>
                 {speciesName}
               </span>
             )}
